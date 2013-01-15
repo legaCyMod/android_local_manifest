@@ -7,6 +7,7 @@
     <remove-project name="CyanogenMod/android_frameworks_native" />
     <remove-project name="CyanogenMod/android_hardware_libhardware_legacy" />
     <remove-project name="CyanogenMod/android_hardware_qcom_media" />
+    <remove-project name="CyanogenMod/android_system_netd" />
     <remove-project name="CyanogenMod/android_vendor_cm" />
     <project path="build" name="legaCyMod/android_build" revision="cm-10.1" />
     <project path="external/libncurses" name="legaCyMod/android_external_libncurses" revision="cm-10.1" />
@@ -14,6 +15,7 @@
     <project path="frameworks/native" name="legaCyMod/android_frameworks_native" revision="cm-10.1" />
     <project path="hardware/libhardware_legacy" name="legaCyMod/android_hardware_libhardware_legacy" revision="cm-10.1" />
     <project path="hardware/qcom/media" name="legaCyMod/android_hardware_qcom_media" revision="cm-10.1" />
+    <project path="system/netd" name="legaCyMod/android_system_netd" revision="cm-10.1" />
     <project path="vendor/cm" name="legaCyMod/android_vendor_cm" revision="cm-10.1" />
 
     <!-- Local projects -->

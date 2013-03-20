@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <!-- ZTE Blade III -->
+    <project path="device/zte/atlas40" name="KonstaT/android_device_zte_atlas40" revision="cm-10.1" />
+    <project path="kernel/zte/zte-kernel-msm7x27a" name="KonstaT/zte-kernel-msm7x27a" revision="jellybean" />
+    <project path="vendor/zte" name="KonstaT/proprietary_vendor_zte" revision="cm-10.1" />
+</manifest>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <!-- ZTE Blade -->
+    <project path="device/zte/blade" name="KonstaT/android_device_zte_blade" revision="cm-10.1" />
+    <project path="kernel/zte/zte-kernel-msm7x27" name="KonstaT/zte-kernel-msm7x27" revision="cm-10.1" />
+    <project path="vendor/zte" name="KonstaT/proprietary_vendor_zte" revision="cm-10.1" />
+</manifest>

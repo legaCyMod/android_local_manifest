@@ -4,4 +4,7 @@
     <project path="device/zte/blade" name="KonstaT/android_device_zte_blade" revision="cm-10.1" />
     <project path="kernel/zte/zte-kernel-msm7x27" name="KonstaT/zte-kernel-msm7x27" revision="cm-10.1" />
     <project path="vendor/zte" name="KonstaT/proprietary_vendor_zte" revision="cm-10.1" />
+
+    <!-- FM Radio -->
+    <project path="packages/apps/Effem" name="grigorig/android_packages_apps_Effem" revision="master" />
 </manifest>

@@ -1,7 +1,4 @@
-Local manifests for building CyanogenMod 10.1 for ZTE Blade and ZTE Blade III.
-
-http://www.modaco.com/topic/359832-cyanogenmod-10.1
-http://www.modaco.com/topic/360987-cyanogenmod-10.1
+Local manifests to build CyanogenMod 10.1 for [ZTE Blade](http://www.modaco.com/topic/359832-cyanogenmod-10.1), [ZTE Blade III](http://www.modaco.com/topic/360987-cyanogenmod-10.1) and [ZTE V9](http://www.modaco.com/topic/361573-cyanogenmod-10.1).
 
 How to build:
 -------------
@@ -31,4 +28,14 @@ Compile:
 
     . build/envsetup.sh
     brunch atlas40
+
+### V9:
+
+    curl -L -o .repo/local_manifests/manifest_zte_v9.xml -O -L https://raw.github.com/legaCyMod/android_local_manifest/cm-10.1/manifest_zte_v9.xml
+    repo sync
+
+Compile:
+
+    . build/envsetup.sh
+    brunch v9
 

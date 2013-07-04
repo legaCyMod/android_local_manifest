@@ -6,5 +6,5 @@
     <project path="vendor/zte" name="KonstaT/proprietary_vendor_zte" revision="cm-10.1" />
 
     <!-- FM Radio -->
-    <project path="packages/apps/Effem" name="grigorig/android_packages_apps_Effem" revision="master" />
+    <project path="packages/apps/Effem" name="legaCyMod/android_packages_apps_Effem" revision="master" />
 </manifest>

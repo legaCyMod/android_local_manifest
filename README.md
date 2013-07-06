@@ -22,6 +22,7 @@ Compile:
 ### Blade III:
 
     curl -L -o .repo/local_manifests/manifest_zte_atlas40.xml -O -L https://raw.github.com/legaCyMod/android_local_manifest/cm-10.1/manifest_zte_atlas40.xml
+    curl -L -o .repo/local_manifests/manifest_bluez.xml -O -L https://raw.github.com/legaCyMod/android_local_manifest/cm-10.1/manifest_bluez.xml
     repo sync
 
 Compile:

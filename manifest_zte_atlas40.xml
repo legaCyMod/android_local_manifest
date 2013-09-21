@@ -4,4 +4,8 @@
     <project path="device/zte/atlas40" name="KonstaT/android_device_zte_atlas40" revision="cm-10.2" />
     <project path="kernel/zte/msm7x27a" name="KonstaT/android_kernel_zte_msm7x27a" revision="cm-10.2" />
     <project path="vendor/zte" name="KonstaT/proprietary_vendor_zte" revision="cm-10.2" />
+
+    <!-- FM Radio -->
+    <project path="hardware/qcom/fm" name="legaCyMod/android_hardware_qcom_fm" revision="cm-10.2" />
+    <project path="packages/apps/FM2" name="legaCyMod/android_packages_apps_FM2" revision="cm-10.2" />
 </manifest>

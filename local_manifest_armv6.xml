@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <!-- CM replacements -->
+    <remove-project name="CyanogenMod/android_bionic" />
+    <remove-project name="CyanogenMod/android_dalvik" />
+    <remove-project name="CyanogenMod/android_external_llvm" />
+    <remove-project name="CyanogenMod/android_external_wpa_supplicant_8" />
+    <remove-project name="CyanogenMod/android_hardware_libhardware_legacy" />
+    <remove-project name="CyanogenMod/android_system_netd" />
+    <project path="bionic" name="androidarmv6/android_bionic" revision="cm-10.2" />
+    <project path="dalvik" name="androidarmv6/android_dalvik" revision="cm-10.2" />
+    <project path="external/llvm" name="androidarmv6/android_external_llvm" revision="cm-10.2" />
+    <project path="external/wpa_supplicant_8" name="legaCyMod/android_external_wpa_supplicant_8" revision="cm-10.2" />
+    <project path="hardware/libhardware_legacy" name="legaCyMod/android_hardware_libhardware_legacy" revision="cm-10.2" />
+    <project path="system/netd" name="legaCyMod/android_system_netd" revision="cm-10.2" />
+</manifest>

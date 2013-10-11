@@ -1,20 +1,20 @@
-From 9c261fff8dc9a9e47ec5cc60e5b05361e4719eeb Mon Sep 17 00:00:00 2001
+From 154cf76a3d10bd4255acad29ff991f3f7f5a3129 Mon Sep 17 00:00:00 2001
 From: Robin Humble <plaguedbypenguins@gmail.com>
 Date: Wed, 18 Sep 2013 13:52:58 +1000
-Subject: [PATCH 14/15] media: add fm support
+Subject: [PATCH 2/2] media: add fm support
 
 Change-Id: If0e5d11c0a2ecc58b37806b28902f8838f7da894
 ---
  media/java/android/media/AudioManager.java |    5 ++++-
  media/java/android/media/AudioService.java |   12 ++++++++----
- media/java/android/media/AudioSystem.java  |    8 +++++++-
- 3 files changed, 19 insertions(+), 6 deletions(-)
+ media/java/android/media/AudioSystem.java  |    4 +++-
+ 3 files changed, 15 insertions(+), 6 deletions(-)
 
 diff --git a/media/java/android/media/AudioManager.java b/media/java/android/media/AudioManager.java
-index 0060b53..1dcbae7 100644
+index ca9471c..df05679 100644
 --- a/media/java/android/media/AudioManager.java
 +++ b/media/java/android/media/AudioManager.java
-@@ -224,6 +224,8 @@ public class AudioManager {
+@@ -221,6 +221,8 @@ public class AudioManager {
      public static final int STREAM_TTS = AudioSystem.STREAM_TTS;
      /** @hide The audio stream for incall music delivery */
      public static final int STREAM_INCALL_MUSIC = AudioSystem.STREAM_INCALL_MUSIC;
@@ -23,7 +23,7 @@ index 0060b53..1dcbae7 100644
      /** Number of audio streams */
      /**
       * @deprecated Use AudioSystem.getNumStreamTypes() instead
-@@ -243,7 +245,8 @@ public class AudioManager {
+@@ -240,7 +242,8 @@ public class AudioManager {
          7,  // STREAM_SYSTEM_ENFORCED
          11, // STREAM_DTMF
          11, // STREAM_TTS
@@ -78,7 +78,7 @@ index 4051bf3..3ed0e82 100644
  
      private boolean mLinkNotificationWithVolume;
 diff --git a/media/java/android/media/AudioSystem.java b/media/java/android/media/AudioSystem.java
-index eacd624..ddf7bf8 100644
+index caa0f48..7fdc4d8 100644
 --- a/media/java/android/media/AudioSystem.java
 +++ b/media/java/android/media/AudioSystem.java
 @@ -54,13 +54,15 @@ public class AudioSystem
@@ -98,24 +98,6 @@ index eacd624..ddf7bf8 100644
      public static final int getNumStreamTypes() { return NUM_STREAM_TYPES; }
  
      /*
-@@ -232,6 +234,8 @@ public class AudioSystem
-     public static final int DEVICE_OUT_ANC_HEADSET = 0x10000;
-     public static final int DEVICE_OUT_ANC_HEADPHONE = 0x20000;
-     public static final int DEVICE_OUT_PROXY = 0x40000;
-+    public static final int DEVICE_OUT_FM = 0x80000;
-+    public static final int DEVICE_OUT_FM_TX = 0x100000;
-     public static final int DEVICE_OUT_DEFAULT = DEVICE_BIT_DEFAULT;
- 
-     public static final int DEVICE_OUT_ALL = (DEVICE_OUT_EARPIECE |
-@@ -253,6 +257,8 @@ public class AudioSystem
-                                               DEVICE_OUT_ANC_HEADSET |
-                                               DEVICE_OUT_ANC_HEADPHONE |
-                                               DEVICE_OUT_PROXY |
-+                                              DEVICE_OUT_FM |
-+                                              DEVICE_OUT_FM_TX |
-                                               DEVICE_OUT_DEFAULT);
-     public static final int DEVICE_OUT_ALL_A2DP = (DEVICE_OUT_BLUETOOTH_A2DP |
-                                                    DEVICE_OUT_BLUETOOTH_A2DP_HEADPHONES |
 -- 
 1.7.9.5
 

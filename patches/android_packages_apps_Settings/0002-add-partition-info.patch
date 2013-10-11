@@ -1,4 +1,4 @@
-From b91746bb92f01973db1473a2b1aa387c14cf41d9 Mon Sep 17 00:00:00 2001
+From 2a0780da028371e4e6ff69f290cfc688955d1196 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:27:40 +0200
 Subject: [PATCH 2/9] add partition info
@@ -35,10 +35,10 @@ index cb65bbb..c57a0f1 100644
                  android:label="@string/location_settings_title"
                  android:configChanges="orientation|keyboardHidden|screenSize"
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index d093aa7..97b4816 100644
+index b26cb0e..a70ba8a 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -14,6 +14,14 @@
+@@ -15,6 +15,14 @@
       limitations under the License.
  -->
  <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">

@@ -1,7 +1,7 @@
-From ec0586ef7953ea493bc4bc0324f2932acaac3941 Mon Sep 17 00:00:00 2001
+From 447ffcb558f58da575c7f328b7a5d51c7aacb4b9 Mon Sep 17 00:00:00 2001
 From: Peter Gregus <pete.gregus@gmail.com>
 Date: Mon, 18 Mar 2013 23:16:05 +0100
-Subject: [PATCH 08/15] FM Radio: Mute spammy log messages in Receiver
+Subject: [PATCH 08/12] FM Radio: Mute spammy log messages in Receiver
 
 Change-Id: I2aed530cc9967470176958f2ffc68929487d2d03
 ---

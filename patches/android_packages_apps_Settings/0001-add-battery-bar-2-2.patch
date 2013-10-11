@@ -1,4 +1,4 @@
-From b74b6e7fff5940c857bc9468a671d50da5acd10d Mon Sep 17 00:00:00 2001
+From 0c68e0d1c9637397796deb9041620a57b1a49810 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:00:55 +0200
 Subject: [PATCH 1/9] add battery bar (2/2)
@@ -10,10 +10,10 @@ Change-Id: I912449bf44386a19f1f174eb732c7d077805b4de
  2 files changed, 3 insertions(+)
 
 diff --git a/res/values/cm_arrays.xml b/res/values/cm_arrays.xml
-index e53ca01..07ec154 100644
+index dac3fff..b66822a 100644
 --- a/res/values/cm_arrays.xml
 +++ b/res/values/cm_arrays.xml
-@@ -380,6 +380,7 @@
+@@ -381,6 +381,7 @@
          <item>@string/status_bar_battery_status_percentage</item>
          <item>@string/status_bar_battery_status_circle</item>
          <item>@string/status_bar_battery_status_circle_percentage</item>
@@ -21,7 +21,7 @@ index e53ca01..07ec154 100644
          <item>@string/status_bar_style_hidden</item>
      </string-array>
  
-@@ -388,6 +389,7 @@
+@@ -389,6 +390,7 @@
          <item>1</item>
          <item>2</item>
          <item>3</item>
@@ -30,16 +30,16 @@ index e53ca01..07ec154 100644
      </string-array>
  
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 7ef607d..d093aa7 100644
+index 4218c50..b26cb0e 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -592,6 +592,7 @@
+@@ -599,6 +599,7 @@
      <string name="status_bar_battery_status_percentage">Percentage</string>
      <string name="status_bar_battery_status_circle">Circle</string>
      <string name="status_bar_battery_status_circle_percentage">Circle with percentage</string>
 +    <string name="status_bar_battery_status_statusbar">Status bar</string>
      <string name="status_bar_notif_count_title">Show notification count</string>
-     <string name="status_bar_notif_count_summary">Display number of pending notifications</string>
+     <string name="status_bar_notif_count_summary">Display the number of pending notifications</string>
  
 -- 
 1.7.9.5

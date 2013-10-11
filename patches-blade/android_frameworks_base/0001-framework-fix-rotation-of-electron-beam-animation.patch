@@ -1,7 +1,7 @@
-From db7bd7557fa036bc888e234ecf2e5513f0228493 Mon Sep 17 00:00:00 2001
+From 12d429b9a00ff03a64da5f9f5a1b460ba93b3886 Mon Sep 17 00:00:00 2001
 From: Lalit Maganti <lalitmaganti@gmail.com>
 Date: Mon, 9 Sep 2013 15:10:55 +1000
-Subject: [PATCH 07/15] framework: fix rotation of electron beam animation
+Subject: [PATCH 07/12] framework: fix rotation of electron beam animation
 
 * For devices which have displays mounted at an angle this is required for electron beam to display properly
 

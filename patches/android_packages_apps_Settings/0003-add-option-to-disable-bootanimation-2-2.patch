@@ -1,0 +1,82 @@
+From 7cdf443d589f9a8727957ba87198f66ba1ec9cd5 Mon Sep 17 00:00:00 2001
+From: Konsta <konsta09@gmail.com>
+Date: Tue, 1 Jan 2013 19:11:19 +0200
+Subject: [PATCH 3/5] add option to disable bootanimation (2/2)
+
+Change-Id: Ia1c29e89318ced977c5b1881bfd5b62253128f6b
+---
+ res/values/cm_strings.xml                          |    4 ++++
+ res/xml/performance_settings.xml                   |    5 +++++
+ .../settings/cyanogenmod/PerformanceSettings.java  |   11 +++++++++++
+ 3 files changed, 20 insertions(+)
+
+diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
+index 585fb70..f052d10 100644
+--- a/res/values/cm_strings.xml
++++ b/res/values/cm_strings.xml
+@@ -39,6 +39,10 @@
+     <string name="konsta_web_summary">Visit MoDaCo thread</string>
+     <string name="konsta_web_url">http://www.modaco.com/topic/367241-cyanogenmod11/</string>
+ 
++    <!-- Performance : Disable bootanimation -->
++    <string name="pref_disable_bootanimation_title">Disable boot animation</string>
++    <string name="pref_disable_bootanimation_summary">Don\'t show boot animation for faster boot</string>
++
+     <!-- Sound settings screen -->
+     <string name="ring_mode_title">Ring mode</string>
+     <string name="ring_mode_normal">Normal</string>
+diff --git a/res/xml/performance_settings.xml b/res/xml/performance_settings.xml
+index 379795e..32c742d 100644
+--- a/res/xml/performance_settings.xml
++++ b/res/xml/performance_settings.xml
+@@ -45,4 +45,9 @@
+         android:title="@string/pref_use_16bpp_alpha_title"
+         android:summary="@string/pref_use_16bpp_alpha_summary" />
+ 
++    <CheckBoxPreference
++        android:key="pref_disable_bootanimation"
++        android:title="@string/pref_disable_bootanimation_title"
++        android:summary="@string/pref_disable_bootanimation_summary" />
++
+ </PreferenceScreen>
+diff --git a/src/com/android/settings/cyanogenmod/PerformanceSettings.java b/src/com/android/settings/cyanogenmod/PerformanceSettings.java
+index a88c805..6324aa8 100644
+--- a/src/com/android/settings/cyanogenmod/PerformanceSettings.java
++++ b/src/com/android/settings/cyanogenmod/PerformanceSettings.java
+@@ -46,8 +46,12 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements
+ 
+     private static final String USE_16BPP_ALPHA_PROP = "persist.sys.use_16bpp_alpha";
+ 
++    private static final String DISABLE_BOOTANIMATION_PREF = "pref_disable_bootanimation";
++    private static final String DISABLE_BOOTANIMATION_PERSIST_PROP = "persist.sys.nobootanimation";
++
+     private ListPreference mPerfProfilePref;
+     private CheckBoxPreference mUse16bppAlphaPref;
++    private CheckBoxPreference mDisableBootanimPref;
+ 
+     private String[] mPerfProfileEntries;
+     private String[] mPerfProfileValues;
+@@ -101,6 +105,10 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements
+         String use16bppAlpha = SystemProperties.get(USE_16BPP_ALPHA_PROP, "0");
+         mUse16bppAlphaPref.setChecked("1".equals(use16bppAlpha));
+ 
++        mDisableBootanimPref = (CheckBoxPreference) prefSet.findPreference(DISABLE_BOOTANIMATION_PREF);
++        String disableBootanimation = SystemProperties.get(DISABLE_BOOTANIMATION_PERSIST_PROP, "0");
++        mDisableBootanimPref.setChecked("1".equals(disableBootanimation));
++
+         /* Display the warning dialog */
+         alertDialog = new AlertDialog.Builder(getActivity()).create();
+         alertDialog.setTitle(R.string.performance_settings_warning_title);
+@@ -145,6 +153,9 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements
+         if (preference == mUse16bppAlphaPref) {
+             SystemProperties.set(USE_16BPP_ALPHA_PROP,
+                     mUse16bppAlphaPref.isChecked() ? "1" : "0");
++        } else if (preference == mDisableBootanimPref) {
++            SystemProperties.set(DISABLE_BOOTANIMATION_PERSIST_PROP,
++                    mDisableBootanimPref.isChecked() ? "1" : "0");
+         } else {
+             // If we didn't handle it, let preferences handle it.
+             return super.onPreferenceTreeClick(preferenceScreen, preference);
+-- 
+1.7.9.5
+

@@ -1,0 +1,82 @@
+From 96da36619a2621048e92769cb9db44de4e1710b9 Mon Sep 17 00:00:00 2001
+From: Konsta <konsta09@gmail.com>
+Date: Tue, 18 Dec 2012 15:32:15 +0200
+Subject: [PATCH 2/5] add forum link to device info
+
+Change-Id: I0f20b34b8f98673d9fc15dd2687b02c0dd296409
+---
+ res/values/cm_strings.xml                        |    5 +++++
+ res/xml/device_info_settings.xml                 |    5 +++++
+ src/com/android/settings/DeviceInfoSettings.java |   12 ++++++++++++
+ 3 files changed, 22 insertions(+)
+
+diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
+index 490b892..585fb70 100644
+--- a/res/values/cm_strings.xml
++++ b/res/values/cm_strings.xml
+@@ -34,6 +34,11 @@
+     <string name="partition_info_sdcard">/sdcard (FAT)</string>
+     <string name="partition_info_sdext">EXT partition</string>
+ 
++    <!-- Konsta forum link -->
++    <string name="konsta_web_title">CyanogenMod 11 - KonstaKANG</string>
++    <string name="konsta_web_summary">Visit MoDaCo thread</string>
++    <string name="konsta_web_url">http://www.modaco.com/topic/367241-cyanogenmod11/</string>
++
+     <!-- Sound settings screen -->
+     <string name="ring_mode_title">Ring mode</string>
+     <string name="ring_mode_normal">Normal</string>
+diff --git a/res/xml/device_info_settings.xml b/res/xml/device_info_settings.xml
+index a3e7891..3f31c0a 100644
+--- a/res/xml/device_info_settings.xml
++++ b/res/xml/device_info_settings.xml
+@@ -190,4 +190,9 @@
+                 android:title="@string/selinux_status"
+                 android:summary="@string/selinux_status_enforcing"/>
+ 
++        <!-- Konsta forum link -->
++        <Preference android:key="konsta_web"
++                android:title="@string/konsta_web_title"
++                android:summary="@string/konsta_web_summary"/>
++
+ </PreferenceScreen>
+diff --git a/src/com/android/settings/DeviceInfoSettings.java b/src/com/android/settings/DeviceInfoSettings.java
+index a70c6bb..8bc89b9 100644
+--- a/src/com/android/settings/DeviceInfoSettings.java
++++ b/src/com/android/settings/DeviceInfoSettings.java
+@@ -20,6 +20,7 @@ import android.app.Activity;
+ import android.content.Context;
+ import android.content.Intent;
+ import android.content.pm.PackageManager.NameNotFoundException;
++import android.net.Uri;
+ import android.os.Build;
+ import android.os.Bundle;
+ import android.os.SELinux;
+@@ -29,6 +30,7 @@ import android.os.UserHandle;
+ import android.preference.Preference;
+ import android.preference.PreferenceGroup;
+ import android.preference.PreferenceScreen;
++import android.preference.Preference.OnPreferenceClickListener;
+ import android.util.Log;
+ import android.widget.Toast;
+ 
+@@ -187,6 +189,16 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
+         // Remove regulatory information if not enabled.
+         removePreferenceIfBoolFalse(KEY_REGULATORY_INFO,
+                 R.bool.config_show_regulatory_info);
++
++        findPreference("konsta_web").setOnPreferenceClickListener(
++            new OnPreferenceClickListener() {
++                public boolean onPreferenceClick(Preference preference) {
++                    Intent browserIntent = new Intent("android.intent.action.VIEW",
++                            Uri.parse(getString(R.string.konsta_web_url)));
++                    startActivity(browserIntent);
++                    return true;
++                }
++            });
+     }
+ 
+     @Override
+-- 
+1.7.9.5
+

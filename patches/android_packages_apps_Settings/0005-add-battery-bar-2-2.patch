@@ -1,0 +1,46 @@
+From 1cd323037fa751b54ff08f2fc068ecf2178b4a0a Mon Sep 17 00:00:00 2001
+From: Konsta <konsta09@gmail.com>
+Date: Tue, 18 Dec 2012 15:00:55 +0200
+Subject: [PATCH 5/5] add battery bar (2/2)
+
+Change-Id: I912449bf44386a19f1f174eb732c7d077805b4de
+---
+ res/values/cm_arrays.xml  |    2 ++
+ res/values/cm_strings.xml |    1 +
+ 2 files changed, 3 insertions(+)
+
+diff --git a/res/values/cm_arrays.xml b/res/values/cm_arrays.xml
+index e2adf6a..e336ac0 100644
+--- a/res/values/cm_arrays.xml
++++ b/res/values/cm_arrays.xml
+@@ -439,6 +439,7 @@
+         <item>@string/status_bar_style_icon_portrait</item>
+         <item>@string/status_bar_style_icon_landscape</item>
+         <item>@string/status_bar_style_circle</item>
++        <item>@string/status_bar_battery_status_statusbar</item>
+         <item>@string/status_bar_style_hidden</item>
+     </string-array>
+ 
+@@ -446,6 +447,7 @@
+         <item>0</item>
+         <item>5</item>
+         <item>2</item>
++        <item>6</item>
+         <item>4</item>
+     </string-array>
+ </resources>
+diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
+index d80573f..134542b 100644
+--- a/res/values/cm_strings.xml
++++ b/res/values/cm_strings.xml
+@@ -833,6 +833,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+     <string name="status_bar_style_circle">Circle</string>
+     <string name="status_bar_style_hidden">Hidden</string>
+     <string name="status_bar_battery_show_percent_title">Show battery status percent</string>
++    <string name="status_bar_battery_status_statusbar">Status bar</string>
+ 
+     <!-- Development shortcut -->
+     <string name="development_shortcut_title">Development shortcut</string>
+-- 
+1.7.9.5
+

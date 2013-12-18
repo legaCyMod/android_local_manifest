@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <!-- ZTE Blade III -->
+    <project path="device/zte/atlas40" name="KonstaT/android_device_zte_atlas40" revision="cm-11.0" />
+    <project path="kernel/zte/msm7x27a" name="KonstaT/android_kernel_zte_msm7x27a" revision="cm-11.0" />
+    <project path="vendor/zte" name="KonstaT/proprietary_vendor_zte" revision="cm-11.0" />
+
+    <!-- FM Radio -->
+    <project path="hardware/qcom/fm" name="legaCyMod/android_hardware_qcom_fm" revision="cm-11.0" />
+    <project path="packages/apps/FM2" name="legaCyMod/android_packages_apps_FM2" revision="cm-11.0" />
+</manifest>

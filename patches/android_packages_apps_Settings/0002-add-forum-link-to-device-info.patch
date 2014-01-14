@@ -1,7 +1,7 @@
-From 96da36619a2621048e92769cb9db44de4e1710b9 Mon Sep 17 00:00:00 2001
+From cd87c43beac39542008ed624ff5c9f39bbb95052 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:32:15 +0200
-Subject: [PATCH 2/5] add forum link to device info
+Subject: [PATCH 02/13] add forum link to device info
 
 Change-Id: I0f20b34b8f98673d9fc15dd2687b02c0dd296409
 ---
@@ -11,7 +11,7 @@ Change-Id: I0f20b34b8f98673d9fc15dd2687b02c0dd296409
  3 files changed, 22 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 490b892..585fb70 100644
+index 9f58ede..d7ff3e1 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
 @@ -34,6 +34,11 @@
@@ -23,14 +23,14 @@ index 490b892..585fb70 100644
 +    <string name="konsta_web_summary">Visit MoDaCo thread</string>
 +    <string name="konsta_web_url">http://www.modaco.com/topic/367241-cyanogenmod11/</string>
 +
-     <!-- Sound settings screen -->
-     <string name="ring_mode_title">Ring mode</string>
-     <string name="ring_mode_normal">Normal</string>
+     <string name="lock_screen_title">Lock screen</string>
+ 
+     <string name="increasing_ring_title">Ascending ringtone</string>
 diff --git a/res/xml/device_info_settings.xml b/res/xml/device_info_settings.xml
-index a3e7891..3f31c0a 100644
+index 51a6e2a..238d5ff 100644
 --- a/res/xml/device_info_settings.xml
 +++ b/res/xml/device_info_settings.xml
-@@ -190,4 +190,9 @@
+@@ -192,4 +192,9 @@
                  android:title="@string/selinux_status"
                  android:summary="@string/selinux_status_enforcing"/>
  
@@ -41,7 +41,7 @@ index a3e7891..3f31c0a 100644
 +
  </PreferenceScreen>
 diff --git a/src/com/android/settings/DeviceInfoSettings.java b/src/com/android/settings/DeviceInfoSettings.java
-index a70c6bb..8bc89b9 100644
+index f7c6dc9..9672947 100644
 --- a/src/com/android/settings/DeviceInfoSettings.java
 +++ b/src/com/android/settings/DeviceInfoSettings.java
 @@ -20,6 +20,7 @@ import android.app.Activity;
@@ -60,7 +60,7 @@ index a70c6bb..8bc89b9 100644
  import android.util.Log;
  import android.widget.Toast;
  
-@@ -187,6 +189,16 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
+@@ -190,6 +192,16 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
          // Remove regulatory information if not enabled.
          removePreferenceIfBoolFalse(KEY_REGULATORY_INFO,
                  R.bool.config_show_regulatory_info);

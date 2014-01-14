@@ -1,0 +1,44 @@
+From c75d3713440b2362f185f208c461c1ba47efa754 Mon Sep 17 00:00:00 2001
+From: Konsta <konsta09@gmail.com>
+Date: Mon, 13 Jan 2014 22:14:37 +0200
+Subject: [PATCH 10/13] add option to show navigation bar (2/2)
+
+Change-Id: I60904182a4b8904e845ddfa7046aa612a0ec71aa
+---
+ res/values/cm_strings.xml      |    4 ++++
+ res/xml/system_ui_settings.xml |    6 ++++++
+ 2 files changed, 10 insertions(+)
+
+diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
+index 2c85f21..6603696 100644
+--- a/res/values/cm_strings.xml
++++ b/res/values/cm_strings.xml
+@@ -39,6 +39,10 @@
+     <string name="konsta_web_summary">Visit MoDaCo thread</string>
+     <string name="konsta_web_url">http://www.modaco.com/topic/367241-cyanogenmod11/</string>
+ 
++    <!-- Navbar -->
++    <string name="show_navbar_title">Show navigation bar</string>
++    <string name="show_navbar_summary">Requires a reboot</string>
++
+     <!-- Performance : Disable bootanimation -->
+     <string name="pref_disable_bootanimation_title">Disable boot animation</string>
+     <string name="pref_disable_bootanimation_summary">Don\'t show boot animation for faster boot</string>
+diff --git a/res/xml/system_ui_settings.xml b/res/xml/system_ui_settings.xml
+index 6ac6be9..33ed402 100644
+--- a/res/xml/system_ui_settings.xml
++++ b/res/xml/system_ui_settings.xml
+@@ -71,4 +71,10 @@
+ 
+     </PreferenceCategory>
+ 
++    <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
++        android:key="show_navbar"
++        android:title="@string/show_navbar_title"
++        android:summary="@string/show_navbar_summary"
++        android:defaultValue="false" />
++
+ </PreferenceScreen>
+-- 
+1.7.9.5
+

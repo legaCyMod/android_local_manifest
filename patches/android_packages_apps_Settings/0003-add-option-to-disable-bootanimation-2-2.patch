@@ -1,7 +1,7 @@
-From 7cdf443d589f9a8727957ba87198f66ba1ec9cd5 Mon Sep 17 00:00:00 2001
+From 676863611552068a86e9d8b08cafc89c55893195 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 1 Jan 2013 19:11:19 +0200
-Subject: [PATCH 3/5] add option to disable bootanimation (2/2)
+Subject: [PATCH 03/13] add option to disable bootanimation (2/2)
 
 Change-Id: Ia1c29e89318ced977c5b1881bfd5b62253128f6b
 ---
@@ -11,7 +11,7 @@ Change-Id: Ia1c29e89318ced977c5b1881bfd5b62253128f6b
  3 files changed, 20 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 585fb70..f052d10 100644
+index d7ff3e1..63497ed 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
 @@ -39,6 +39,10 @@
@@ -22,9 +22,9 @@ index 585fb70..f052d10 100644
 +    <string name="pref_disable_bootanimation_title">Disable boot animation</string>
 +    <string name="pref_disable_bootanimation_summary">Don\'t show boot animation for faster boot</string>
 +
-     <!-- Sound settings screen -->
-     <string name="ring_mode_title">Ring mode</string>
-     <string name="ring_mode_normal">Normal</string>
+     <string name="lock_screen_title">Lock screen</string>
+ 
+     <string name="increasing_ring_title">Ascending ringtone</string>
 diff --git a/res/xml/performance_settings.xml b/res/xml/performance_settings.xml
 index 379795e..32c742d 100644
 --- a/res/xml/performance_settings.xml

@@ -1,7 +1,7 @@
-From 1f401ea0a53f2f80ccfdcc90747b064d8ddc0626 Mon Sep 17 00:00:00 2001
+From 7d6d80e493f0a162d31b6168e74ab6f885e5d435 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 14:48:22 +0200
-Subject: [PATCH 7/9] add battery bar (1/2)
+Subject: [PATCH 07/13] add battery bar (1/2)
 
 Change-Id: I6a3f3028946829e4117a519c827bdd6d88912e1d
 ---
@@ -16,14 +16,14 @@ Change-Id: I6a3f3028946829e4117a519c827bdd6d88912e1d
  create mode 100644 packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index fa8641b9..d424548 100644
+index 52d416b..72c8c1a 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -2929,6 +2929,7 @@ public final class Settings {
-          * 2: Display the battery as a circle
+@@ -2933,6 +2933,7 @@ public final class Settings {
           * 4: Hide the battery status information
-          * 5: Display the battery an icon  in landscape mode
-+         * 6: Show MIUI-style battery bar on the status bar
+          * 5: Display the battery an icon in landscape mode
+          * 6: Display the battery as plain text
++         * 7: Show MIUI-style battery bar on the status bar
           * default: 0
           * @hide
           */
@@ -63,10 +63,10 @@ index 0000000..38a03cd
 +
 +</layer-list>
 diff --git a/packages/SystemUI/res/layout/status_bar.xml b/packages/SystemUI/res/layout/status_bar.xml
-index 47a438a..7d7bc42 100644
+index 9ecf40e..ab98800 100644
 --- a/packages/SystemUI/res/layout/status_bar.xml
 +++ b/packages/SystemUI/res/layout/status_bar.xml
-@@ -167,4 +167,9 @@
+@@ -172,4 +172,9 @@
                  />
          </com.android.systemui.statusbar.phone.TickerView>
      </LinearLayout>
@@ -77,10 +77,10 @@ index 47a438a..7d7bc42 100644
 +        android:layout_height="1dip" />
  </com.android.systemui.statusbar.phone.PhoneStatusBarView>
 diff --git a/packages/SystemUI/res/values/styles.xml b/packages/SystemUI/res/values/styles.xml
-index 37bc5a8..83b4218 100644
+index 23d05b4..abe8be5 100644
 --- a/packages/SystemUI/res/values/styles.xml
 +++ b/packages/SystemUI/res/values/styles.xml
-@@ -171,4 +171,10 @@
+@@ -178,4 +178,10 @@
          <item name="android:textSize">14dp</item>
      </style>
      
@@ -93,7 +93,7 @@ index 37bc5a8..83b4218 100644
  </resources>
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java
 new file mode 100644
-index 0000000..2c555bb
+index 0000000..50b3ea3
 --- /dev/null
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java
 @@ -0,0 +1,173 @@
@@ -222,7 +222,7 @@ index 0000000..2c555bb
 +    private void updateSettings() {
 +        ContentResolver resolver = mContext.getContentResolver();
 +        mShowBatteryBar = (Settings.System.getInt(resolver,
-+                Settings.System.STATUS_BAR_BATTERY, 0) == 6);
++                Settings.System.STATUS_BAR_BATTERY, 0) == 7);
 +        if (mShowBatteryBar) {
 +            setVisibility(VISIBLE);
 +        } else {
@@ -271,14 +271,14 @@ index 0000000..2c555bb
 +
 +}
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
-index 828c12b..1fc7955 100644
+index a7cabd3..b897562 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
-@@ -2890,6 +2890,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
-                 mode = BatteryMeterMode.BATTERY_METER_ICON_LANDSCAPE;
+@@ -2906,6 +2906,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode {
+                 mode = BatteryMeterMode.BATTERY_METER_TEXT;
                  break;
  
-+            case 6:
++            case 7:
 +                mode = BatteryMeterMode.BATTERY_METER_GONE;
 +                break;
 +

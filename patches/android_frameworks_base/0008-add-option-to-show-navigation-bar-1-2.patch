@@ -1,0 +1,49 @@
+From 05745095aa560b51796f5c17f0859b1737bc8f97 Mon Sep 17 00:00:00 2001
+From: Konsta <konsta09@gmail.com>
+Date: Mon, 13 Jan 2014 22:04:25 +0200
+Subject: [PATCH 11/13] add option to show navigation bar (1/2)
+
+Change-Id: I7360587e5196fd529b50dbb8bd3202f94d0be6cd
+---
+ core/java/android/provider/Settings.java           |    6 ++++++
+ .../internal/policy/impl/PhoneWindowManager.java   |    7 ++++++-
+ 2 files changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
+index 9904e2a..4637629 100644
+--- a/core/java/android/provider/Settings.java
++++ b/core/java/android/provider/Settings.java
+@@ -3275,6 +3275,12 @@ public final class Settings {
+         public static final String NOTIFICATION_VIBRATE_DURING_ALERTS_DISABLED = "vibrate_while_no_alerts";
+ 
+         /**
++         * Option to display navigation bar
++         * @hide
++         */
++        public static final String SHOW_NAVBAR = "show_navbar";
++
++        /**
+          * Custom navring actions
+          *
+          * @hide
+diff --git a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
+index 2f2f73c..ef4260c 100644
+--- a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
++++ b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
+@@ -1394,7 +1394,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+         // Allow the navigation bar to move on small devices (phones).
+         mNavigationBarCanMove = shortSizeDp < 600;
+ 
+-        mHasNavigationBar = res.getBoolean(com.android.internal.R.bool.config_showNavigationBar);
++        if (res.getBoolean(com.android.internal.R.bool.config_showNavigationBar)) {
++            mHasNavigationBar = true;
++        } else {
++            mHasNavigationBar = Settings.System.getInt(mContext.getContentResolver(),
++                    Settings.System.SHOW_NAVBAR, 0) != 0;
++        }
+         // Allow a system property to override this. Used by the emulator.
+         // See also hasNavigationBar().
+         String navBarOverride = SystemProperties.get("qemu.hw.mainkeys");
+-- 
+1.7.9.5
+

@@ -1,7 +1,7 @@
-From 676863611552068a86e9d8b08cafc89c55893195 Mon Sep 17 00:00:00 2001
+From 602c65622b39f26c8e81376970f8c9dc833f5552 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 1 Jan 2013 19:11:19 +0200
-Subject: [PATCH 03/13] add option to disable bootanimation (2/2)
+Subject: [PATCH 3/8] add option to disable bootanimation (2/2)
 
 Change-Id: Ia1c29e89318ced977c5b1881bfd5b62253128f6b
 ---
@@ -11,7 +11,7 @@ Change-Id: Ia1c29e89318ced977c5b1881bfd5b62253128f6b
  3 files changed, 20 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index d7ff3e1..63497ed 100644
+index 00b84a5..ebd0f8a 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
 @@ -39,6 +39,10 @@
@@ -40,7 +40,7 @@ index 379795e..32c742d 100644
 +
  </PreferenceScreen>
 diff --git a/src/com/android/settings/cyanogenmod/PerformanceSettings.java b/src/com/android/settings/cyanogenmod/PerformanceSettings.java
-index a88c805..6324aa8 100644
+index 1f1957f..9f21da0 100644
 --- a/src/com/android/settings/cyanogenmod/PerformanceSettings.java
 +++ b/src/com/android/settings/cyanogenmod/PerformanceSettings.java
 @@ -46,8 +46,12 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements
@@ -67,7 +67,7 @@ index a88c805..6324aa8 100644
          /* Display the warning dialog */
          alertDialog = new AlertDialog.Builder(getActivity()).create();
          alertDialog.setTitle(R.string.performance_settings_warning_title);
-@@ -145,6 +153,9 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements
+@@ -141,6 +149,9 @@ public class PerformanceSettings extends SettingsPreferenceFragment implements
          if (preference == mUse16bppAlphaPref) {
              SystemProperties.set(USE_16BPP_ALPHA_PROP,
                      mUse16bppAlphaPref.isChecked() ? "1" : "0");

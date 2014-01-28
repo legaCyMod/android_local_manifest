@@ -1,7 +1,7 @@
-From 8a8767975ecef3db8906880df6f8ce95959f5ce6 Mon Sep 17 00:00:00 2001
+From 2cd3ba75717a815d512b8bd946a91325a53e7faa Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 19 Aug 2013 13:03:28 +0300
-Subject: [PATCH 04/13] cmhw: USB charging (2/2)
+Subject: [PATCH 4/8] cmhw: USB charging (2/2)
 
 Change-Id: Ia627239addddd45adaf4fc617c6904495660de73
 ---
@@ -12,10 +12,10 @@ Change-Id: Ia627239addddd45adaf4fc617c6904495660de73
  4 files changed, 68 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 63497ed..b4d0659 100644
+index ebd0f8a..4f493f2 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -673,6 +673,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -682,6 +682,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="gamma_tuning_brightness">Brightness</string>
      <string name="gamma_tuning_saturation">Saturation</string>
  
@@ -47,7 +47,7 @@ index fbf28d3..40858d9 100644
 +
  </PreferenceScreen>
 diff --git a/src/com/android/settings/cyanogenmod/BootReceiver.java b/src/com/android/settings/cyanogenmod/BootReceiver.java
-index a7392c2..f5c2294 100644
+index 9d48c1a..b5a16ad 100644
 --- a/src/com/android/settings/cyanogenmod/BootReceiver.java
 +++ b/src/com/android/settings/cyanogenmod/BootReceiver.java
 @@ -77,6 +77,7 @@ public class BootReceiver extends BroadcastReceiver {
@@ -59,7 +59,7 @@ index a7392c2..f5c2294 100644
  
      private void initFreqCapFiles(Context ctx)
 diff --git a/src/com/android/settings/cyanogenmod/MoreDeviceSettings.java b/src/com/android/settings/cyanogenmod/MoreDeviceSettings.java
-index 4ad9b04..252569e 100644
+index 0de3c5b..6454a8c 100644
 --- a/src/com/android/settings/cyanogenmod/MoreDeviceSettings.java
 +++ b/src/com/android/settings/cyanogenmod/MoreDeviceSettings.java
 @@ -18,9 +18,13 @@ package com.android.settings.cyanogenmod;

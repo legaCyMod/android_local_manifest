@@ -1,4 +1,4 @@
-From 2cd3ba75717a815d512b8bd946a91325a53e7faa Mon Sep 17 00:00:00 2001
+From 949643bdb44375b765505df189ecb7ff555748fc Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 19 Aug 2013 13:03:28 +0300
 Subject: [PATCH 4/8] cmhw: USB charging (2/2)
@@ -12,10 +12,10 @@ Change-Id: Ia627239addddd45adaf4fc617c6904495660de73
  4 files changed, 68 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index ebd0f8a..4f493f2 100644
+index 9bd850f..b7d2cf4 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -682,6 +682,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -687,6 +687,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="gamma_tuning_brightness">Brightness</string>
      <string name="gamma_tuning_saturation">Saturation</string>
  

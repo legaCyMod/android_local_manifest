@@ -1,19 +1,19 @@
-From 9211381a02a9e1cf81f30b5a52b9c089612635b3 Mon Sep 17 00:00:00 2001
+From 024ea5f7d034fe4033bd1765c3c87adab3a8f4c1 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:24:44 +0200
-Subject: [PATCH 11/11] custom navbar height (1/2)
+Subject: [PATCH 09/12] custom navbar height (1/2)
 
 Change-Id: Ib98773eda3d0b2b501594e4247113d0138f53b6a
 ---
  core/java/android/provider/Settings.java           |    6 +++++
- .../internal/policy/impl/PhoneWindowManager.java   |   24 ++++++++++++++++++++
- 2 files changed, 30 insertions(+)
+ .../internal/policy/impl/PhoneWindowManager.java   |   25 ++++++++++++++++++++
+ 2 files changed, 31 insertions(+)
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 897fe45..21167a3 100644
+index 232524d..f2fb765 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -3356,6 +3356,12 @@ public final class Settings {
+@@ -3363,6 +3363,12 @@ public final class Settings {
          public static final String SHOW_NAVBAR = "show_navbar";
  
          /**
@@ -27,20 +27,21 @@ index 897fe45..21167a3 100644
           *
           * @hide
 diff --git a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-index be827de..d02a8c9 100644
+index 88539b5..7174c6b 100644
 --- a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
 +++ b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-@@ -675,6 +675,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -679,6 +679,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
              resolver.registerContentObserver(Settings.System.getUriFor(
-                     Settings.System.KEY_APP_SWITCH_LONG_PRESS_ACTION), false, this,
+                     Settings.System.NAVBAR_LEFT_IN_LANDSCAPE), false, this,
                      UserHandle.USER_ALL);
 +            resolver.registerContentObserver(Settings.System.getUriFor(
 +                    Settings.System.NAV_BUTTONS_HEIGHT), false, this,
 +                    UserHandle.USER_ALL);
- 
++
              updateSettings();
          }
-@@ -1545,6 +1548,27 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+ 
+@@ -1551,6 +1555,27 @@ public class PhoneWindowManager implements WindowManagerPolicy {
              if (mImmersiveModeConfirmation != null) {
                  mImmersiveModeConfirmation.loadSetting();
              }

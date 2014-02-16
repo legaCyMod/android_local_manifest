@@ -1,4 +1,4 @@
-From d9d97b148894749f9e46eef16d8afad19617e7de Mon Sep 17 00:00:00 2001
+From 546f31399c69edb50af3bba1b9b2acd48efec880 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:32:15 +0200
 Subject: [PATCH 2/8] add forum link to device info
@@ -11,7 +11,7 @@ Change-Id: I0f20b34b8f98673d9fc15dd2687b02c0dd296409
  3 files changed, 22 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index f2fb717..00b84a5 100644
+index d464ca5..0d696f2 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
 @@ -34,6 +34,11 @@
@@ -41,7 +41,7 @@ index 51a6e2a..238d5ff 100644
 +
  </PreferenceScreen>
 diff --git a/src/com/android/settings/DeviceInfoSettings.java b/src/com/android/settings/DeviceInfoSettings.java
-index f7c6dc9..9672947 100644
+index 90be731..624e59f 100644
 --- a/src/com/android/settings/DeviceInfoSettings.java
 +++ b/src/com/android/settings/DeviceInfoSettings.java
 @@ -20,6 +20,7 @@ import android.app.Activity;

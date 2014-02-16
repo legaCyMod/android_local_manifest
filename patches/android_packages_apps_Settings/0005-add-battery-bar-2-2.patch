@@ -1,4 +1,4 @@
-From 391414e7967072701b095d0bce27d6ddcd48a616 Mon Sep 17 00:00:00 2001
+From e0b8c4188cf652a2156cb7bcfb64b6322d8cb1d7 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:00:55 +0200
 Subject: [PATCH 5/8] add battery bar (2/2)
@@ -11,7 +11,7 @@ Change-Id: I912449bf44386a19f1f174eb732c7d077805b4de
  3 files changed, 5 insertions(+)
 
 diff --git a/res/values/cm_arrays.xml b/res/values/cm_arrays.xml
-index 10c4206..6d5a0aa 100644
+index 77913af..1164c56 100644
 --- a/res/values/cm_arrays.xml
 +++ b/res/values/cm_arrays.xml
 @@ -519,6 +519,7 @@
@@ -31,10 +31,10 @@ index 10c4206..6d5a0aa 100644
      </string-array>
  
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 4f493f2..cfed6bc 100644
+index b7d2cf4..372e5cb 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -932,6 +932,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -939,6 +939,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="status_bar_style_circle">Circle</string>
      <string name="status_bar_style_text">Text</string>
      <string name="status_bar_style_hidden">Hidden</string>

@@ -1,7 +1,7 @@
-From 6eabccaa3c2f59f44a62952fb36ed806ad40bf34 Mon Sep 17 00:00:00 2001
+From f92c26b5555e3d4231756c6fa5c8bfa128e92c96 Mon Sep 17 00:00:00 2001
 From: Mingming Yin <mingming@codeaurora.org>
 Date: Thu, 27 Dec 2012 17:43:24 -0800
-Subject: [PATCH 02/11] qcom-fm: audio: add support for mr1 based fm feature
+Subject: [PATCH 02/12] qcom-fm: audio: add support for mr1 based fm feature
 
 Change-Id: Id48a52ceb7359deb65d4a69e664b22ed80cf997c
 ---
@@ -54,7 +54,7 @@ index 882dbfc..ffdd525 100644
       * Broadcast Action: An analog audio speaker/headset plugged in or unplugged.
       *
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index e266209..30ed223 100644
+index 248693a..7e33e79 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
 @@ -2025,6 +2025,18 @@ public final class Settings {
@@ -87,7 +87,7 @@ index e266209..30ed223 100644
          };
  
          /**
-@@ -3481,6 +3495,7 @@ public final class Settings {
+@@ -3488,6 +3502,7 @@ public final class Settings {
              VOLUME_SYSTEM,
              VOLUME_RING,
              VOLUME_MUSIC,
@@ -393,10 +393,10 @@ index 4f6f223..0724da9 100644
                      AudioManager.DEFAULT_STREAM_VOLUME[AudioManager.STREAM_RING]);
              loadSetting(stmt, Settings.System.VOLUME_SYSTEM,
 diff --git a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-index b335559..5aa0be0 100644
+index b7e62c7..7773c95 100644
 --- a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
 +++ b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-@@ -4224,6 +4224,18 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -4266,6 +4266,18 @@ public class PhoneWindowManager implements WindowManagerPolicy {
      }
  
      /**
@@ -415,7 +415,7 @@ index b335559..5aa0be0 100644
       * Tell the audio service to adjust the volume appropriate to the event.
       * @param keycode
       */
-@@ -4567,7 +4579,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -4609,7 +4621,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
  
                  }
  

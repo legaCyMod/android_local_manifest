@@ -1,7 +1,7 @@
-From 986aa2b5abc335202bfd8847be4b72b8f44c39a2 Mon Sep 17 00:00:00 2001
+From 5d9f5ee0247c1f20287230281427ed943e973d9f Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:04:25 +0200
-Subject: [PATCH 10/11] add option to show navigation bar (1/2)
+Subject: [PATCH 08/12] add option to show navigation bar (1/2)
 
 Change-Id: I7360587e5196fd529b50dbb8bd3202f94d0be6cd
 ---
@@ -10,10 +10,10 @@ Change-Id: I7360587e5196fd529b50dbb8bd3202f94d0be6cd
  2 files changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 7169635..897fe45 100644
+index aeba410..232524d 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -3350,6 +3350,12 @@ public final class Settings {
+@@ -3357,6 +3357,12 @@ public final class Settings {
          public static final String NOTIFICATION_VIBRATE_DURING_ALERTS_DISABLED = "vibrate_while_no_alerts";
  
          /**
@@ -27,10 +27,10 @@ index 7169635..897fe45 100644
           *
           * @hide
 diff --git a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-index 5aa0be0..be827de 100644
+index 7773c95..88539b5 100644
 --- a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
 +++ b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-@@ -1403,7 +1403,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -1406,7 +1406,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
          // Allow the navigation bar to move on small devices (phones).
          mNavigationBarCanMove = shortSizeDp < 600;
  

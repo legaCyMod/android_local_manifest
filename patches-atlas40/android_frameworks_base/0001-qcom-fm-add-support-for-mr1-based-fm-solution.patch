@@ -1,7 +1,7 @@
-From 56d352612ea05c14294833315aaad2d6c9437647 Mon Sep 17 00:00:00 2001
+From af2d8d0d90c4e48e730c7b93decd471b930bceeb Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Fri, 26 Apr 2013 16:55:27 +0300
-Subject: [PATCH 01/11] qcom-fm: add support for mr1 based fm solution
+Subject: [PATCH 01/12] qcom-fm: add support for mr1 based fm solution
 
 Squashed commit between:
 https://www.codeaurora.org/gitweb/quic/la/?p=platform/frameworks/base.git;a=commit;h=27086d06dec240e8915580208197ab7169ec498e

@@ -1,7 +1,7 @@
-From a93df8f43d6594582233cd2056ef508ec3fc938c Mon Sep 17 00:00:00 2001
+From 3bebfce4c220527e536772b65fec94fed2680547 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:33:16 +0200
-Subject: [PATCH 8/8] custom navbar height (2/2)
+Subject: [PATCH 7/8] custom navbar height (2/2)
 
 Change-Id: I30b0061eb8c50ea882c47d7e750d960d365b44d1
 ---
@@ -12,7 +12,7 @@ Change-Id: I30b0061eb8c50ea882c47d7e750d960d365b44d1
  4 files changed, 60 insertions(+)
 
 diff --git a/res/values/cm_arrays.xml b/res/values/cm_arrays.xml
-index 6d5a0aa..1b55139 100644
+index 1164c56..609fdff 100644
 --- a/res/values/cm_arrays.xml
 +++ b/res/values/cm_arrays.xml
 @@ -15,6 +15,27 @@
@@ -44,10 +44,10 @@ index 6d5a0aa..1b55139 100644
      <string-array name="wifi_countrycode_entries">
          <item>United States</item>
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index ef319ae..941758a 100644
+index 528859f..1fbcde2 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -863,6 +863,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -866,6 +866,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="navring_action_google_now">Google Now</string>
      <string name="navring_choose_action_title">Choose action</string>
  
@@ -65,7 +65,7 @@ index ef319ae..941758a 100644
      <string name="power_menu_title">Power menu</string>
      <string name="power_menu_reboot_title">Reboot menu</string>
 diff --git a/res/xml/system_ui_settings.xml b/res/xml/system_ui_settings.xml
-index 01e769d..2d1fc3a 100644
+index 12e6197..a788b17 100644
 --- a/res/xml/system_ui_settings.xml
 +++ b/res/xml/system_ui_settings.xml
 @@ -69,6 +69,15 @@
@@ -81,27 +81,29 @@ index 01e769d..2d1fc3a 100644
 +            android:defaultValue="48"
 +            android:persistent="false" />
 +
-     </PreferenceCategory>
- 
-     <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+         <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
+             android:key="navigation_bar_left"
+             android:title="@string/navigation_bar_left_title"
 diff --git a/src/com/android/settings/cyanogenmod/SystemUiSettings.java b/src/com/android/settings/cyanogenmod/SystemUiSettings.java
-index 156e900..e280027 100644
+index 1fd04cf..04916bb 100644
 --- a/src/com/android/settings/cyanogenmod/SystemUiSettings.java
 +++ b/src/com/android/settings/cyanogenmod/SystemUiSettings.java
-@@ -39,10 +39,12 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
+@@ -40,12 +40,14 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
      private static final String KEY_EXPANDED_DESKTOP = "expanded_desktop";
      private static final String KEY_EXPANDED_DESKTOP_NO_NAVBAR = "expanded_desktop_no_navbar";
      private static final String CATEGORY_NAVBAR = "navigation_bar";
 +    private static final String KEY_NAVIGATION_HEIGHT = "nav_buttons_height";
      private static final String KEY_SCREEN_GESTURE_SETTINGS = "touch_screen_gesture_settings";
+     private static final String KEY_NAVIGATION_BAR_LEFT = "navigation_bar_left";
  
      private ListPreference mExpandedDesktopPref;
      private CheckBoxPreference mExpandedDesktopNoNavbarPref;
+     private CheckBoxPreference mNavigationBarLeftPref;
 +    private ListPreference mNavButtonsHeight;
  
      @Override
      public void onCreate(Bundle savedInstanceState) {
-@@ -67,6 +69,17 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
+@@ -73,6 +75,17 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
              prefScreen.removePreference(findPreference(Settings.System.SHOW_NAVBAR));
          }
  
@@ -119,7 +121,7 @@ index 156e900..e280027 100644
          try {
              boolean hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar();
  
-@@ -97,6 +110,13 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
+@@ -109,6 +122,13 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
              boolean value = (Boolean) objValue;
              updateExpandedDesktop(value ? 2 : 0);
              return true;

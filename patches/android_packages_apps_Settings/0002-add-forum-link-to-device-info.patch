@@ -1,7 +1,7 @@
-From 546f31399c69edb50af3bba1b9b2acd48efec880 Mon Sep 17 00:00:00 2001
+From 884277ff4b9dfdf3c56ca9f119617e7af57f5544 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:32:15 +0200
-Subject: [PATCH 2/8] add forum link to device info
+Subject: [PATCH 2/7] add forum link to device info
 
 Change-Id: I0f20b34b8f98673d9fc15dd2687b02c0dd296409
 ---
@@ -11,11 +11,11 @@ Change-Id: I0f20b34b8f98673d9fc15dd2687b02c0dd296409
  3 files changed, 22 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index d464ca5..0d696f2 100644
+index 628cbb2..c5019b5 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -34,6 +34,11 @@
-     <string name="partition_info_sdcard">/sdcard (FAT)</string>
+@@ -23,6 +23,11 @@
+     <string name="partition_info_sdcard">/sdcard</string>
      <string name="partition_info_sdext">EXT partition</string>
  
 +    <!-- Konsta forum link -->
@@ -23,9 +23,9 @@ index d464ca5..0d696f2 100644
 +    <string name="konsta_web_summary">Visit MoDaCo thread</string>
 +    <string name="konsta_web_url">http://www.modaco.com/topic/367241-cyanogenmod11/</string>
 +
-     <string name="lock_screen_title">Lock screen</string>
- 
-     <string name="increasing_ring_title">Ascending ringtone</string>
+     <!-- Wi-Fi region code -->
+     <string name="wifi_setting_countrycode_title">Wi-Fi region code</string>
+     <!-- Wi-Fi settings screen, setting summary for setting the wifi frequency band [CHAR LIMIT=50]-->
 diff --git a/res/xml/device_info_settings.xml b/res/xml/device_info_settings.xml
 index 51a6e2a..238d5ff 100644
 --- a/res/xml/device_info_settings.xml
@@ -41,7 +41,7 @@ index 51a6e2a..238d5ff 100644
 +
  </PreferenceScreen>
 diff --git a/src/com/android/settings/DeviceInfoSettings.java b/src/com/android/settings/DeviceInfoSettings.java
-index 90be731..624e59f 100644
+index 7e9da61..3bf29a2 100644
 --- a/src/com/android/settings/DeviceInfoSettings.java
 +++ b/src/com/android/settings/DeviceInfoSettings.java
 @@ -20,6 +20,7 @@ import android.app.Activity;
@@ -57,10 +57,10 @@ index 90be731..624e59f 100644
  import android.preference.PreferenceGroup;
  import android.preference.PreferenceScreen;
 +import android.preference.Preference.OnPreferenceClickListener;
+ import android.telephony.MSimTelephonyManager;
  import android.util.Log;
  import android.widget.Toast;
- 
-@@ -190,6 +192,16 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
+@@ -198,6 +200,16 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
          // Remove regulatory information if not enabled.
          removePreferenceIfBoolFalse(KEY_REGULATORY_INFO,
                  R.bool.config_show_regulatory_info);

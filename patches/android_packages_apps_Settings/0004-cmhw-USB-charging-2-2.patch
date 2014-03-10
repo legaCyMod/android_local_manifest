@@ -1,27 +1,27 @@
-From 949643bdb44375b765505df189ecb7ff555748fc Mon Sep 17 00:00:00 2001
+From 5f6aa33b4847c7204f1de01ffcebe86a0eb2e01c Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 19 Aug 2013 13:03:28 +0300
-Subject: [PATCH 4/8] cmhw: USB charging (2/2)
+Subject: [PATCH 4/7] cmhw: USB charging (2/2)
 
 Change-Id: Ia627239addddd45adaf4fc617c6904495660de73
 ---
  res/values/cm_strings.xml                          |    4 ++
- res/xml/more_device_settings.xml                   |   11 +++++
+ res/xml/more_device_settings.xml                   |   11 ++++
  .../android/settings/cyanogenmod/BootReceiver.java |    1 +
- .../settings/cyanogenmod/MoreDeviceSettings.java   |   52 ++++++++++++++++++++
- 4 files changed, 68 insertions(+)
+ .../settings/cyanogenmod/MoreDeviceSettings.java   |   57 ++++++++++++++++++++
+ 4 files changed, 73 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 9bd850f..b7d2cf4 100644
+index 6d7235b..d4152e9 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -687,6 +687,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -688,6 +688,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="gamma_tuning_brightness">Brightness</string>
      <string name="gamma_tuning_saturation">Saturation</string>
  
 +    <!-- Hardware tunables - USB charging -->
 +    <string name="usb_charging_title">USB charging</string>
-+    <string name="usb_charging_summary">Charge battery when connected to USB port</string>
++    <string name="usb_charging_summary">Charge battery when connected in USB mode</string>
 +
      <!-- Category title for headset specific Settings.
           [CHAR LIMIT=40] -->
@@ -59,10 +59,10 @@ index 9d48c1a..b5a16ad 100644
  
      private void initFreqCapFiles(Context ctx)
 diff --git a/src/com/android/settings/cyanogenmod/MoreDeviceSettings.java b/src/com/android/settings/cyanogenmod/MoreDeviceSettings.java
-index 0de3c5b..6454a8c 100644
+index 0de3c5b..3e20923 100644
 --- a/src/com/android/settings/cyanogenmod/MoreDeviceSettings.java
 +++ b/src/com/android/settings/cyanogenmod/MoreDeviceSettings.java
-@@ -18,9 +18,13 @@ package com.android.settings.cyanogenmod;
+@@ -18,11 +18,16 @@ package com.android.settings.cyanogenmod;
  
  import android.content.ContentResolver;
  import android.content.Context;
@@ -75,8 +75,11 @@ index 0de3c5b..6454a8c 100644
 +import android.preference.PreferenceManager;
  import android.preference.PreferenceScreen;
  import android.provider.Settings;
++import android.util.Log;
  
-@@ -30,6 +34,8 @@ import com.android.settings.hardware.DisplayColor;
+ import com.android.settings.R;
+ import com.android.settings.SettingsPreferenceFragment;
+@@ -30,6 +35,8 @@ import com.android.settings.hardware.DisplayColor;
  import com.android.settings.hardware.DisplayGamma;
  import com.android.settings.hardware.VibratorIntensity;
  
@@ -85,7 +88,7 @@ index 0de3c5b..6454a8c 100644
  public class MoreDeviceSettings extends SettingsPreferenceFragment {
      private static final String TAG = "MoreDeviceSettings";
  
-@@ -37,6 +43,10 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
+@@ -37,6 +44,10 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
      private static final String KEY_DISPLAY_CALIBRATION_CATEGORY = "display_calibration_category";
      private static final String KEY_DISPLAY_COLOR = "color_calibration";
      private static final String KEY_DISPLAY_GAMMA = "gamma_tuning";
@@ -96,7 +99,7 @@ index 0de3c5b..6454a8c 100644
  
      @Override
      public void onCreate(Bundle savedInstanceState) {
-@@ -63,5 +73,47 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
+@@ -63,5 +74,51 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
                  calibrationCategory.removePreference(findPreference(KEY_DISPLAY_GAMMA));
              }
          }
@@ -110,7 +113,7 @@ index 0de3c5b..6454a8c 100644
 +        } else {
 +            getPreferenceScreen().removePreference(usbChargingCategory);
 +        }
-     }
++    }
 +
 +    @Override
 +    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
@@ -130,9 +133,13 @@ index 0de3c5b..6454a8c 100644
 +        if (isUsbChargingSupported()) {
 +            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 +            final boolean enabled = prefs.getBoolean(KEY_USB_CHARGING, true);
-+            UsbCharging.setEnabled(enabled);
++            if (!UsbCharging.setEnabled(enabled)) {
++                Log.e(TAG, "Failed to restore USB charging settings.");
++            } else {
++                Log.d(TAG, "USB charging settings restored.");
++            }
 +        }
-+    }
+     }
 +
 +    private static boolean isUsbChargingSupported() {
 +        try {

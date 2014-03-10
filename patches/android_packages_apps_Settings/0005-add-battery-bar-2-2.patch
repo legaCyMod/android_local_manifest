@@ -1,7 +1,7 @@
-From e0b8c4188cf652a2156cb7bcfb64b6322d8cb1d7 Mon Sep 17 00:00:00 2001
+From cae5e1d6440f71cf19aa84100ea5197bd431521f Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:00:55 +0200
-Subject: [PATCH 5/8] add battery bar (2/2)
+Subject: [PATCH 5/7] add battery bar (2/2)
 
 Change-Id: I912449bf44386a19f1f174eb732c7d077805b4de
 ---
@@ -11,10 +11,10 @@ Change-Id: I912449bf44386a19f1f174eb732c7d077805b4de
  3 files changed, 5 insertions(+)
 
 diff --git a/res/values/cm_arrays.xml b/res/values/cm_arrays.xml
-index 77913af..1164c56 100644
+index ee5058c..0149b37 100644
 --- a/res/values/cm_arrays.xml
 +++ b/res/values/cm_arrays.xml
-@@ -519,6 +519,7 @@
+@@ -533,6 +533,7 @@
          <item>@string/status_bar_style_icon_landscape</item>
          <item>@string/status_bar_style_circle</item>
          <item>@string/status_bar_style_text</item>
@@ -22,7 +22,7 @@ index 77913af..1164c56 100644
          <item>@string/status_bar_style_hidden</item>
      </string-array>
  
-@@ -527,6 +528,7 @@
+@@ -541,6 +542,7 @@
          <item>5</item>
          <item>2</item>
          <item>6</item>
@@ -31,10 +31,10 @@ index 77913af..1164c56 100644
      </string-array>
  
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index b7d2cf4..372e5cb 100644
+index d4152e9..1506dfc 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -939,6 +939,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -943,6 +943,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="status_bar_style_circle">Circle</string>
      <string name="status_bar_style_text">Text</string>
      <string name="status_bar_style_hidden">Hidden</string>
@@ -43,7 +43,7 @@ index b7d2cf4..372e5cb 100644
      <string name="status_bar_signal_text_title">Signal status style</string>
      <string name="status_bar_signal_style_icon">Icon</string>
 diff --git a/src/com/android/settings/cyanogenmod/StatusBar.java b/src/com/android/settings/cyanogenmod/StatusBar.java
-index d442b01..3e212c7 100644
+index 0f76cdd..06574ed 100644
 --- a/src/com/android/settings/cyanogenmod/StatusBar.java
 +++ b/src/com/android/settings/cyanogenmod/StatusBar.java
 @@ -39,6 +39,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
@@ -54,7 +54,7 @@ index d442b01..3e212c7 100644
  
      private ListPreference mStatusBarBattery;
      private SystemSettingCheckBoxPreference mStatusBarBatteryShowPercent;
-@@ -116,6 +117,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
+@@ -112,6 +113,7 @@ public class StatusBar extends SettingsPreferenceFragment implements OnPreferenc
  
      private void enableStatusBarBatteryDependents(String value) {
          boolean enabled = !(value.equals(STATUS_BAR_STYLE_TEXT)

@@ -1,7 +1,7 @@
-From be79435c089e9cd3779f7b791eb6228a124bf5a4 Mon Sep 17 00:00:00 2001
+From ab5ef58509a72f158f74756c6eb5aeae308771c1 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 1 Jan 2013 19:11:19 +0200
-Subject: [PATCH 3/8] add option to disable bootanimation (2/2)
+Subject: [PATCH 3/7] add option to disable bootanimation (2/2)
 
 Change-Id: Ia1c29e89318ced977c5b1881bfd5b62253128f6b
 ---
@@ -11,20 +11,20 @@ Change-Id: Ia1c29e89318ced977c5b1881bfd5b62253128f6b
  3 files changed, 20 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 0d696f2..9bd850f 100644
+index c5019b5..6d7235b 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -39,6 +39,10 @@
-     <string name="konsta_web_summary">Visit MoDaCo thread</string>
-     <string name="konsta_web_url">http://www.modaco.com/topic/367241-cyanogenmod11/</string>
+@@ -591,6 +591,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+     <string name="pref_force_highend_gfx_title">Force high-end graphics</string>
+     <string name="pref_force_highend_gfx_summary">Enables high-end visual effects such as transparent status/navigation bar (requires reboot)</string>
  
 +    <!-- Performance : Disable bootanimation -->
 +    <string name="pref_disable_bootanimation_title">Disable boot animation</string>
-+    <string name="pref_disable_bootanimation_summary">Don\'t show boot animation for faster boot</string>
++    <string name="pref_disable_bootanimation_summary">Don\'t show boot animation to speed up boot time</string>
 +
-     <string name="lock_screen_title">Lock screen</string>
- 
-     <string name="increasing_ring_title">Ascending ringtone</string>
+     <!-- Kill app long-press back -->
+     <string name="kill_app_longpress_back">Kill app back button</string>
+     <string name="kill_app_longpress_back_summary">Kill the foreground app by long-pressing the back button</string>
 diff --git a/res/xml/performance_settings.xml b/res/xml/performance_settings.xml
 index 3feb85b..490b023 100644
 --- a/res/xml/performance_settings.xml

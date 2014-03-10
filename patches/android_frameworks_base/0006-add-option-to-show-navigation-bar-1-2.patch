@@ -1,7 +1,7 @@
-From 5d9f5ee0247c1f20287230281427ed943e973d9f Mon Sep 17 00:00:00 2001
+From 400b793146d67db4452bd1d8c46e59bafefd383a Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:04:25 +0200
-Subject: [PATCH 08/12] add option to show navigation bar (1/2)
+Subject: [PATCH 6/7] add option to show navigation bar (1/2)
 
 Change-Id: I7360587e5196fd529b50dbb8bd3202f94d0be6cd
 ---
@@ -10,7 +10,7 @@ Change-Id: I7360587e5196fd529b50dbb8bd3202f94d0be6cd
  2 files changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index aeba410..232524d 100644
+index 26ba3a0..3bd0ea3 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
 @@ -3357,6 +3357,12 @@ public final class Settings {
@@ -27,10 +27,10 @@ index aeba410..232524d 100644
           *
           * @hide
 diff --git a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-index 7773c95..88539b5 100644
+index a8d6821..74aa6e1 100644
 --- a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
 +++ b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-@@ -1406,7 +1406,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -1481,7 +1481,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
          // Allow the navigation bar to move on small devices (phones).
          mNavigationBarCanMove = shortSizeDp < 600;
  

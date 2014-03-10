@@ -1,7 +1,7 @@
-From c915ae41fca1cdd313c071d5ece40605bbd49e09 Mon Sep 17 00:00:00 2001
+From 97ffafa342f1f73e24c1caa65df19ef6ccc4253d Mon Sep 17 00:00:00 2001
 From: Chirayu Desai <cdesai@cyanogenmod.org>
 Date: Wed, 13 Nov 2013 12:54:51 -0500
-Subject: [PATCH 03/12] Allow using Classic WebView
+Subject: [PATCH 1/7] Allow using Classic WebView
 
 Squashed commit of the following:
 

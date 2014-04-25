@@ -1,4 +1,4 @@
-From ab5ef58509a72f158f74756c6eb5aeae308771c1 Mon Sep 17 00:00:00 2001
+From 04e025888de159777f4647de02d074fe5b4180c3 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 1 Jan 2013 19:11:19 +0200
 Subject: [PATCH 3/7] add option to disable bootanimation (2/2)
@@ -11,10 +11,10 @@ Change-Id: Ia1c29e89318ced977c5b1881bfd5b62253128f6b
  3 files changed, 20 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index c5019b5..6d7235b 100644
+index 8e42b25..ec3e3fb 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -591,6 +591,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -616,6 +616,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="pref_force_highend_gfx_title">Force high-end graphics</string>
      <string name="pref_force_highend_gfx_summary">Enables high-end visual effects such as transparent status/navigation bar (requires reboot)</string>
  
@@ -22,9 +22,9 @@ index c5019b5..6d7235b 100644
 +    <string name="pref_disable_bootanimation_title">Disable boot animation</string>
 +    <string name="pref_disable_bootanimation_summary">Don\'t show boot animation to speed up boot time</string>
 +
-     <!-- Kill app long-press back -->
+     <!-- Kill app long press back -->
      <string name="kill_app_longpress_back">Kill app back button</string>
-     <string name="kill_app_longpress_back_summary">Kill the foreground app by long-pressing the back button</string>
+     <string name="kill_app_longpress_back_summary">Kill the foreground app by long pressing the back button</string>
 diff --git a/res/xml/performance_settings.xml b/res/xml/performance_settings.xml
 index 3feb85b..490b023 100644
 --- a/res/xml/performance_settings.xml

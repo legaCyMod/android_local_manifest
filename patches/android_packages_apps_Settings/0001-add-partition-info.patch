@@ -1,4 +1,4 @@
-From a9d9900eb762dc416c2b4b98dc38eca53d618fca Mon Sep 17 00:00:00 2001
+From 0548d201bbc5ad23a2516f4c7839256eadb7b5a5 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:27:40 +0200
 Subject: [PATCH 1/7] add partition info
@@ -15,7 +15,7 @@ Change-Id: I5a01f913f5d0eca04cbe54175e8fa72cb6418f77
  create mode 100644 src/com/android/settings/cyanogenmod/PartitionInfo.java
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 80c6c32..628cbb2 100644
+index 65da442..a6f9ca4 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
 @@ -15,6 +15,14 @@
@@ -79,10 +79,10 @@ index 0000000..8ffa4a6
 +        android:summary="@string/status_unavailable" />
 +</PreferenceScreen>
 diff --git a/res/xml/settings_headers.xml b/res/xml/settings_headers.xml
-index 3aee4d9..99a3e40 100644
+index 355d5d4..e8f3b82 100644
 --- a/res/xml/settings_headers.xml
 +++ b/res/xml/settings_headers.xml
-@@ -137,6 +137,13 @@
+@@ -148,6 +148,13 @@
          android:icon="@drawable/ic_settings_storage"
          android:title="@string/storage_settings" />
  
@@ -97,10 +97,10 @@ index 3aee4d9..99a3e40 100644
      <header
          android:id="@+id/battery_settings"
 diff --git a/src/com/android/settings/Settings.java b/src/com/android/settings/Settings.java
-index 262a27f..81879c7 100644
+index 8b77fcd..599b8bd 100644
 --- a/src/com/android/settings/Settings.java
 +++ b/src/com/android/settings/Settings.java
-@@ -79,6 +79,7 @@ import com.android.settings.bluetooth.BluetoothSettings;
+@@ -81,6 +81,7 @@ import com.android.settings.bluetooth.BluetoothSettings;
  import com.android.settings.cyanogenmod.ButtonSettings;
  import com.android.settings.cyanogenmod.LockscreenInterface;
  import com.android.settings.cyanogenmod.MoreDeviceSettings;
@@ -108,7 +108,7 @@ index 262a27f..81879c7 100644
  import com.android.settings.cyanogenmod.PerformanceSettings;
  import com.android.settings.cyanogenmod.SystemUiSettings;
  import com.android.settings.cyanogenmod.superuser.PolicyNativeFragment;
-@@ -159,6 +160,7 @@ public class Settings extends PreferenceActivity
+@@ -165,6 +166,7 @@ public class Settings extends PreferenceActivity
              R.id.sound_settings,
              R.id.display_settings,
              R.id.storage_settings,
@@ -116,7 +116,7 @@ index 262a27f..81879c7 100644
              R.id.application_settings,
              R.id.battery_settings,
              R.id.personal_section,
-@@ -373,6 +375,7 @@ public class Settings extends PreferenceActivity
+@@ -379,6 +381,7 @@ public class Settings extends PreferenceActivity
          LockscreenInterface.class.getName(),
          SystemUiSettings.class.getName(),
          ButtonSettings.class.getName(),

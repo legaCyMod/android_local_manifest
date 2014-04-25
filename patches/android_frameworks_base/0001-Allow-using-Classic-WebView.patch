@@ -1,4 +1,4 @@
-From 97ffafa342f1f73e24c1caa65df19ef6ccc4253d Mon Sep 17 00:00:00 2001
+From ea4f40e8331f3b4b2451c6f6cea72ff164dcfd45 Mon Sep 17 00:00:00 2001
 From: Chirayu Desai <cdesai@cyanogenmod.org>
 Date: Wed, 13 Nov 2013 12:54:51 -0500
 Subject: [PATCH 1/7] Allow using Classic WebView

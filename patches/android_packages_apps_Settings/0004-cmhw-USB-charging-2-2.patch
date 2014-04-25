@@ -1,4 +1,4 @@
-From 5f6aa33b4847c7204f1de01ffcebe86a0eb2e01c Mon Sep 17 00:00:00 2001
+From 0422a12bb1c0aa11e74541b0343e95cd772587c0 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 19 Aug 2013 13:03:28 +0300
 Subject: [PATCH 4/7] cmhw: USB charging (2/2)
@@ -12,10 +12,10 @@ Change-Id: Ia627239addddd45adaf4fc617c6904495660de73
  4 files changed, 73 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 6d7235b..d4152e9 100644
+index ec3e3fb..d9a8dd5 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -688,6 +688,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -715,6 +715,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="gamma_tuning_brightness">Brightness</string>
      <string name="gamma_tuning_saturation">Saturation</string>
  
@@ -47,13 +47,13 @@ index fbf28d3..40858d9 100644
 +
  </PreferenceScreen>
 diff --git a/src/com/android/settings/cyanogenmod/BootReceiver.java b/src/com/android/settings/cyanogenmod/BootReceiver.java
-index 9d48c1a..b5a16ad 100644
+index 85d9b5e..62a9715 100644
 --- a/src/com/android/settings/cyanogenmod/BootReceiver.java
 +++ b/src/com/android/settings/cyanogenmod/BootReceiver.java
-@@ -77,6 +77,7 @@ public class BootReceiver extends BroadcastReceiver {
-         VibratorIntensity.restore(ctx);
+@@ -79,6 +79,7 @@ public class BootReceiver extends BroadcastReceiver {
          DisplaySettings.restore(ctx);
          LocationSettings.restore(ctx);
+         ButtonSettings.restoreKeyDisabler(ctx);
 +        MoreDeviceSettings.restore(ctx);
      }
  

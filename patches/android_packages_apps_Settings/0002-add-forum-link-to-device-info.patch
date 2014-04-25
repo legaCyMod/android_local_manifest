@@ -1,4 +1,4 @@
-From 884277ff4b9dfdf3c56ca9f119617e7af57f5544 Mon Sep 17 00:00:00 2001
+From 15a81895075d80da8d3732dcd54e8ae8d38a0ade Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:32:15 +0200
 Subject: [PATCH 2/7] add forum link to device info
@@ -11,7 +11,7 @@ Change-Id: I0f20b34b8f98673d9fc15dd2687b02c0dd296409
  3 files changed, 22 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 628cbb2..c5019b5 100644
+index a6f9ca4..8e42b25 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
 @@ -23,6 +23,11 @@
@@ -41,18 +41,18 @@ index 51a6e2a..238d5ff 100644
 +
  </PreferenceScreen>
 diff --git a/src/com/android/settings/DeviceInfoSettings.java b/src/com/android/settings/DeviceInfoSettings.java
-index 7e9da61..3bf29a2 100644
+index 39bcecd..36ea30b 100644
 --- a/src/com/android/settings/DeviceInfoSettings.java
 +++ b/src/com/android/settings/DeviceInfoSettings.java
-@@ -20,6 +20,7 @@ import android.app.Activity;
- import android.content.Context;
- import android.content.Intent;
+@@ -22,6 +22,7 @@ import android.content.Intent;
+ import android.content.pm.PackageInfo;
+ import android.content.pm.PackageManager;
  import android.content.pm.PackageManager.NameNotFoundException;
 +import android.net.Uri;
  import android.os.Build;
  import android.os.Bundle;
  import android.os.SELinux;
-@@ -29,6 +30,7 @@ import android.os.UserHandle;
+@@ -31,6 +32,7 @@ import android.os.UserHandle;
  import android.preference.Preference;
  import android.preference.PreferenceGroup;
  import android.preference.PreferenceScreen;
@@ -60,7 +60,7 @@ index 7e9da61..3bf29a2 100644
  import android.telephony.MSimTelephonyManager;
  import android.util.Log;
  import android.widget.Toast;
-@@ -198,6 +200,16 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
+@@ -201,6 +203,16 @@ public class DeviceInfoSettings extends RestrictedSettingsFragment {
          // Remove regulatory information if not enabled.
          removePreferenceIfBoolFalse(KEY_REGULATORY_INFO,
                  R.bool.config_show_regulatory_info);

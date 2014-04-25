@@ -1,4 +1,4 @@
-From 8201c6a44402b9ad56a185881c21ba6d109c176d Mon Sep 17 00:00:00 2001
+From 3e02f916b55cd5a9ac3db82d014804cd6e19edf0 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:14:37 +0200
 Subject: [PATCH 6/7] add option to show navigation bar (2/2)
@@ -11,10 +11,10 @@ Change-Id: I60904182a4b8904e845ddfa7046aa612a0ec71aa
  3 files changed, 15 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 1506dfc..77a96ce 100644
+index ea2031b..4870c6c 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -847,6 +847,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -875,6 +875,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="navigation_bar_menu_editable">Editable</string>
      <string name="navigation_bar_menu_locked">Locked</string>
  
@@ -41,7 +41,7 @@ index c8251bf..c149db4 100644
 +
  </PreferenceScreen>
 diff --git a/src/com/android/settings/cyanogenmod/SystemUiSettings.java b/src/com/android/settings/cyanogenmod/SystemUiSettings.java
-index ea82732..7e1ea31 100644
+index d6bd368..d13e31b 100644
 --- a/src/com/android/settings/cyanogenmod/SystemUiSettings.java
 +++ b/src/com/android/settings/cyanogenmod/SystemUiSettings.java
 @@ -71,6 +71,11 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
@@ -54,8 +54,8 @@ index ea82732..7e1ea31 100644
 +        }
 +
          try {
-             boolean hasNavBar = WindowManagerGlobal.getWindowManagerService().hasNavigationBar();
- 
+             // Only show the navigation bar category on devices that has a navigation bar
+             // unless we are forcing it via development settings
 -- 
 1.7.9.5
 

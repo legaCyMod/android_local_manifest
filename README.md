@@ -1,4 +1,4 @@
-Local manifests to build CyanogenMod 11 for [ZTE Blade III](http://www.modaco.com/topic/367241-cyanogenmod-11/).
+Local manifests to build CyanogenMod 11 for [ZTE Blade III](http://www.modaco.com/topic/367241-cyanogenmod-11/) and Motorola Moto G.
 
 How to build:
 -------------
@@ -19,3 +19,12 @@ Compile:
     . build/envsetup.sh
     brunch atlas40
 
+### Moto G:
+
+    curl -L -o .repo/local_manifests/manifest_motorola_falcon.xml -O -L https://raw.github.com/legaCyMod/android_local_manifest/cm-11.0/manifest_motorola_falcon.xml
+    repo sync
+
+Compile:
+
+    . build/envsetup.sh
+    brunch falcon

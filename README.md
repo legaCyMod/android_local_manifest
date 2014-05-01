@@ -6,12 +6,12 @@ How to build:
 Initialize repo:
 
     repo init -u git://github.com/CyanogenMod/android.git -b cm-11.0
-    curl --create-dirs -L -o .repo/local_manifests/local_manifest.xml -O -L https://raw.github.com/legaCyMod/android_local_manifest/cm-11.0/local_manifest.xml
+    curl --create-dirs -L -o .repo/local_manifests/local_manifest.xml -O -L https://raw.githubusercontent.com/legaCyMod/android_local_manifest/cm-11.0/local_manifest.xml
     repo sync
 
 ### Blade III:
 
-    curl -L -o .repo/local_manifests/manifest_zte_atlas40.xml -O -L https://raw.github.com/legaCyMod/android_local_manifest/cm-11.0/manifest_zte_atlas40.xml
+    curl -L -o .repo/local_manifests/manifest_zte_atlas40.xml -O -L https://raw.githubusercontent.com/legaCyMod/android_local_manifest/cm-11.0/manifest_zte_atlas40.xml
     repo sync
 
 Compile:
@@ -21,7 +21,7 @@ Compile:
 
 ### Moto G:
 
-    curl -L -o .repo/local_manifests/manifest_motorola_falcon.xml -O -L https://raw.github.com/legaCyMod/android_local_manifest/cm-11.0/manifest_motorola_falcon.xml
+    curl -L -o .repo/local_manifests/manifest_motorola_falcon.xml -O -L https://raw.githubusercontent.com/legaCyMod/android_local_manifest/cm-11.0/manifest_motorola_falcon.xml
     repo sync
 
 Compile:

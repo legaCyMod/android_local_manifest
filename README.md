@@ -6,13 +6,13 @@ How to build:
 Initialize repo:
 
     repo init -u git://github.com/CyanogenMod/android.git -b cm-10.2
-    curl --create-dirs -L -o .repo/local_manifests/local_manifest.xml -O -L https://raw.github.com/legaCyMod/android_local_manifest/cm-10.2/local_manifest.xml
+    curl --create-dirs -L -o .repo/local_manifests/local_manifest.xml -O -L https://raw.githubusercontent.com/legaCyMod/android_local_manifest/cm-10.2/local_manifest.xml
     repo sync
 
 ### Blade:
 
-    curl -L -o .repo/local_manifests/local_manifest_armv6.xml -O -L https://raw.github.com/legaCyMod/android_local_manifest/cm-10.2/local_manifest_armv6.xml
-    curl -L -o .repo/local_manifests/manifest_zte_blade.xml -O -L https://raw.github.com/legaCyMod/android_local_manifest/cm-10.2/manifest_zte_blade.xml
+    curl -L -o .repo/local_manifests/local_manifest_armv6.xml -O -L https://raw.githubusercontent.com/legaCyMod/android_local_manifest/cm-10.2/local_manifest_armv6.xml
+    curl -L -o .repo/local_manifests/manifest_zte_blade.xml -O -L https://raw.githubusercontent.com/legaCyMod/android_local_manifest/cm-10.2/manifest_zte_blade.xml
     repo sync
 
 Compile:
@@ -22,7 +22,7 @@ Compile:
 
 ### Blade III:
 
-    curl -L -o .repo/local_manifests/manifest_zte_atlas40.xml -O -L https://raw.github.com/legaCyMod/android_local_manifest/cm-10.2/manifest_zte_atlas40.xml
+    curl -L -o .repo/local_manifests/manifest_zte_atlas40.xml -O -L https://raw.githubusercontent.com/legaCyMod/android_local_manifest/cm-10.2/manifest_zte_atlas40.xml
     repo sync
 
 Compile:

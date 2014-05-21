@@ -1,0 +1,131 @@
+From a773a202e53e19bba5c4d5ebfffa7ab0b4113313 Mon Sep 17 00:00:00 2001
+From: Chirayu Desai <cdesai@cyanogenmod.org>
+Date: Wed, 13 Nov 2013 13:02:36 -0500
+Subject: [PATCH 1/8] add option to use classic webview
+
+Change-Id: I011da44caab9ccd7e7631356c113248117f4496e
+---
+ res/values/cm_strings.xml                         |    4 +++
+ res/xml/development_prefs.xml                     |    5 ++++
+ src/com/android/settings/DevelopmentSettings.java |   32 +++++++++++++++++++++
+ 3 files changed, 41 insertions(+)
+
+diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
+index 8014285..9c4fe16 100644
+--- a/res/values/cm_strings.xml
++++ b/res/values/cm_strings.xml
+@@ -612,6 +612,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+     <string name="kill_app_longpress_back">Kill app back button</string>
+     <string name="kill_app_longpress_back_summary">Kill the foreground app by long pressing the back button</string>
+ 
++    <!-- Webview -->
++    <string name="classic_webview">Use classic webview</string>
++    <string name="classic_webview_summary">Apps will use the old classic webview. Close any apps using webview before switching.</string>
++
+     <!-- Change Log strings -->
+     <string name="changelog_title">View changelog</string>
+     <string name="changelog_loading">Loading changelog\u2026</string>
+diff --git a/res/xml/development_prefs.xml b/res/xml/development_prefs.xml
+index d99aca1..737868c 100644
+--- a/res/xml/development_prefs.xml
++++ b/res/xml/development_prefs.xml
+@@ -331,6 +331,11 @@
+             android:title="@string/kill_app_longpress_back"
+             android:summary="@string/kill_app_longpress_back_summary"/>
+ 
++        <CheckBoxPreference
++            android:key="classic_webview"
++            android:title="@string/classic_webview"
++            android:summary="@string/classic_webview_summary"/>
++
+     </PreferenceCategory>
+ 
+ </PreferenceScreen>
+diff --git a/src/com/android/settings/DevelopmentSettings.java b/src/com/android/settings/DevelopmentSettings.java
+index 95404a7..f4bd0e7 100644
+--- a/src/com/android/settings/DevelopmentSettings.java
++++ b/src/com/android/settings/DevelopmentSettings.java
+@@ -67,6 +67,7 @@ import android.view.Gravity;
+ import android.view.HardwareRenderer;
+ import android.view.IWindowManager;
+ import android.view.View;
++import android.webkit.WebViewFactory;
+ import android.widget.CompoundButton;
+ import android.widget.Switch;
+ import android.widget.TextView;
+@@ -159,6 +160,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+ 
+     private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
+ 
++    private static final String WEBVIEW_CLASSIC_KEY = "classic_webview";
++
+     private static final String TAG_CONFIRM_ENFORCE = "confirm_enforce";
+ 
+     private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
+@@ -228,6 +231,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+ 
+     private CheckBoxPreference mShowAllANRs;
+     private CheckBoxPreference mKillAppLongpressBack;
++    private CheckBoxPreference mClassicWebView;
+ 
+     private ListPreference mRootAccess;
+     private Object mSelectedRootValue;
+@@ -367,6 +371,18 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+ 
+         mKillAppLongpressBack = findAndInitCheckboxPref(KILL_APP_LONGPRESS_BACK);
+ 
++        if (WebViewFactory.isClassicWebViewAvailable()
++                && WebViewFactory.isChromiumWebViewAvailable()) {
++            mClassicWebView = findAndInitCheckboxPref(WEBVIEW_CLASSIC_KEY);
++        } else {
++            Preference classicWebView = findPreference(WEBVIEW_CLASSIC_KEY);
++            PreferenceGroup debugApplicationsCategory = (PreferenceGroup)
++                    findPreference(DEBUG_APPLICATIONS_CATEGORY_KEY);
++            if (debugApplicationsCategory != null) {
++                debugApplicationsCategory.removePreference(classicWebView);
++            }
++        }
++
+         Preference selectRuntime = findPreference(SELECT_RUNTIME_KEY);
+         if (selectRuntime != null) {
+             mAllPrefs.add(selectRuntime);
+@@ -590,6 +606,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+         updateImmediatelyDestroyActivitiesOptions();
+         updateAppProcessLimitOptions();
+         updateShowAllANRsOptions();
++        updateClassicWebViewOptions();
+         updateVerifyAppsOverUsbOptions();
+         updateBugreportOptions();
+         updateForceRtlOptions();
+@@ -1325,6 +1342,19 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+             getActivity().getContentResolver(), Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0);
+     }
+ 
++    private void writeClassicWebViewOptions() {
++        if (mClassicWebView != null) {
++            WebViewFactory.setUseClassicWebView(mClassicWebView.isChecked());
++            pokeSystemProperties();
++        }
++    }
++
++    private void updateClassicWebViewOptions() {
++        if (mClassicWebView != null) {
++            updateCheckBox(mClassicWebView, WebViewFactory.useClassicWebView());
++        }
++    }
++
+     @Override
+     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+         if (buttonView == mEnabledSwitch) {
+@@ -1488,6 +1518,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+             writeImmediatelyDestroyActivitiesOptions();
+         } else if (preference == mShowAllANRs) {
+             writeShowAllANRsOptions();
++        } else if (preference == mClassicWebView) {
++            writeClassicWebViewOptions();
+         } else if (preference == mForceHardwareUi) {
+             writeHardwareUiOptions();
+         } else if (preference == mForceMsaa) {
+-- 
+1.7.9.5
+

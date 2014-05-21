@@ -1,7 +1,7 @@
-From b3cd339fd8edf0c6291df16ee4c3122cc4d15d1d Mon Sep 17 00:00:00 2001
+From 78d3df9a89a21309369d4a101bd68e06ea07c33e Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Sun, 24 Nov 2013 00:14:55 +0200
-Subject: [PATCH 2/2] Revert "Revert "Support a prebuilt WebView.""
+Subject: [PATCH] Revert "Revert "Support a prebuilt WebView.""
 
 This reverts commit a52bf0f6b156d329231509364d303c4102057239.
 ---

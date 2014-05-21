@@ -1,7 +1,7 @@
-From 3e02f916b55cd5a9ac3db82d014804cd6e19edf0 Mon Sep 17 00:00:00 2001
+From b23c537ca7efa98327b0924a148627eedea90acf Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:14:37 +0200
-Subject: [PATCH 6/7] add option to show navigation bar (2/2)
+Subject: [PATCH 7/8] add option to show navigation bar (2/2)
 
 Change-Id: I60904182a4b8904e845ddfa7046aa612a0ec71aa
 ---
@@ -11,10 +11,10 @@ Change-Id: I60904182a4b8904e845ddfa7046aa612a0ec71aa
  3 files changed, 15 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index ea2031b..4870c6c 100644
+index d3c562b..d147738 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -875,6 +875,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -886,6 +886,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="navigation_bar_menu_editable">Editable</string>
      <string name="navigation_bar_menu_locked">Locked</string>
  
@@ -26,7 +26,7 @@ index ea2031b..4870c6c 100644
      <string name="navigation_ring_title">Quick launch shortcuts</string>
      <string name="navring_target_reset_message">Delete all user created navigation bar shortcuts and restore to default?</string>
 diff --git a/res/xml/system_ui_settings.xml b/res/xml/system_ui_settings.xml
-index c8251bf..c149db4 100644
+index 073e166..a14e266 100644
 --- a/res/xml/system_ui_settings.xml
 +++ b/res/xml/system_ui_settings.xml
 @@ -89,4 +89,10 @@

@@ -1,4 +1,4 @@
-From ea4f40e8331f3b4b2451c6f6cea72ff164dcfd45 Mon Sep 17 00:00:00 2001
+From cb0fd9d9fa86db80e443f9ab4c5cf6533fdc09a8 Mon Sep 17 00:00:00 2001
 From: Chirayu Desai <cdesai@cyanogenmod.org>
 Date: Wed, 13 Nov 2013 12:54:51 -0500
 Subject: [PATCH 1/7] Allow using Classic WebView
@@ -28,6 +28,16 @@ Date:   Tue Nov 12 18:41:39 2013 +0530
     Revert "Restore 4 classes that were accidentally deleted"
 
     This reverts commit 328dd7d7059c70b6776c6e29f9ea315f2f8aed3f.
+
+Author: Konsta <konsta09@gmail.com>
+Date:   Tue, 13 May 2014 22:13:28 +0300
+
+    default to chromium webview
+
+    * default to chromium webview
+    * fix set/get properties
+    * modify APIs to check webview availability
+    * remove unused APIs & hide public APIs
 
 Change-Id: Iba847a04b515cada0eb32cc86026b60469108d80
 ---
@@ -77,14 +87,14 @@ Change-Id: Iba847a04b515cada0eb32cc86026b60469108d80
  .../android/webkit/WebViewClientClassicExt.java    |   53 +
  core/java/android/webkit/WebViewCore.java          | 3145 +++++++
  .../android/webkit/WebViewDatabaseClassic.java     |  628 ++
- core/java/android/webkit/WebViewFactory.java       |   51 +-
+ core/java/android/webkit/WebViewFactory.java       |   56 +-
  .../android/webkit/WebViewInputDispatcher.java     | 1293 +++
  core/java/android/webkit/ZoomControlBase.java      |   41 +
  core/java/android/webkit/ZoomControlEmbedded.java  |  119 +
  core/java/android/webkit/ZoomControlExternal.java  |  159 +
  core/java/android/webkit/ZoomManager.java          | 1263 +++
  .../com/android/internal/app/ProcessStats.java     |    2 +-
- 53 files changed, 29119 insertions(+), 14 deletions(-)
+ 53 files changed, 29124 insertions(+), 14 deletions(-)
  create mode 100644 core/java/android/webkit/AccessibilityInjector.java
  create mode 100644 core/java/android/webkit/AccessibilityInjectorFallback.java
  create mode 100644 core/java/android/webkit/AutoCompletePopup.java
@@ -26625,10 +26635,19 @@ index 0000000..be01028
 +    }
 +}
 diff --git a/core/java/android/webkit/WebViewFactory.java b/core/java/android/webkit/WebViewFactory.java
-index b9131bf..cb08cd5 100644
+index b9131bf..6d28def 100644
 --- a/core/java/android/webkit/WebViewFactory.java
 +++ b/core/java/android/webkit/WebViewFactory.java
-@@ -29,6 +29,12 @@ import android.util.Log;
+@@ -22,6 +22,8 @@ import android.os.SystemProperties;
+ import android.util.AndroidRuntimeException;
+ import android.util.Log;
+ 
++import java.io.File;
++
+ /**
+  * Top level factory, used creating all the main WebView implementation classes.
+  *
+@@ -29,9 +31,18 @@ import android.util.Log;
   */
  public final class WebViewFactory {
  
@@ -26637,46 +26656,52 @@ index b9131bf..cb08cd5 100644
 +    private static final String FORCE_PROVIDER_PROPERTY_VALUE_CLASSIC = "classic";
 +
 +    // Default Provider factory class name.
-+    private static final String DEFAULT_WEBVIEW_FACTORY = "android.webkit.WebViewClassic$Factory";
++    private static final String CLASSIC_WEBVIEW_FACTORY = "android.webkit.WebViewClassic$Factory";
      private static final String CHROMIUM_WEBVIEW_FACTORY =
              "com.android.webview.chromium.WebViewChromiumFactoryProvider";
  
-@@ -52,32 +58,33 @@ public final class WebViewFactory {
++    private static final String CLASSIC_WEBVIEW_FILE = "/system/lib/libwebcore.so";
++    private static final String CHROMIUM_WEBVIEW_FILE = "/system/lib/libwebviewchromium.so";
++
+     private static final String LOGTAG = "WebViewFactory";
+ 
+     private static final boolean DEBUG = false;
+@@ -52,32 +63,33 @@ public final class WebViewFactory {
      private static WebViewFactoryProvider sProviderInstance;
      private static final Object sProviderLock = new Object();
  
 -    public static boolean isExperimentalWebViewAvailable() {
 -        // TODO: Remove callers of this method then remove it.
 -        return false;  // Hide the toggle in Developer Settings.
++    /** @hide */
 +    public static boolean isClassicWebViewAvailable() {
-+        return true;
++        return new File(CLASSIC_WEBVIEW_FILE).exists();
      }
  
      /** @hide */
 -    public static void setUseExperimentalWebView(boolean enable) {
 -        // TODO: Remove callers of this method then remove it.
-+    public static void setUseClassicWebView(boolean enable) {
-+        SystemProperties.set(FORCE_PROVIDER_PROPERTY, enable ? FORCE_PROVIDER_PROPERTY_VALUE_CLASSIC : FORCE_PROVIDER_PROPERTY_VALUE_CHROMIUM);
-+        Log.i(LOGTAG, "Use Classic WebView changed: "
-+                + SystemProperties.get(WebViewFactory.FORCE_PROVIDER_PROPERTY, ""));
++    public static boolean isChromiumWebViewAvailable() {
++        return new File(CHROMIUM_WEBVIEW_FILE).exists();
      }
  
      /** @hide */
 -    public static boolean useExperimentalWebView() {
 -        // TODO: Remove callers of this method then remove it.
 -        return true;
-+    public static boolean useClassicWebView() {
-+        return (SystemProperties.get(FORCE_PROVIDER_PROPERTY,
-+             "") == FORCE_PROVIDER_PROPERTY_VALUE_CLASSIC);
++    public static void setUseClassicWebView(boolean enable) {
++        SystemProperties.set(FORCE_PROVIDER_PROPERTY, enable ? FORCE_PROVIDER_PROPERTY_VALUE_CLASSIC
++                : FORCE_PROVIDER_PROPERTY_VALUE_CHROMIUM);
++        Log.i(LOGTAG, "Use Classic WebView changed: "
++                + SystemProperties.get(FORCE_PROVIDER_PROPERTY, ""));
      }
  
      /** @hide */
 -    public static boolean isUseExperimentalWebViewSet() {
 -        // TODO: Remove callers of this method then remove it.
 -        return false;  // User has not modifed Developer Settings
-+    public static boolean isUseClassicWebViewSet() {
-+        return (SystemProperties.get(FORCE_PROVIDER_PROPERTY,
-+             "") == FORCE_PROVIDER_PROPERTY_VALUE_CLASSIC);
++    public static boolean useClassicWebView() {
++        return FORCE_PROVIDER_PROPERTY_VALUE_CLASSIC.equals(SystemProperties.get(FORCE_PROVIDER_PROPERTY));
      }
  
      static WebViewFactoryProvider getProvider() {
@@ -26687,7 +26712,7 @@ index b9131bf..cb08cd5 100644
              if (sProviderInstance != null) return sProviderInstance;
  
              Class<WebViewFactoryProvider> providerClass;
-@@ -111,7 +118,25 @@ public final class WebViewFactory {
+@@ -111,7 +123,25 @@ public final class WebViewFactory {
          }
      }
  
@@ -26695,20 +26720,20 @@ index b9131bf..cb08cd5 100644
 +    // WebView. This enables us to switch between implementations at runtime.
 +    private static boolean isClassicWebViewEnabled() {
 +        String forceProviderName = SystemProperties.get(FORCE_PROVIDER_PROPERTY);
-+        if (forceProviderName.isEmpty()) return true;
++        if (forceProviderName.isEmpty()) return false;
 +
 +        Log.i(LOGTAG, String.format("Provider overridden by property: %s=%s",
 +                FORCE_PROVIDER_PROPERTY, forceProviderName));
 +        if (forceProviderName.equals(FORCE_PROVIDER_PROPERTY_VALUE_CHROMIUM)) return false;
 +        if (forceProviderName.equals(FORCE_PROVIDER_PROPERTY_VALUE_CLASSIC)) return true;
 +        Log.e(LOGTAG, String.format("Unrecognized provider: %s", forceProviderName));
-+        return true;
++        return false;
 +    }
 +
      private static Class<WebViewFactoryProvider> getFactoryClass() throws ClassNotFoundException {
 -        return (Class<WebViewFactoryProvider>) Class.forName(CHROMIUM_WEBVIEW_FACTORY);
 +        if (isClassicWebViewEnabled()) {
-+            return (Class<WebViewFactoryProvider>) Class.forName(DEFAULT_WEBVIEW_FACTORY);
++            return (Class<WebViewFactoryProvider>) Class.forName(CLASSIC_WEBVIEW_FACTORY);
 +        } else  {
 +            return (Class<WebViewFactoryProvider>) Class.forName(CHROMIUM_WEBVIEW_FACTORY);
 +        }

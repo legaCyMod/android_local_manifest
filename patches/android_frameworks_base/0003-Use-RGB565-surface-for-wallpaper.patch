@@ -1,4 +1,4 @@
-From b7e1e072a8645790279775401313ed627966304e Mon Sep 17 00:00:00 2001
+From 980d55216f30acbdafbeb0da443d94e7e8cd38f9 Mon Sep 17 00:00:00 2001
 From: Grigori Goronzy <greg@blackbox>
 Date: Mon, 28 Jan 2013 06:43:09 +0100
 Subject: [PATCH 3/7] Use RGB565 surface for wallpaper
@@ -15,10 +15,10 @@ Change-Id: If19902500d615291c4362f03d26d9cee2d4e684e
  3 files changed, 7 insertions(+), 4 deletions(-)
 
 diff --git a/core/java/android/app/WallpaperManager.java b/core/java/android/app/WallpaperManager.java
-index bafd524..06e9085 100644
+index 4a1e1fc..052f4dd 100644
 --- a/core/java/android/app/WallpaperManager.java
 +++ b/core/java/android/app/WallpaperManager.java
-@@ -386,7 +386,7 @@ public class WallpaperManager {
+@@ -453,7 +453,7 @@ public class WallpaperManager {
          Bitmap bm = sGlobals.peekWallpaperBitmap(mContext, true);
          if (bm != null) {
              Drawable dr = new BitmapDrawable(mContext.getResources(), bm);
@@ -27,7 +27,7 @@ index bafd524..06e9085 100644
              return dr;
          }
          return null;
-@@ -577,7 +577,7 @@ public class WallpaperManager {
+@@ -644,7 +644,7 @@ public class WallpaperManager {
          Bitmap bm = sGlobals.peekWallpaperBitmap(mContext, false);
          if (bm != null) {
              Drawable dr = new BitmapDrawable(mContext.getResources(), bm);

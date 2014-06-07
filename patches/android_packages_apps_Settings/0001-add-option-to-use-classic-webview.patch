@@ -1,4 +1,4 @@
-From a773a202e53e19bba5c4d5ebfffa7ab0b4113313 Mon Sep 17 00:00:00 2001
+From c4561675498167d45706a48dfa9bf3a68d3d2c3d Mon Sep 17 00:00:00 2001
 From: Chirayu Desai <cdesai@cyanogenmod.org>
 Date: Wed, 13 Nov 2013 13:02:36 -0500
 Subject: [PATCH 1/8] add option to use classic webview
@@ -11,10 +11,10 @@ Change-Id: I011da44caab9ccd7e7631356c113248117f4496e
  3 files changed, 41 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 8014285..9c4fe16 100644
+index 5659bb4..f754607 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -612,6 +612,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -621,6 +621,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="kill_app_longpress_back">Kill app back button</string>
      <string name="kill_app_longpress_back_summary">Kill the foreground app by long pressing the back button</string>
  
@@ -26,10 +26,10 @@ index 8014285..9c4fe16 100644
      <string name="changelog_title">View changelog</string>
      <string name="changelog_loading">Loading changelog\u2026</string>
 diff --git a/res/xml/development_prefs.xml b/res/xml/development_prefs.xml
-index d99aca1..737868c 100644
+index 51acc28..f1e0943 100644
 --- a/res/xml/development_prefs.xml
 +++ b/res/xml/development_prefs.xml
-@@ -331,6 +331,11 @@
+@@ -336,6 +336,11 @@
              android:title="@string/kill_app_longpress_back"
              android:summary="@string/kill_app_longpress_back_summary"/>
  
@@ -42,7 +42,7 @@ index d99aca1..737868c 100644
  
  </PreferenceScreen>
 diff --git a/src/com/android/settings/DevelopmentSettings.java b/src/com/android/settings/DevelopmentSettings.java
-index 95404a7..f4bd0e7 100644
+index ea210b7..191e4bc 100644
 --- a/src/com/android/settings/DevelopmentSettings.java
 +++ b/src/com/android/settings/DevelopmentSettings.java
 @@ -67,6 +67,7 @@ import android.view.Gravity;
@@ -53,7 +53,7 @@ index 95404a7..f4bd0e7 100644
  import android.widget.CompoundButton;
  import android.widget.Switch;
  import android.widget.TextView;
-@@ -159,6 +160,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+@@ -161,6 +162,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
  
      private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
  
@@ -62,7 +62,7 @@ index 95404a7..f4bd0e7 100644
      private static final String TAG_CONFIRM_ENFORCE = "confirm_enforce";
  
      private static final String PACKAGE_MIME_TYPE = "application/vnd.android.package-archive";
-@@ -228,6 +231,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+@@ -230,6 +233,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
  
      private CheckBoxPreference mShowAllANRs;
      private CheckBoxPreference mKillAppLongpressBack;
@@ -70,7 +70,7 @@ index 95404a7..f4bd0e7 100644
  
      private ListPreference mRootAccess;
      private Object mSelectedRootValue;
-@@ -367,6 +371,18 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+@@ -373,6 +377,18 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
  
          mKillAppLongpressBack = findAndInitCheckboxPref(KILL_APP_LONGPRESS_BACK);
  
@@ -89,7 +89,7 @@ index 95404a7..f4bd0e7 100644
          Preference selectRuntime = findPreference(SELECT_RUNTIME_KEY);
          if (selectRuntime != null) {
              mAllPrefs.add(selectRuntime);
-@@ -590,6 +606,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+@@ -596,6 +612,7 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
          updateImmediatelyDestroyActivitiesOptions();
          updateAppProcessLimitOptions();
          updateShowAllANRsOptions();
@@ -97,7 +97,7 @@ index 95404a7..f4bd0e7 100644
          updateVerifyAppsOverUsbOptions();
          updateBugreportOptions();
          updateForceRtlOptions();
-@@ -1325,6 +1342,19 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+@@ -1332,6 +1349,19 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
              getActivity().getContentResolver(), Settings.Secure.ANR_SHOW_BACKGROUND, 0) != 0);
      }
  
@@ -114,10 +114,10 @@ index 95404a7..f4bd0e7 100644
 +        }
 +    }
 +
-     @Override
-     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-         if (buttonView == mEnabledSwitch) {
-@@ -1488,6 +1518,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+     private void updateUpdateRecoveryOptions() {
+         updateCheckBox(mUpdateRecovery, SystemProperties.getBoolean(UPDATE_RECOVERY_PROPERTY, false));
+     }
+@@ -1504,6 +1534,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
              writeImmediatelyDestroyActivitiesOptions();
          } else if (preference == mShowAllANRs) {
              writeShowAllANRsOptions();

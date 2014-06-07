@@ -1,4 +1,4 @@
-From b23c537ca7efa98327b0924a148627eedea90acf Mon Sep 17 00:00:00 2001
+From 21e9be97a671fafde7170984fc16699325510bbe Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:14:37 +0200
 Subject: [PATCH 7/8] add option to show navigation bar (2/2)
@@ -11,10 +11,10 @@ Change-Id: I60904182a4b8904e845ddfa7046aa612a0ec71aa
  3 files changed, 15 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index d3c562b..d147738 100644
+index 6dc8ab9..4cf56b9 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -886,6 +886,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -896,6 +896,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="navigation_bar_menu_editable">Editable</string>
      <string name="navigation_bar_menu_locked">Locked</string>
  

@@ -1,4 +1,4 @@
-From 0b3af033135e5f890b7855556ca07e5a4a9215d9 Mon Sep 17 00:00:00 2001
+From b67dcccb7a4967a76f2cf7c8310d593f267d4595 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:32:15 +0200
 Subject: [PATCH 3/8] add forum link to device info
@@ -11,7 +11,7 @@ Change-Id: I0f20b34b8f98673d9fc15dd2687b02c0dd296409
  3 files changed, 22 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index f505e27..7de6663 100644
+index 5c2e51c..a814b4a 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
 @@ -23,6 +23,11 @@
@@ -27,10 +27,10 @@ index f505e27..7de6663 100644
      <string name="wifi_setting_countrycode_title">Wi-Fi region code</string>
      <!-- Wi-Fi settings screen, setting summary for setting the wifi frequency band [CHAR LIMIT=50]-->
 diff --git a/res/xml/device_info_settings.xml b/res/xml/device_info_settings.xml
-index cbab800..18d9625 100644
+index 22c29de..b523894 100644
 --- a/res/xml/device_info_settings.xml
 +++ b/res/xml/device_info_settings.xml
-@@ -198,4 +198,9 @@
+@@ -190,4 +190,9 @@
                  android:title="@string/selinux_status"
                  android:summary="@string/selinux_status_enforcing"/>
  

@@ -1,4 +1,4 @@
-From d842317c0d2048b954794755f0da36dd657a6808 Mon Sep 17 00:00:00 2001
+From 4a7a276d4c76158a1148e2c7c276668c9e3813b4 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 19 Aug 2013 13:03:28 +0300
 Subject: [PATCH 5/8] cmhw: USB charging (2/2)
@@ -8,14 +8,14 @@ Change-Id: Ia627239addddd45adaf4fc617c6904495660de73
  res/values/cm_strings.xml                          |    4 ++
  res/xml/more_device_settings.xml                   |   11 ++++
  .../android/settings/cyanogenmod/BootReceiver.java |    1 +
- .../settings/cyanogenmod/MoreDeviceSettings.java   |   57 ++++++++++++++++++++
- 4 files changed, 73 insertions(+)
+ .../settings/cyanogenmod/MoreDeviceSettings.java   |   58 +++++++++++++++++++-
+ 4 files changed, 73 insertions(+), 1 deletion(-)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 80cc843..ce8aa12 100644
+index 5d54d54..e5a4806 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -726,6 +726,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -736,6 +736,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="gamma_tuning_brightness">Brightness</string>
      <string name="gamma_tuning_saturation">Saturation</string>
  
@@ -27,10 +27,10 @@ index 80cc843..ce8aa12 100644
           [CHAR LIMIT=40] -->
      <string name="headset_category_title">Headset</string>
 diff --git a/res/xml/more_device_settings.xml b/res/xml/more_device_settings.xml
-index fbf28d3..40858d9 100644
+index cec7926..4094a49 100644
 --- a/res/xml/more_device_settings.xml
 +++ b/res/xml/more_device_settings.xml
-@@ -62,4 +62,15 @@
+@@ -51,4 +51,15 @@
  
      </PreferenceCategory>
  
@@ -59,12 +59,12 @@ index 85d9b5e..62a9715 100644
  
      private void initFreqCapFiles(Context ctx)
 diff --git a/src/com/android/settings/cyanogenmod/MoreDeviceSettings.java b/src/com/android/settings/cyanogenmod/MoreDeviceSettings.java
-index 0de3c5b..3e20923 100644
+index bff45bc..ebab20c 100644
 --- a/src/com/android/settings/cyanogenmod/MoreDeviceSettings.java
 +++ b/src/com/android/settings/cyanogenmod/MoreDeviceSettings.java
-@@ -18,11 +18,16 @@ package com.android.settings.cyanogenmod;
+@@ -17,9 +17,15 @@
+ package com.android.settings.cyanogenmod;
  
- import android.content.ContentResolver;
  import android.content.Context;
 +import android.content.SharedPreferences;
  import android.os.Bundle;
@@ -73,13 +73,12 @@ index 0de3c5b..3e20923 100644
 +import android.preference.Preference;
  import android.preference.PreferenceGroup;
 +import android.preference.PreferenceManager;
- import android.preference.PreferenceScreen;
- import android.provider.Settings;
++import android.preference.PreferenceScreen;
 +import android.util.Log;
  
  import com.android.settings.R;
  import com.android.settings.SettingsPreferenceFragment;
-@@ -30,6 +35,8 @@ import com.android.settings.hardware.DisplayColor;
+@@ -27,6 +33,8 @@ import com.android.settings.hardware.DisplayColor;
  import com.android.settings.hardware.DisplayGamma;
  import com.android.settings.hardware.VibratorIntensity;
  
@@ -88,7 +87,7 @@ index 0de3c5b..3e20923 100644
  public class MoreDeviceSettings extends SettingsPreferenceFragment {
      private static final String TAG = "MoreDeviceSettings";
  
-@@ -37,6 +44,10 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
+@@ -34,6 +42,10 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
      private static final String KEY_DISPLAY_CALIBRATION_CATEGORY = "display_calibration_category";
      private static final String KEY_DISPLAY_COLOR = "color_calibration";
      private static final String KEY_DISPLAY_GAMMA = "gamma_tuning";
@@ -99,7 +98,7 @@ index 0de3c5b..3e20923 100644
  
      @Override
      public void onCreate(Bundle savedInstanceState) {
-@@ -63,5 +74,51 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
+@@ -59,11 +71,55 @@ public class MoreDeviceSettings extends SettingsPreferenceFragment {
                  calibrationCategory.removePreference(findPreference(KEY_DISPLAY_GAMMA));
              }
          }
@@ -117,11 +116,9 @@ index 0de3c5b..3e20923 100644
 +
 +    @Override
 +    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-+
 +        if (preference == mUsbCharging) {
 +            return UsbCharging.setEnabled(mUsbCharging.isChecked());
 +        }
-+
 +        return super.onPreferenceTreeClick(preferenceScreen, preference);
 +    }
 +
@@ -139,7 +136,7 @@ index 0de3c5b..3e20923 100644
 +                Log.d(TAG, "USB charging settings restored.");
 +            }
 +        }
-     }
++    }
 +
 +    private static boolean isUsbChargingSupported() {
 +        try {
@@ -148,8 +145,15 @@ index 0de3c5b..3e20923 100644
 +            // Hardware abstraction framework not installed
 +            return false;
 +        }
-+    }
-+
+     }
+ 
+     public static boolean hasItems() {
+         return DisplayColor.isSupported() ||
+                DisplayGamma.isSupported() ||
+-               VibratorIntensity.isSupported();
++               VibratorIntensity.isSupported() ||
++               isUsbChargingSupported();
+     }
  }
 -- 
 1.7.9.5

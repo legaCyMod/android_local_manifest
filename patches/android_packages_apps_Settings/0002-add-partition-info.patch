@@ -1,4 +1,4 @@
-From 231dc4964bfbfc72830f8a7efbc8f7987bca2ac3 Mon Sep 17 00:00:00 2001
+From 598768e1f1fe05858d0d6d8b5d9547f1bf7a5333 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:27:40 +0200
 Subject: [PATCH 2/8] add partition info
@@ -15,7 +15,7 @@ Change-Id: I5a01f913f5d0eca04cbe54175e8fa72cb6418f77
  create mode 100644 src/com/android/settings/cyanogenmod/PartitionInfo.java
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 9c4fe16..f505e27 100644
+index f754607..5c2e51c 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
 @@ -15,6 +15,14 @@
@@ -97,7 +97,7 @@ index ade2121..d470857 100644
      <header
          android:id="@+id/battery_settings"
 diff --git a/src/com/android/settings/Settings.java b/src/com/android/settings/Settings.java
-index 36f928b..d68bdac 100644
+index 34661b5..4b647d8 100644
 --- a/src/com/android/settings/Settings.java
 +++ b/src/com/android/settings/Settings.java
 @@ -81,6 +81,7 @@ import com.android.settings.bluetooth.BluetoothSettings;

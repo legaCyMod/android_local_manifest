@@ -1,4 +1,4 @@
-From 6894f28d3fc4ca16acb4445f9fe2609e00da61ae Mon Sep 17 00:00:00 2001
+From 54ea717550489bce17de79a5306cf45a7d299ef3 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:33:16 +0200
 Subject: [PATCH 8/8] custom navigation bar height (2/2)
@@ -44,10 +44,10 @@ index 516be93..a73a2cb 100644
      <string-array name="wifi_countrycode_entries">
          <item>United States</item>
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index d147738..de4ef7d 100644
+index 4cf56b9..0441cfc 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -906,6 +906,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -916,6 +916,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="navring_action_google_now">Google Now</string>
      <string name="navring_choose_action_title">Choose action</string>
  

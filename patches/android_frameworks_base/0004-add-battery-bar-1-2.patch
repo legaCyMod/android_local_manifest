@@ -1,7 +1,7 @@
-From 3f428e8fff2db9a5782f6fe45e910307a7fb07f3 Mon Sep 17 00:00:00 2001
+From 22321f0ccf68cfeccb4dcbb1e4dace86e685e2e1 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 14:48:22 +0200
-Subject: [PATCH 5/7] add battery bar (1/2)
+Subject: [PATCH 4/6] add battery bar (1/2)
 
 Change-Id: I6a3f3028946829e4117a519c827bdd6d88912e1d
 ---
@@ -16,10 +16,10 @@ Change-Id: I6a3f3028946829e4117a519c827bdd6d88912e1d
  create mode 100644 packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 9c753fe..b32fc2b 100644
+index d3fadf4..4164e14 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -3028,6 +3028,7 @@ public final class Settings {
+@@ -3035,6 +3035,7 @@ public final class Settings {
           * 4: Hide the battery status information
           * 5: Display the battery an icon in landscape mode
           * 6: Display the battery as plain text
@@ -271,7 +271,7 @@ index 0000000..50b3ea3
 +
 +}
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
-index 255350c..eef523a 100644
+index 0b044e4..e36b364 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
 @@ -3127,6 +3127,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,

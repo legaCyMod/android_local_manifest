@@ -1,7 +1,7 @@
-From cb0fd9d9fa86db80e443f9ab4c5cf6533fdc09a8 Mon Sep 17 00:00:00 2001
+From 0510b5755551681b16b1db0013483fcdaa78ac40 Mon Sep 17 00:00:00 2001
 From: Chirayu Desai <cdesai@cyanogenmod.org>
 Date: Wed, 13 Nov 2013 12:54:51 -0500
-Subject: [PATCH 1/7] Allow using Classic WebView
+Subject: [PATCH 1/6] Allow using Classic WebView
 
 Squashed commit of the following:
 
@@ -38,6 +38,13 @@ Date:   Tue, 13 May 2014 22:13:28 +0300
     * fix set/get properties
     * modify APIs to check webview availability
     * remove unused APIs & hide public APIs
+
+Author: WinSuk <winsuk@winsuk.net>
+Date:   Sat Jun 7 00:07:06 2014 -0700
+
+    WebViewClassic: Add freeMemoryForTests
+
+    Since the 4.4.3 merge, an override of freeMemoryForTests is required to build
 
 Change-Id: Iba847a04b515cada0eb32cc86026b60469108d80
 ---
@@ -83,7 +90,7 @@ Change-Id: Iba847a04b515cada0eb32cc86026b60469108d80
  core/java/android/webkit/WebSettingsClassic.java   | 1744 ++++
  core/java/android/webkit/WebStorageClassic.java    |  352 +
  core/java/android/webkit/WebTextView.java          |   53 +
- core/java/android/webkit/WebViewClassic.java       | 8810 ++++++++++++++++++++
+ core/java/android/webkit/WebViewClassic.java       | 8815 ++++++++++++++++++++
  .../android/webkit/WebViewClientClassicExt.java    |   53 +
  core/java/android/webkit/WebViewCore.java          | 3145 +++++++
  .../android/webkit/WebViewDatabaseClassic.java     |  628 ++
@@ -94,7 +101,7 @@ Change-Id: Iba847a04b515cada0eb32cc86026b60469108d80
  core/java/android/webkit/ZoomControlExternal.java  |  159 +
  core/java/android/webkit/ZoomManager.java          | 1263 +++
  .../com/android/internal/app/ProcessStats.java     |    2 +-
- 53 files changed, 29124 insertions(+), 14 deletions(-)
+ 53 files changed, 29129 insertions(+), 14 deletions(-)
  create mode 100644 core/java/android/webkit/AccessibilityInjector.java
  create mode 100644 core/java/android/webkit/AccessibilityInjectorFallback.java
  create mode 100644 core/java/android/webkit/AutoCompletePopup.java
@@ -13976,10 +13983,10 @@ index 0000000..911073d
 +}
 diff --git a/core/java/android/webkit/WebViewClassic.java b/core/java/android/webkit/WebViewClassic.java
 new file mode 100644
-index 0000000..3c377d3
+index 0000000..09f40e3
 --- /dev/null
 +++ b/core/java/android/webkit/WebViewClassic.java
-@@ -0,0 +1,8810 @@
+@@ -0,0 +1,8815 @@
 +/*
 + * Copyright (C) 2012 The Android Open Source Project
 + *
@@ -15342,6 +15349,11 @@ index 0000000..3c377d3
 +        public String getDefaultUserAgent(Context context) {
 +            return WebSettingsClassic.getDefaultUserAgentForLocale(context,
 +                    Locale.getDefault());
++        }
++
++        @Override
++        public void freeMemoryForTests() {
++            WebViewFactory.getProvider().getStatics().freeMemoryForTests();
 +        }
 +
 +        @Override
@@ -29646,7 +29658,7 @@ index 0000000..1d864e5
 +    }
 +}
 diff --git a/core/java/com/android/internal/app/ProcessStats.java b/core/java/com/android/internal/app/ProcessStats.java
-index 0cad33c..c4a4962 100644
+index 0aad0b5..e96be36 100644
 --- a/core/java/com/android/internal/app/ProcessStats.java
 +++ b/core/java/com/android/internal/app/ProcessStats.java
 @@ -1054,7 +1054,7 @@ public final class ProcessStats implements Parcelable {

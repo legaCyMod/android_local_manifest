@@ -1,7 +1,7 @@
-From 8d9f7787f909966047d59555400df81d249d4874 Mon Sep 17 00:00:00 2001
+From 9034c9e9bc896c59c42e9ed67db6da7f21181ded Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:24:44 +0200
-Subject: [PATCH 7/7] custom navigation bar height (1/2)
+Subject: [PATCH 6/6] custom navigation bar height (1/2)
 
 Change-Id: Ib98773eda3d0b2b501594e4247113d0138f53b6a
 ---
@@ -10,10 +10,10 @@ Change-Id: Ib98773eda3d0b2b501594e4247113d0138f53b6a
  2 files changed, 28 insertions(+), 1 deletion(-)
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index ff5527f..3e716af 100644
+index 93191ff..5044ad9 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -3446,6 +3446,12 @@ public final class Settings {
+@@ -3453,6 +3453,12 @@ public final class Settings {
          public static final String SHOW_NAVBAR = "show_navbar";
  
          /**
@@ -27,10 +27,10 @@ index ff5527f..3e716af 100644
           *
           * @hide
 diff --git a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-index 8f1de2a..bae7f89 100644
+index 7ac3e01..c087d69 100644
 --- a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
 +++ b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-@@ -695,7 +695,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -697,7 +697,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.DEV_FORCE_SHOW_NAVBAR), false, this,
                      UserHandle.USER_ALL);
@@ -41,7 +41,7 @@ index 8f1de2a..bae7f89 100644
              updateSettings();
          }
  
-@@ -1672,6 +1674,25 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -1674,6 +1676,25 @@ public class PhoneWindowManager implements WindowManagerPolicy {
              if (mImmersiveModeConfirmation != null) {
                  mImmersiveModeConfirmation.loadSetting();
              }

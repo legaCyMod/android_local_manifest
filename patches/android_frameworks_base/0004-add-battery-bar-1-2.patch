@@ -1,4 +1,4 @@
-From 22321f0ccf68cfeccb4dcbb1e4dace86e685e2e1 Mon Sep 17 00:00:00 2001
+From f900e3e826377577aaa4e192bd7adb8122fb2961 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 14:48:22 +0200
 Subject: [PATCH 4/6] add battery bar (1/2)
@@ -16,7 +16,7 @@ Change-Id: I6a3f3028946829e4117a519c827bdd6d88912e1d
  create mode 100644 packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index d3fadf4..4164e14 100644
+index 4ef82fb..b909206 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
 @@ -3035,6 +3035,7 @@ public final class Settings {

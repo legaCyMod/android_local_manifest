@@ -1,4 +1,4 @@
-From 0510b5755551681b16b1db0013483fcdaa78ac40 Mon Sep 17 00:00:00 2001
+From c8e88c7ef7b8b9297852e4fb23948696b08f8a1a Mon Sep 17 00:00:00 2001
 From: Chirayu Desai <cdesai@cyanogenmod.org>
 Date: Wed, 13 Nov 2013 12:54:51 -0500
 Subject: [PATCH 1/6] Allow using Classic WebView
@@ -46,6 +46,13 @@ Date:   Sat Jun 7 00:07:06 2014 -0700
 
     Since the 4.4.3 merge, an override of freeMemoryForTests is required to build
 
+Author: Robin Humble <plaguedbypenguins@gmail.com>
+Date:   Tue May 20 00:29:40 2014 +1000
+
+    reduce cookie tracking (3/4): count cookies
+
+    add an efficient cookie counting function
+
 Change-Id: Iba847a04b515cada0eb32cc86026b60469108d80
 ---
  .../java/android/webkit/AccessibilityInjector.java |  976 +++
@@ -56,7 +63,7 @@ Change-Id: Iba847a04b515cada0eb32cc86026b60469108d80
  core/java/android/webkit/CallbackProxy.java        | 1452 ++++
  core/java/android/webkit/CertTool.java             |   80 +
  .../android/webkit/ClientCertRequestHandler.java   |  119 +
- core/java/android/webkit/CookieManagerClassic.java |  184 +
+ core/java/android/webkit/CookieManagerClassic.java |  190 +
  core/java/android/webkit/CookieSyncManager.java    |    4 +
  core/java/android/webkit/DebugFlags.java           |   18 +
  .../webkit/DeviceMotionAndOrientationManager.java  |   78 +
@@ -101,7 +108,7 @@ Change-Id: Iba847a04b515cada0eb32cc86026b60469108d80
  core/java/android/webkit/ZoomControlExternal.java  |  159 +
  core/java/android/webkit/ZoomManager.java          | 1263 +++
  .../com/android/internal/app/ProcessStats.java     |    2 +-
- 53 files changed, 29129 insertions(+), 14 deletions(-)
+ 53 files changed, 29135 insertions(+), 14 deletions(-)
  create mode 100644 core/java/android/webkit/AccessibilityInjector.java
  create mode 100644 core/java/android/webkit/AccessibilityInjectorFallback.java
  create mode 100644 core/java/android/webkit/AutoCompletePopup.java
@@ -5221,10 +5228,10 @@ index 0000000..d7a6806
 +}
 diff --git a/core/java/android/webkit/CookieManagerClassic.java b/core/java/android/webkit/CookieManagerClassic.java
 new file mode 100644
-index 0000000..36159e1
+index 0000000..232d8d2
 --- /dev/null
 +++ b/core/java/android/webkit/CookieManagerClassic.java
-@@ -0,0 +1,184 @@
+@@ -0,0 +1,190 @@
 +/*
 + * Copyright (C) 2012 The Android Open Source Project
 + *
@@ -5362,6 +5369,11 @@ index 0000000..36159e1
 +    }
 +
 +    @Override
++    public int countCookies() {
++        return nativeCountCookies();
++    }
++
++    @Override
 +    public void removeAllCookie() {
 +        nativeRemoveAllCookie();
 +    }
@@ -5408,6 +5420,7 @@ index 0000000..36159e1
 +    private static native void nativeFlushCookieStore();
 +    private static native boolean nativeAcceptFileSchemeCookies();
 +    private static native void nativeSetAcceptFileSchemeCookies(boolean accept);
++    private static native int nativeCountCookies();
 +}
 diff --git a/core/java/android/webkit/CookieSyncManager.java b/core/java/android/webkit/CookieSyncManager.java
 index 13aa43f..154a290 100644

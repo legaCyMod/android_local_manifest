@@ -1,4 +1,4 @@
-From ebd4e432d2f98802c87caf5612c9830e405e2f3b Mon Sep 17 00:00:00 2001
+From a376acf3ac5977e5765d65739712ba31f921952c Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:04:25 +0200
 Subject: [PATCH 5/6] add option to show navigation bar (1/2)
@@ -10,7 +10,7 @@ Change-Id: I7360587e5196fd529b50dbb8bd3202f94d0be6cd
  2 files changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 4164e14..93191ff 100644
+index b909206..7dded09 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
 @@ -3447,6 +3447,12 @@ public final class Settings {
@@ -27,10 +27,10 @@ index 4164e14..93191ff 100644
           *
           * @hide
 diff --git a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-index d0b2d64..7ac3e01 100644
+index c8829aa..73947fa 100644
 --- a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
 +++ b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-@@ -1506,7 +1506,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -1514,7 +1514,12 @@ public class PhoneWindowManager implements WindowManagerPolicy {
          // Allow the navigation bar to move on small devices (phones).
          mNavigationBarCanMove = shortSizeDp < 600;
  

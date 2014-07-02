@@ -1,0 +1,178 @@
+From 4e415ef6efc2c391728e0afac5ffbf94d21e0988 Mon Sep 17 00:00:00 2001
+From: Konsta <konsta09@gmail.com>
+Date: Sun, 29 Jun 2014 16:21:31 +0300
+Subject: [PATCH 4/8] cmhw: USB charging (2/2)
+
+Change-Id: I06eb61da830ee57e7e8b3f75ea83f4ea1851e5b7
+---
+ res/values/cm_strings.xml                          |    5 +++
+ res/xml/development_prefs.xml                      |   10 +++++
+ src/com/android/settings/DevelopmentSettings.java  |   45 ++++++++++++++++++++
+ .../android/settings/cyanogenmod/BootReceiver.java |    2 +
+ 4 files changed, 62 insertions(+)
+
+diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
+index 1084ed1..7379448 100644
+--- a/res/values/cm_strings.xml
++++ b/res/values/cm_strings.xml
+@@ -735,6 +735,11 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+     <string name="gamma_tuning_brightness">Brightness</string>
+     <string name="gamma_tuning_saturation">Saturation</string>
+ 
++    <!-- Hardware tunables - USB charging -->
++    <string name="charging_category">Charging</string>
++    <string name="usb_charging_title">USB charging</string>
++    <string name="usb_charging_summary">Charge battery when connected in USB mode</string>
++
+     <!-- Launch music player when headset is connected -->
+     <string name="headset_connect_player_title">Launch music app</string>
+     <string name="headset_connect_player_summary">Launch the default music app when headset is connected</string>
+diff --git a/res/xml/development_prefs.xml b/res/xml/development_prefs.xml
+index f065222..74d298b 100644
+--- a/res/xml/development_prefs.xml
++++ b/res/xml/development_prefs.xml
+@@ -165,6 +165,16 @@
+             android:summary="@string/wifi_display_certification_summary"/>
+     </PreferenceCategory>
+ 
++    <PreferenceCategory android:key="charging_category"
++        android:title="@string/charging_category" >
++
++        <CheckBoxPreference
++            android:key="usb_charging"
++            android:title="@string/usb_charging_title"
++            android:summary="@string/usb_charging_summary"/>
++
++    </PreferenceCategory>
++
+     <PreferenceCategory android:key="debug_input_category"
+             android:title="@string/debug_input_category">
+ 
+diff --git a/src/com/android/settings/DevelopmentSettings.java b/src/com/android/settings/DevelopmentSettings.java
+index afd248a..52fb682 100644
+--- a/src/com/android/settings/DevelopmentSettings.java
++++ b/src/com/android/settings/DevelopmentSettings.java
+@@ -34,6 +34,7 @@ import android.content.pm.ApplicationInfo;
+ import android.content.pm.PackageManager;
+ import android.content.pm.PackageManager.NameNotFoundException;
+ import android.content.pm.ResolveInfo;
++import android.content.SharedPreferences;
+ import android.net.NetworkUtils;
+ import android.net.wifi.IWifiManager;
+ import android.net.wifi.WifiInfo;
+@@ -56,6 +57,7 @@ import android.preference.Preference;
+ import android.preference.Preference.OnPreferenceChangeListener;
+ import android.preference.Preference.OnPreferenceClickListener;
+ import android.preference.PreferenceGroup;
++import android.preference.PreferenceManager;
+ import android.preference.PreferenceScreen;
+ import android.provider.Settings;
+ import android.text.Html;
+@@ -79,6 +81,8 @@ import java.util.ArrayList;
+ import java.util.HashSet;
+ import java.util.List;
+ 
++import org.cyanogenmod.hardware.UsbCharging;
++
+ /*
+  * Displays preferences for application developers.
+  */
+@@ -175,6 +179,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+ 
+     private static final String DEVELOPMENT_SHORTCUT_KEY = "development_shortcut";
+ 
++    private static final String CHARGING_CATEGORY_KEY = "charging_category";
++    private static final String USB_CHARGING_KEY = "usb_charging";
++
+     private static final int RESULT_DEBUG_APP = 1000;
+ 
+     private IWindowManager mWindowManager;
+@@ -243,6 +250,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+ 
+     private CheckBoxPreference mDevelopmentShortcut;
+ 
++    private CheckBoxPreference mUsbCharging;
++
+     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
+     private final ArrayList<CheckBoxPreference> mResetCbPrefs
+             = new ArrayList<CheckBoxPreference>();
+@@ -409,6 +418,15 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+ 
+         mDevelopmentTools = (PreferenceScreen) findPreference(DEVELOPMENT_TOOLS);
+         mAllPrefs.add(mDevelopmentTools);
++
++        if (isUsbChargingSupported()) {
++            mUsbCharging = findAndInitCheckboxPref(USB_CHARGING_KEY);
++            mUsbCharging.setChecked(UsbCharging.isEnabled());
++        } else {
++            PreferenceGroup usbChargingCategory =
++                    (PreferenceGroup) findPreference(CHARGING_CATEGORY_KEY);
++            getPreferenceScreen().removePreference(usbChargingCategory);
++        }
+     }
+ 
+     private ListPreference addListPreference(String prefKey) {
+@@ -1377,6 +1395,31 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+         pokeSystemProperties();
+     }
+ 
++    /**
++     * Restore the properties associated with this preference on boot
++     * @param context A valid context
++     */
++    public static void restore(Context context) {
++        if (isUsbChargingSupported()) {
++            final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
++            final boolean enabled = prefs.getBoolean(USB_CHARGING_KEY, true);
++            if (!UsbCharging.setEnabled(enabled)) {
++                Log.e(TAG, "Failed to restore USB charging settings.");
++            } else {
++                Log.d(TAG, "USB charging settings restored.");
++            }
++        }
++    }
++
++    private static boolean isUsbChargingSupported() {
++        try {
++            return UsbCharging.isSupported();
++        } catch (NoClassDefFoundError e) {
++            // Hardware abstraction framework not installed
++            return false;
++        }
++    }
++
+     @Override
+     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+         if (buttonView == mEnabledSwitch) {
+@@ -1562,6 +1605,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+             writeKillAppLongpressBackOptions();
+         } else if (preference == mUpdateRecovery) {
+             writeUpdateRecoveryOptions();
++        } else if (preference == mUsbCharging) {
++            return UsbCharging.setEnabled(mUsbCharging.isChecked());
+         } else {
+             return super.onPreferenceTreeClick(preferenceScreen, preference);
+         }
+diff --git a/src/com/android/settings/cyanogenmod/BootReceiver.java b/src/com/android/settings/cyanogenmod/BootReceiver.java
+index 85d9b5e..c66223c 100644
+--- a/src/com/android/settings/cyanogenmod/BootReceiver.java
++++ b/src/com/android/settings/cyanogenmod/BootReceiver.java
+@@ -24,6 +24,7 @@ import android.os.SystemProperties;
+ import android.preference.PreferenceManager;
+ import android.util.Log;
+ 
++import com.android.settings.DevelopmentSettings;
+ import com.android.settings.DisplaySettings;
+ import com.android.settings.R;
+ import com.android.settings.Utils;
+@@ -79,6 +80,7 @@ public class BootReceiver extends BroadcastReceiver {
+         DisplaySettings.restore(ctx);
+         LocationSettings.restore(ctx);
+         ButtonSettings.restoreKeyDisabler(ctx);
++        DevelopmentSettings.restore(ctx);
+     }
+ 
+     private void initFreqCapFiles(Context ctx)
+-- 
+1.7.9.5
+

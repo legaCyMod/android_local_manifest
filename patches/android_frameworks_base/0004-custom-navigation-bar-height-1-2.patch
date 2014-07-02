@@ -1,7 +1,7 @@
-From c25e43adb817f4b9f052cae20b113955d5e1e6c3 Mon Sep 17 00:00:00 2001
+From 00e00052d38f1c00c2a8feda1abd1d03962fa95c Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:24:44 +0200
-Subject: [PATCH 6/6] custom navigation bar height (1/2)
+Subject: [PATCH 4/4] custom navigation bar height (1/2)
 
 Change-Id: Ib98773eda3d0b2b501594e4247113d0138f53b6a
 ---
@@ -10,7 +10,7 @@ Change-Id: Ib98773eda3d0b2b501594e4247113d0138f53b6a
  2 files changed, 28 insertions(+), 1 deletion(-)
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 7dded09..5b2f6b5 100644
+index b3348f5..f2bd5e7 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
 @@ -3453,6 +3453,12 @@ public final class Settings {
@@ -27,10 +27,10 @@ index 7dded09..5b2f6b5 100644
           *
           * @hide
 diff --git a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-index 73947fa..023e244 100644
+index b693f88..c349194 100644
 --- a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
 +++ b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-@@ -699,7 +699,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -701,7 +701,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.DEV_FORCE_SHOW_NAVBAR), false, this,
                      UserHandle.USER_ALL);
@@ -41,7 +41,7 @@ index 73947fa..023e244 100644
              updateSettings();
          }
  
-@@ -1682,6 +1684,25 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -1706,6 +1708,25 @@ public class PhoneWindowManager implements WindowManagerPolicy {
              if (mImmersiveModeConfirmation != null) {
                  mImmersiveModeConfirmation.loadSetting();
              }

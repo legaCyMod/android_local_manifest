@@ -1,4 +1,4 @@
-From 598768e1f1fe05858d0d6d8b5d9547f1bf7a5333 Mon Sep 17 00:00:00 2001
+From ea33211a2959b6d37e4ac6e4613adce347f0ec05 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:27:40 +0200
 Subject: [PATCH 2/8] add partition info
@@ -15,7 +15,7 @@ Change-Id: I5a01f913f5d0eca04cbe54175e8fa72cb6418f77
  create mode 100644 src/com/android/settings/cyanogenmod/PartitionInfo.java
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index f754607..5c2e51c 100644
+index 7f8eb7a..8b0dd8f 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
 @@ -15,6 +15,14 @@
@@ -79,10 +79,10 @@ index 0000000..8ffa4a6
 +        android:summary="@string/status_unavailable" />
 +</PreferenceScreen>
 diff --git a/res/xml/settings_headers.xml b/res/xml/settings_headers.xml
-index ade2121..d470857 100644
+index 1a6d3fb..a10dfc2 100644
 --- a/res/xml/settings_headers.xml
 +++ b/res/xml/settings_headers.xml
-@@ -144,6 +144,13 @@
+@@ -170,6 +170,13 @@
          android:icon="@drawable/ic_settings_storage"
          android:title="@string/storage_settings" />
  
@@ -97,18 +97,18 @@ index ade2121..d470857 100644
      <header
          android:id="@+id/battery_settings"
 diff --git a/src/com/android/settings/Settings.java b/src/com/android/settings/Settings.java
-index 34661b5..4b647d8 100644
+index 9aa98f9..d61806e 100644
 --- a/src/com/android/settings/Settings.java
 +++ b/src/com/android/settings/Settings.java
-@@ -81,6 +81,7 @@ import com.android.settings.bluetooth.BluetoothSettings;
+@@ -89,6 +89,7 @@ import com.android.settings.bluetooth.BluetoothEnabler;
+ import com.android.settings.bluetooth.BluetoothSettings;
  import com.android.settings.cyanogenmod.ButtonSettings;
  import com.android.settings.cyanogenmod.LockscreenInterface;
- import com.android.settings.cyanogenmod.MoreDeviceSettings;
 +import com.android.settings.cyanogenmod.PartitionInfo;
  import com.android.settings.cyanogenmod.PerformanceSettings;
- import com.android.settings.cyanogenmod.SystemUiSettings;
- import com.android.settings.cyanogenmod.superuser.PolicyNativeFragment;
-@@ -165,6 +166,7 @@ public class Settings extends PreferenceActivity
+ import com.android.settings.cyanogenmod.StatusBar;
+ import com.android.settings.cyanogenmod.NotificationDrawer;
+@@ -183,6 +184,7 @@ public class Settings extends PreferenceActivity
              R.id.sound_settings,
              R.id.display_settings,
              R.id.storage_settings,
@@ -116,14 +116,14 @@ index 34661b5..4b647d8 100644
              R.id.application_settings,
              R.id.battery_settings,
              R.id.personal_section,
-@@ -379,6 +381,7 @@ public class Settings extends PreferenceActivity
-         LockscreenInterface.class.getName(),
-         SystemUiSettings.class.getName(),
+@@ -494,6 +496,7 @@ public class Settings extends PreferenceActivity
+         StatusBar.class.getName(),
+         NotificationDrawer.class.getName(),
          ButtonSettings.class.getName(),
 +        PartitionInfo.class.getName(),
-         MoreDeviceSettings.class.getName(),
          ProfilesSettings.class.getName(),
          PerformanceSettings.class.getName(),
+         PolicyNativeFragment.class.getName(),
 diff --git a/src/com/android/settings/cyanogenmod/PartitionInfo.java b/src/com/android/settings/cyanogenmod/PartitionInfo.java
 new file mode 100644
 index 0000000..f148c6d

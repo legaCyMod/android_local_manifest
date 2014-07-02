@@ -1,4 +1,4 @@
-From 54ea717550489bce17de79a5306cf45a7d299ef3 Mon Sep 17 00:00:00 2001
+From 63821236cdf6e26dc3e2fb63e5e4b7abfdc49bed Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:33:16 +0200
 Subject: [PATCH 8/8] custom navigation bar height (2/2)
@@ -7,12 +7,12 @@ Change-Id: I30b0061eb8c50ea882c47d7e750d960d365b44d1
 ---
  res/values/cm_arrays.xml                           |   21 ++++++++++++++++++++
  res/values/cm_strings.xml                          |   10 ++++++++++
- res/xml/system_ui_settings.xml                     |    9 +++++++++
- .../settings/cyanogenmod/SystemUiSettings.java     |   18 +++++++++++++++++
- 4 files changed, 58 insertions(+)
+ res/xml/button_settings.xml                        |    9 +++++++++
+ .../settings/cyanogenmod/ButtonSettings.java       |   15 ++++++++++++++
+ 4 files changed, 55 insertions(+)
 
 diff --git a/res/values/cm_arrays.xml b/res/values/cm_arrays.xml
-index 516be93..a73a2cb 100644
+index d63340a..003f69f 100644
 --- a/res/values/cm_arrays.xml
 +++ b/res/values/cm_arrays.xml
 @@ -15,6 +15,27 @@
@@ -44,10 +44,10 @@ index 516be93..a73a2cb 100644
      <string-array name="wifi_countrycode_entries">
          <item>United States</item>
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 4cf56b9..0441cfc 100644
+index b46f00d..1ffede6 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -916,6 +916,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -904,6 +904,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="navring_action_google_now">Google Now</string>
      <string name="navring_choose_action_title">Choose action</string>
  
@@ -64,11 +64,11 @@ index 4cf56b9..0441cfc 100644
      <!-- Power menu enable disable -->
      <string name="power_menu_title">Power menu</string>
      <string name="power_menu_reboot_title">Reboot menu</string>
-diff --git a/res/xml/system_ui_settings.xml b/res/xml/system_ui_settings.xml
-index a14e266..51124a7 100644
---- a/res/xml/system_ui_settings.xml
-+++ b/res/xml/system_ui_settings.xml
-@@ -81,6 +81,15 @@
+diff --git a/res/xml/button_settings.xml b/res/xml/button_settings.xml
+index 33b4eb5..5afcab5 100644
+--- a/res/xml/button_settings.xml
++++ b/res/xml/button_settings.xml
+@@ -37,6 +37,15 @@
              android:fragment="com.android.settings.cyanogenmod.NavRing"
              android:title="@string/navigation_ring_title" />
  
@@ -84,56 +84,56 @@ index a14e266..51124a7 100644
          <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
              android:key="navigation_bar_left"
              android:title="@string/navigation_bar_left_title"
-diff --git a/src/com/android/settings/cyanogenmod/SystemUiSettings.java b/src/com/android/settings/cyanogenmod/SystemUiSettings.java
-index d13e31b..007523f 100644
---- a/src/com/android/settings/cyanogenmod/SystemUiSettings.java
-+++ b/src/com/android/settings/cyanogenmod/SystemUiSettings.java
-@@ -43,10 +43,12 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
-     private static final String CATEGORY_NAVBAR = "navigation_bar";
-     private static final String KEY_SCREEN_GESTURE_SETTINGS = "touch_screen_gesture_settings";
-     private static final String KEY_NAVIGATION_BAR_LEFT = "navigation_bar_left";
+diff --git a/src/com/android/settings/cyanogenmod/ButtonSettings.java b/src/com/android/settings/cyanogenmod/ButtonSettings.java
+index 417cf4b..4caa4c2 100644
+--- a/src/com/android/settings/cyanogenmod/ButtonSettings.java
++++ b/src/com/android/settings/cyanogenmod/ButtonSettings.java
+@@ -60,6 +60,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+     private static final String KEY_SWAP_VOLUME_BUTTONS = "swap_volume_buttons";
+     private static final String KEY_VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
+     private static final String KEY_BLUETOOTH_INPUT_SETTINGS = "bluetooth_input_settings";
 +    private static final String KEY_NAVIGATION_HEIGHT = "nav_buttons_height";
- 
-     private ListPreference mExpandedDesktopPref;
-     private CheckBoxPreference mExpandedDesktopNoNavbarPref;
-     private CheckBoxPreference mNavigationBarLeftPref;
+     private static final String KEY_NAVIGATION_BAR_LEFT = "navigation_bar_left";
+     private static final String DISABLE_NAV_KEYS = "disable_nav_keys";
+     private static final String KEY_POWER_END_CALL = "power_end_call";
+@@ -111,6 +112,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+     private CheckBoxPreference mDisableNavigationKeys;
+     private CheckBoxPreference mPowerEndCall;
+     private CheckBoxPreference mHomeAnswerCall;
 +    private ListPreference mNavButtonsHeight;
+     private CheckBoxPreference mNavigationBarLeftPref;
  
-     @Override
-     public void onCreate(Bundle savedInstanceState) {
-@@ -65,6 +67,9 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
-         // Navigation bar left
-         mNavigationBarLeftPref = (CheckBoxPreference) findPreference(KEY_NAVIGATION_BAR_LEFT);
+     private Handler mHandler;
+@@ -162,6 +164,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+         // Force Navigation bar related options
+         mDisableNavigationKeys = (CheckBoxPreference) findPreference(DISABLE_NAV_KEYS);
  
 +        // Navigation bar height
 +        mNavButtonsHeight = (ListPreference) findPreference(KEY_NAVIGATION_HEIGHT);
 +
-         Utils.updatePreferenceToSpecificActivityFromMetaDataOrRemove(getActivity(),
-                 getPreferenceScreen(), KEY_SCREEN_GESTURE_SETTINGS);
+         // Navigation bar left
+         mNavigationBarLeftPref = (CheckBoxPreference) findPreference(KEY_NAVIGATION_BAR_LEFT);
  
-@@ -90,6 +95,12 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
-                 updateExpandedDesktop(expandedDesktopValue);
-                 expandedCategory.removePreference(mExpandedDesktopNoNavbarPref);
- 
-+                mNavButtonsHeight.setOnPreferenceChangeListener(this);
-+                int statusNavButtonsHeight = Settings.System.getInt(getContentResolver(),
-+                        Settings.System.NAV_BUTTONS_HEIGHT, 48);
-+                mNavButtonsHeight.setValue(String.valueOf(statusNavButtonsHeight));
-+                mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntry());
-+
-                 if (!Utils.isPhone(getActivity())) {
-                     PreferenceCategory navCategory =
+@@ -332,6 +337,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                              (PreferenceCategory) findPreference(CATEGORY_NAVBAR);
-@@ -117,6 +128,13 @@ public class SystemUiSettings extends SettingsPreferenceFragment  implements
-             boolean value = (Boolean) objValue;
-             updateExpandedDesktop(value ? 2 : 0);
+                     navCategory.removePreference(mNavigationBarLeftPref);
+                 }
++
++                // Navigation bar height
++                int statusNavButtonsHeight = Settings.System.getInt(resolver,
++                        Settings.System.NAV_BUTTONS_HEIGHT, 48);
++                mNavButtonsHeight = initActionList(KEY_NAVIGATION_HEIGHT, statusNavButtonsHeight);
++
+             } else {
+                 // Hide navigation bar category
+                 prefScreen.removePreference(findPreference(CATEGORY_NAVBAR));
+@@ -429,6 +440,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+             handleActionListChange(mVolumeKeyCursorControl, newValue,
+                     Settings.System.VOLUME_KEY_CURSOR_CONTROL);
              return true;
 +        } else if (preference == mNavButtonsHeight) {
-+            int statusNavButtonsHeight = Integer.valueOf((String) objValue);
-+            int index = mNavButtonsHeight.findIndexOfValue((String) objValue);
-+            Settings.System.putInt(getContentResolver(),
-+                    Settings.System.NAV_BUTTONS_HEIGHT, statusNavButtonsHeight);
-+            mNavButtonsHeight.setSummary(mNavButtonsHeight.getEntries()[index]);
++            handleActionListChange(mNavButtonsHeight, newValue,
++                    Settings.System.NAV_BUTTONS_HEIGHT);
 +            return true;
          }
  

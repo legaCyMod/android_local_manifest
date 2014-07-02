@@ -1,7 +1,7 @@
-From c8e88c7ef7b8b9297852e4fb23948696b08f8a1a Mon Sep 17 00:00:00 2001
+From 78871042153320fef3b8ef5065ceee574fde4bb7 Mon Sep 17 00:00:00 2001
 From: Chirayu Desai <cdesai@cyanogenmod.org>
 Date: Wed, 13 Nov 2013 12:54:51 -0500
-Subject: [PATCH 1/6] Allow using Classic WebView
+Subject: [PATCH 1/4] Allow using Classic WebView
 
 Squashed commit of the following:
 
@@ -101,14 +101,14 @@ Change-Id: Iba847a04b515cada0eb32cc86026b60469108d80
  .../android/webkit/WebViewClientClassicExt.java    |   53 +
  core/java/android/webkit/WebViewCore.java          | 3145 +++++++
  .../android/webkit/WebViewDatabaseClassic.java     |  628 ++
- core/java/android/webkit/WebViewFactory.java       |   56 +-
+ core/java/android/webkit/WebViewFactory.java       |   52 +-
  .../android/webkit/WebViewInputDispatcher.java     | 1293 +++
  core/java/android/webkit/ZoomControlBase.java      |   41 +
  core/java/android/webkit/ZoomControlEmbedded.java  |  119 +
  core/java/android/webkit/ZoomControlExternal.java  |  159 +
  core/java/android/webkit/ZoomManager.java          | 1263 +++
  .../com/android/internal/app/ProcessStats.java     |    2 +-
- 53 files changed, 29135 insertions(+), 14 deletions(-)
+ 53 files changed, 29129 insertions(+), 16 deletions(-)
  create mode 100644 core/java/android/webkit/AccessibilityInjector.java
  create mode 100644 core/java/android/webkit/AccessibilityInjectorFallback.java
  create mode 100644 core/java/android/webkit/AutoCompletePopup.java
@@ -26660,7 +26660,7 @@ index 0000000..be01028
 +    }
 +}
 diff --git a/core/java/android/webkit/WebViewFactory.java b/core/java/android/webkit/WebViewFactory.java
-index b9131bf..6d28def 100644
+index b9131bf..4dc68f1 100644
 --- a/core/java/android/webkit/WebViewFactory.java
 +++ b/core/java/android/webkit/WebViewFactory.java
 @@ -22,6 +22,8 @@ import android.os.SystemProperties;
@@ -26676,7 +26676,7 @@ index b9131bf..6d28def 100644
   */
  public final class WebViewFactory {
  
-+    private static final String FORCE_PROVIDER_PROPERTY = "persist.webview.provider";
++    public static final String FORCE_PROVIDER_PROPERTY = "persist.webview.provider";
 +    private static final String FORCE_PROVIDER_PROPERTY_VALUE_CHROMIUM = "chromium";
 +    private static final String FORCE_PROVIDER_PROPERTY_VALUE_CLASSIC = "classic";
 +
@@ -26691,34 +26691,28 @@ index b9131bf..6d28def 100644
      private static final String LOGTAG = "WebViewFactory";
  
      private static final boolean DEBUG = false;
-@@ -52,32 +63,33 @@ public final class WebViewFactory {
+@@ -52,32 +63,25 @@ public final class WebViewFactory {
      private static WebViewFactoryProvider sProviderInstance;
      private static final Object sProviderLock = new Object();
  
 -    public static boolean isExperimentalWebViewAvailable() {
 -        // TODO: Remove callers of this method then remove it.
 -        return false;  // Hide the toggle in Developer Settings.
-+    /** @hide */
-+    public static boolean isClassicWebViewAvailable() {
-+        return new File(CLASSIC_WEBVIEW_FILE).exists();
-     }
- 
+-    }
+-
      /** @hide */
 -    public static void setUseExperimentalWebView(boolean enable) {
 -        // TODO: Remove callers of this method then remove it.
-+    public static boolean isChromiumWebViewAvailable() {
-+        return new File(CHROMIUM_WEBVIEW_FILE).exists();
++    public static boolean isClassicWebViewAvailable() {
++        return new File(CLASSIC_WEBVIEW_FILE).exists();
      }
  
      /** @hide */
 -    public static boolean useExperimentalWebView() {
 -        // TODO: Remove callers of this method then remove it.
 -        return true;
-+    public static void setUseClassicWebView(boolean enable) {
-+        SystemProperties.set(FORCE_PROVIDER_PROPERTY, enable ? FORCE_PROVIDER_PROPERTY_VALUE_CLASSIC
-+                : FORCE_PROVIDER_PROPERTY_VALUE_CHROMIUM);
-+        Log.i(LOGTAG, "Use Classic WebView changed: "
-+                + SystemProperties.get(FORCE_PROVIDER_PROPERTY, ""));
++    public static boolean isChromiumWebViewAvailable() {
++        return new File(CHROMIUM_WEBVIEW_FILE).exists();
      }
  
      /** @hide */
@@ -26737,7 +26731,7 @@ index b9131bf..6d28def 100644
              if (sProviderInstance != null) return sProviderInstance;
  
              Class<WebViewFactoryProvider> providerClass;
-@@ -111,7 +123,25 @@ public final class WebViewFactory {
+@@ -111,7 +115,25 @@ public final class WebViewFactory {
          }
      }
  
@@ -29671,7 +29665,7 @@ index 0000000..1d864e5
 +    }
 +}
 diff --git a/core/java/com/android/internal/app/ProcessStats.java b/core/java/com/android/internal/app/ProcessStats.java
-index 0aad0b5..e96be36 100644
+index b46a201..e1e94ea 100644
 --- a/core/java/com/android/internal/app/ProcessStats.java
 +++ b/core/java/com/android/internal/app/ProcessStats.java
 @@ -1054,7 +1054,7 @@ public final class ProcessStats implements Parcelable {

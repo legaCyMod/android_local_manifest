@@ -1,4 +1,4 @@
-From 1d1d0f44c9c68b9d9e6a4832a7dc3c82b116aa90 Mon Sep 17 00:00:00 2001
+From c46434d1fd2d81360036a594e8e994113593e383 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 14:48:22 +0200
 Subject: [PATCH 2/4] add battery bar (1/2)
@@ -7,19 +7,20 @@ Change-Id: I6a3f3028946829e4117a519c827bdd6d88912e1d
 ---
  core/java/android/provider/Settings.java           |    1 +
  packages/SystemUI/res/drawable/battery_bar.xml     |   29 ++++
- packages/SystemUI/res/layout/status_bar.xml        |    5 +
+ packages/SystemUI/res/layout/msim_status_bar.xml   |    6 +
+ packages/SystemUI/res/layout/status_bar.xml        |    6 +
  packages/SystemUI/res/values/styles.xml            |    6 +
  .../systemui/statusbar/phone/BatteryBar.java       |  173 ++++++++++++++++++++
  .../systemui/statusbar/phone/PhoneStatusBar.java   |    4 +
- 6 files changed, 218 insertions(+)
+ 7 files changed, 225 insertions(+)
  create mode 100644 packages/SystemUI/res/drawable/battery_bar.xml
  create mode 100644 packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 280c2ad..ede391d 100644
+index b27e292..d404c42 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -3056,6 +3056,7 @@ public final class Settings {
+@@ -3070,6 +3070,7 @@ public final class Settings {
           * 4: Hide the battery status information
           * 5: Display the battery an icon in landscape mode
           * 6: Display the battery as plain text
@@ -62,11 +63,11 @@ index 0000000..38a03cd
 +    </item>
 +
 +</layer-list>
-diff --git a/packages/SystemUI/res/layout/status_bar.xml b/packages/SystemUI/res/layout/status_bar.xml
-index 7902f73..7e40218 100644
---- a/packages/SystemUI/res/layout/status_bar.xml
-+++ b/packages/SystemUI/res/layout/status_bar.xml
-@@ -173,4 +173,9 @@
+diff --git a/packages/SystemUI/res/layout/msim_status_bar.xml b/packages/SystemUI/res/layout/msim_status_bar.xml
+index ecc9134..b05c718 100644
+--- a/packages/SystemUI/res/layout/msim_status_bar.xml
++++ b/packages/SystemUI/res/layout/msim_status_bar.xml
+@@ -187,4 +187,10 @@
                  />
          </com.android.systemui.statusbar.phone.TickerView>
      </LinearLayout>
@@ -75,6 +76,22 @@ index 7902f73..7e40218 100644
 +        style="@style/StatusBar.BatteryBar"
 +        android:layout_width="match_parent"
 +        android:layout_height="1.5dp" />
++
+ </com.android.systemui.statusbar.phone.PhoneStatusBarView>
+diff --git a/packages/SystemUI/res/layout/status_bar.xml b/packages/SystemUI/res/layout/status_bar.xml
+index 488a0bb..926c95d 100644
+--- a/packages/SystemUI/res/layout/status_bar.xml
++++ b/packages/SystemUI/res/layout/status_bar.xml
+@@ -185,4 +185,10 @@
+                 />
+         </com.android.systemui.statusbar.phone.TickerView>
+     </LinearLayout>
++
++    <com.android.systemui.statusbar.phone.BatteryBar
++        style="@style/StatusBar.BatteryBar"
++        android:layout_width="match_parent"
++        android:layout_height="1.5dp" />
++
  </com.android.systemui.statusbar.phone.PhoneStatusBarView>
 diff --git a/packages/SystemUI/res/values/styles.xml b/packages/SystemUI/res/values/styles.xml
 index 8b77ebd..c3231e4 100644
@@ -271,10 +288,10 @@ index 0000000..50b3ea3
 +
 +}
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
-index 9be0495..c0b9436 100644
+index 08ca930..ff3e4a5 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/PhoneStatusBar.java
-@@ -3167,6 +3167,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
+@@ -3224,6 +3224,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                  mode = BatteryMeterMode.BATTERY_METER_TEXT;
                  break;
  

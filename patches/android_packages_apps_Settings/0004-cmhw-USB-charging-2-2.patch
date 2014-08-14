@@ -1,4 +1,4 @@
-From 4e415ef6efc2c391728e0afac5ffbf94d21e0988 Mon Sep 17 00:00:00 2001
+From 9e94386ea5755a849b9d50d810e4505a5298adda Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Sun, 29 Jun 2014 16:21:31 +0300
 Subject: [PATCH 4/8] cmhw: USB charging (2/2)
@@ -12,10 +12,10 @@ Change-Id: I06eb61da830ee57e7e8b3f75ea83f4ea1851e5b7
  4 files changed, 62 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 1084ed1..7379448 100644
+index 920b9d2..3e6c2cb 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -735,6 +735,11 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -744,6 +744,11 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="gamma_tuning_brightness">Brightness</string>
      <string name="gamma_tuning_saturation">Saturation</string>
  
@@ -28,7 +28,7 @@ index 1084ed1..7379448 100644
      <string name="headset_connect_player_title">Launch music app</string>
      <string name="headset_connect_player_summary">Launch the default music app when headset is connected</string>
 diff --git a/res/xml/development_prefs.xml b/res/xml/development_prefs.xml
-index f065222..74d298b 100644
+index 6957301..028209a 100644
 --- a/res/xml/development_prefs.xml
 +++ b/res/xml/development_prefs.xml
 @@ -165,6 +165,16 @@

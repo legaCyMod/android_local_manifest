@@ -1,7 +1,7 @@
-From a06b872fc311758c94ef138edd0191567e862bd5 Mon Sep 17 00:00:00 2001
+From e7ec1fcec7414283ec5979f94dd2813d33f78cae Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:33:16 +0200
-Subject: [PATCH 8/8] custom navigation bar height (2/2)
+Subject: [PATCH 7/7] custom navigation bar height (2/2)
 
 Change-Id: I30b0061eb8c50ea882c47d7e750d960d365b44d1
 ---
@@ -12,7 +12,7 @@ Change-Id: I30b0061eb8c50ea882c47d7e750d960d365b44d1
  4 files changed, 53 insertions(+)
 
 diff --git a/res/values/cm_arrays.xml b/res/values/cm_arrays.xml
-index b9d842e..748cbdb 100644
+index d9753f5..51f3b24 100644
 --- a/res/values/cm_arrays.xml
 +++ b/res/values/cm_arrays.xml
 @@ -15,6 +15,27 @@
@@ -44,10 +44,10 @@ index b9d842e..748cbdb 100644
      <string-array name="wifi_countrycode_entries">
          <item>United States</item>
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 6fa5d11..7ed654e 100644
+index 33f8bf5..9daf485 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -918,6 +918,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -917,6 +917,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="navring_action_google_now">Google Now</string>
      <string name="navring_choose_action_title">Choose action</string>
  
@@ -85,7 +85,7 @@ index 33b4eb5..5afcab5 100644
              android:key="navigation_bar_left"
              android:title="@string/navigation_bar_left_title"
 diff --git a/src/com/android/settings/cyanogenmod/ButtonSettings.java b/src/com/android/settings/cyanogenmod/ButtonSettings.java
-index 86caaef..b1c3a4b 100644
+index 5d6294e..0be4d54 100644
 --- a/src/com/android/settings/cyanogenmod/ButtonSettings.java
 +++ b/src/com/android/settings/cyanogenmod/ButtonSettings.java
 @@ -60,6 +60,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
@@ -96,7 +96,7 @@ index 86caaef..b1c3a4b 100644
      private static final String KEY_NAVIGATION_BAR_LEFT = "navigation_bar_left";
      private static final String DISABLE_NAV_KEYS = "disable_nav_keys";
      private static final String KEY_POWER_END_CALL = "power_end_call";
-@@ -111,6 +112,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+@@ -112,6 +113,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
      private CheckBoxPreference mDisableNavigationKeys;
      private CheckBoxPreference mPowerEndCall;
      private CheckBoxPreference mHomeAnswerCall;
@@ -104,7 +104,7 @@ index 86caaef..b1c3a4b 100644
      private CheckBoxPreference mNavigationBarLeftPref;
  
      private PreferenceCategory mNavigationPreferencesCat;
-@@ -164,6 +166,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+@@ -165,6 +167,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
          // Force Navigation bar related options
          mDisableNavigationKeys = (CheckBoxPreference) findPreference(DISABLE_NAV_KEYS);
  
@@ -114,7 +114,7 @@ index 86caaef..b1c3a4b 100644
          mNavigationPreferencesCat = (PreferenceCategory) findPreference(CATEGORY_NAVBAR);
  
          // Navigation bar left
-@@ -335,6 +340,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+@@ -336,6 +341,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                  if (!Utils.isPhone(getActivity())) {
                      mNavigationPreferencesCat.removePreference(mNavigationBarLeftPref);
                  }
@@ -125,7 +125,7 @@ index 86caaef..b1c3a4b 100644
              } else if (needsNavigationBar || !isKeyDisablerSupported()) {
                  // Hide navigation bar category
                  prefScreen.removePreference(mNavigationPreferencesCat);
-@@ -432,6 +441,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+@@ -433,6 +442,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
              handleActionListChange(mVolumeKeyCursorControl, newValue,
                      Settings.System.VOLUME_KEY_CURSOR_CONTROL);
              return true;

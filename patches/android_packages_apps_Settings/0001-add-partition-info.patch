@@ -1,7 +1,7 @@
-From a69d195efb74e0ef6f40dbf84760e12d497d9d0c Mon Sep 17 00:00:00 2001
+From 9664c249aa40a4bf907f6f2b7d8876c4a75d2a09 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:27:40 +0200
-Subject: [PATCH 2/8] add partition info
+Subject: [PATCH 1/7] add partition info
 
 Change-Id: I5a01f913f5d0eca04cbe54175e8fa72cb6418f77
 ---
@@ -15,7 +15,7 @@ Change-Id: I5a01f913f5d0eca04cbe54175e8fa72cb6418f77
  create mode 100644 src/com/android/settings/cyanogenmod/PartitionInfo.java
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index e2b6b5e..d46ae83 100644
+index 289e391..b9e700a 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
 @@ -15,6 +15,14 @@
@@ -97,7 +97,7 @@ index 1a6d3fb..a10dfc2 100644
      <header
          android:id="@+id/battery_settings"
 diff --git a/src/com/android/settings/Settings.java b/src/com/android/settings/Settings.java
-index 0c5b4c6..d6aff7f 100644
+index 0483a8a..8adde58 100644
 --- a/src/com/android/settings/Settings.java
 +++ b/src/com/android/settings/Settings.java
 @@ -90,6 +90,7 @@ import com.android.settings.cyanogenmod.ButtonSettings;
@@ -116,7 +116,7 @@ index 0c5b4c6..d6aff7f 100644
              R.id.application_settings,
              R.id.battery_settings,
              R.id.personal_section,
-@@ -480,6 +482,7 @@ public class Settings extends PreferenceActivity
+@@ -481,6 +483,7 @@ public class Settings extends PreferenceActivity
          StatusBar.class.getName(),
          NotificationDrawer.class.getName(),
          ButtonSettings.class.getName(),

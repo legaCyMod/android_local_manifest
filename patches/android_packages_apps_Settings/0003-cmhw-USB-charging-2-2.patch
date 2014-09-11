@@ -1,7 +1,7 @@
-From 9e94386ea5755a849b9d50d810e4505a5298adda Mon Sep 17 00:00:00 2001
+From 40c7a04d5d90f90b91aa0eb1477010d7b5eea30d Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Sun, 29 Jun 2014 16:21:31 +0300
-Subject: [PATCH 4/8] cmhw: USB charging (2/2)
+Subject: [PATCH 3/7] cmhw: USB charging (2/2)
 
 Change-Id: I06eb61da830ee57e7e8b3f75ea83f4ea1851e5b7
 ---
@@ -12,10 +12,10 @@ Change-Id: I06eb61da830ee57e7e8b3f75ea83f4ea1851e5b7
  4 files changed, 62 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 920b9d2..3e6c2cb 100644
+index 7c0e395..e8f3974 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -744,6 +744,11 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -743,6 +743,11 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="gamma_tuning_brightness">Brightness</string>
      <string name="gamma_tuning_saturation">Saturation</string>
  
@@ -28,7 +28,7 @@ index 920b9d2..3e6c2cb 100644
      <string name="headset_connect_player_title">Launch music app</string>
      <string name="headset_connect_player_summary">Launch the default music app when headset is connected</string>
 diff --git a/res/xml/development_prefs.xml b/res/xml/development_prefs.xml
-index 6957301..028209a 100644
+index 45e8906..343de9b 100644
 --- a/res/xml/development_prefs.xml
 +++ b/res/xml/development_prefs.xml
 @@ -165,6 +165,16 @@
@@ -49,7 +49,7 @@ index 6957301..028209a 100644
              android:title="@string/debug_input_category">
  
 diff --git a/src/com/android/settings/DevelopmentSettings.java b/src/com/android/settings/DevelopmentSettings.java
-index afd248a..52fb682 100644
+index ea210b7..21af53a 100644
 --- a/src/com/android/settings/DevelopmentSettings.java
 +++ b/src/com/android/settings/DevelopmentSettings.java
 @@ -34,6 +34,7 @@ import android.content.pm.ApplicationInfo;
@@ -68,7 +68,7 @@ index afd248a..52fb682 100644
  import android.preference.PreferenceScreen;
  import android.provider.Settings;
  import android.text.Html;
-@@ -79,6 +81,8 @@ import java.util.ArrayList;
+@@ -78,6 +80,8 @@ import java.util.ArrayList;
  import java.util.HashSet;
  import java.util.List;
  
@@ -77,7 +77,7 @@ index afd248a..52fb682 100644
  /*
   * Displays preferences for application developers.
   */
-@@ -175,6 +179,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+@@ -173,6 +177,9 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
  
      private static final String DEVELOPMENT_SHORTCUT_KEY = "development_shortcut";
  
@@ -87,7 +87,7 @@ index afd248a..52fb682 100644
      private static final int RESULT_DEBUG_APP = 1000;
  
      private IWindowManager mWindowManager;
-@@ -243,6 +250,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+@@ -241,6 +248,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
  
      private CheckBoxPreference mDevelopmentShortcut;
  
@@ -96,7 +96,7 @@ index afd248a..52fb682 100644
      private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
      private final ArrayList<CheckBoxPreference> mResetCbPrefs
              = new ArrayList<CheckBoxPreference>();
-@@ -409,6 +418,15 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+@@ -393,6 +402,15 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
  
          mDevelopmentTools = (PreferenceScreen) findPreference(DEVELOPMENT_TOOLS);
          mAllPrefs.add(mDevelopmentTools);
@@ -112,7 +112,7 @@ index afd248a..52fb682 100644
      }
  
      private ListPreference addListPreference(String prefKey) {
-@@ -1377,6 +1395,31 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+@@ -1341,6 +1359,31 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
          pokeSystemProperties();
      }
  
@@ -144,7 +144,7 @@ index afd248a..52fb682 100644
      @Override
      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
          if (buttonView == mEnabledSwitch) {
-@@ -1562,6 +1605,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
+@@ -1526,6 +1569,8 @@ public class DevelopmentSettings extends RestrictedSettingsFragment
              writeKillAppLongpressBackOptions();
          } else if (preference == mUpdateRecovery) {
              writeUpdateRecoveryOptions();

@@ -1,4 +1,4 @@
-From afedcbd83e9dcc1d34d383fb4281d94735170877 Mon Sep 17 00:00:00 2001
+From 13097449aa586e2c1097fcb0c18fff9576e5d89f Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Thu, 26 Jun 2014 19:08:12 +0300
 Subject: [PATCH 5/7] move navigation bar options to the top of button

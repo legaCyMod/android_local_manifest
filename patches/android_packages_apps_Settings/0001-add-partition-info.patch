@@ -1,4 +1,4 @@
-From 9664c249aa40a4bf907f6f2b7d8876c4a75d2a09 Mon Sep 17 00:00:00 2001
+From 91977aaccbd513b0181ec3eaf732e8a642482281 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:27:40 +0200
 Subject: [PATCH 1/7] add partition info
@@ -15,7 +15,7 @@ Change-Id: I5a01f913f5d0eca04cbe54175e8fa72cb6418f77
  create mode 100644 src/com/android/settings/cyanogenmod/PartitionInfo.java
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 289e391..b9e700a 100644
+index 5cc2469..31238bb 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
 @@ -15,6 +15,14 @@
@@ -97,10 +97,10 @@ index 1a6d3fb..a10dfc2 100644
      <header
          android:id="@+id/battery_settings"
 diff --git a/src/com/android/settings/Settings.java b/src/com/android/settings/Settings.java
-index 0483a8a..8adde58 100644
+index 0a5f430..795cfcf 100644
 --- a/src/com/android/settings/Settings.java
 +++ b/src/com/android/settings/Settings.java
-@@ -90,6 +90,7 @@ import com.android.settings.cyanogenmod.ButtonSettings;
+@@ -91,6 +91,7 @@ import com.android.settings.cyanogenmod.ButtonSettings;
  import com.android.settings.cyanogenmod.LockscreenInterface;
  import com.android.settings.cyanogenmod.NavBar;
  import com.android.settings.cyanogenmod.NavRing;
@@ -108,7 +108,7 @@ index 0483a8a..8adde58 100644
  import com.android.settings.cyanogenmod.PerformanceSettings;
  import com.android.settings.cyanogenmod.StatusBar;
  import com.android.settings.cyanogenmod.NotificationDrawer;
-@@ -186,6 +187,7 @@ public class Settings extends PreferenceActivity
+@@ -187,6 +188,7 @@ public class Settings extends PreferenceActivity
              R.id.sound_settings,
              R.id.display_settings,
              R.id.storage_settings,
@@ -116,7 +116,7 @@ index 0483a8a..8adde58 100644
              R.id.application_settings,
              R.id.battery_settings,
              R.id.personal_section,
-@@ -481,6 +483,7 @@ public class Settings extends PreferenceActivity
+@@ -484,6 +486,7 @@ public class Settings extends PreferenceActivity
          StatusBar.class.getName(),
          NotificationDrawer.class.getName(),
          ButtonSettings.class.getName(),

@@ -1,4 +1,4 @@
-From cdc3d37f9c5a18e2fb30316498150bbf3b2b65ee Mon Sep 17 00:00:00 2001
+From 43d001e6d5f6cef2b99e9eca817e431895add03c Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:24:44 +0200
 Subject: [PATCH 3/3] custom navigation bar height (1/2)
@@ -10,10 +10,10 @@ Change-Id: Ib98773eda3d0b2b501594e4247113d0138f53b6a
  2 files changed, 28 insertions(+), 1 deletion(-)
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 592dfd7..045f411 100644
+index 3f8e649..f8e3120 100755
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -3536,6 +3536,12 @@ public final class Settings {
+@@ -3551,6 +3551,12 @@ public final class Settings {
          public static final String SHOW_NAVBAR = "show_navbar";
  
          /**
@@ -27,10 +27,10 @@ index 592dfd7..045f411 100644
           *
           * @hide
 diff --git a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-index 0c8c023..246f6a8 100644
+index ed1b4e9..ce6b079 100644
 --- a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
 +++ b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-@@ -701,7 +701,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -705,7 +705,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.DEV_FORCE_SHOW_NAVBAR), false, this,
                      UserHandle.USER_ALL);
@@ -41,7 +41,7 @@ index 0c8c023..246f6a8 100644
              updateSettings();
          }
  
-@@ -1709,6 +1711,25 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -1717,6 +1719,25 @@ public class PhoneWindowManager implements WindowManagerPolicy {
              if (mImmersiveModeConfirmation != null) {
                  mImmersiveModeConfirmation.loadSetting();
              }

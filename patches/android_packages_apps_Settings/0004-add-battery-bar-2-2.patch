@@ -1,4 +1,4 @@
-From abd8f06f12ada109b8eef9962fe2654e3966dd1c Mon Sep 17 00:00:00 2001
+From 855252c46c3600c535df718198021312c91957d4 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:00:55 +0200
 Subject: [PATCH 4/7] add battery bar (2/2)
@@ -11,10 +11,10 @@ Change-Id: I912449bf44386a19f1f174eb732c7d077805b4de
  3 files changed, 5 insertions(+)
 
 diff --git a/res/values/cm_arrays.xml b/res/values/cm_arrays.xml
-index dc9d0d6..d9753f5 100644
+index 8980988..529e809 100644
 --- a/res/values/cm_arrays.xml
 +++ b/res/values/cm_arrays.xml
-@@ -532,6 +532,7 @@
+@@ -548,6 +548,7 @@
          <item>@string/status_bar_style_icon_landscape</item>
          <item>@string/status_bar_style_circle</item>
          <item>@string/status_bar_style_text</item>
@@ -22,7 +22,7 @@ index dc9d0d6..d9753f5 100644
          <item>@string/status_bar_style_hidden</item>
      </string-array>
  
-@@ -540,6 +541,7 @@
+@@ -556,6 +557,7 @@
          <item>5</item>
          <item>2</item>
          <item>6</item>
@@ -31,10 +31,10 @@ index dc9d0d6..d9753f5 100644
      </string-array>
  
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index e8f3974..b4a5011 100644
+index d29d33f..df79a42 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -1006,6 +1006,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -988,6 +988,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="status_bar_style_circle">Circle</string>
      <string name="status_bar_style_text">Text</string>
      <string name="status_bar_style_hidden">Hidden</string>

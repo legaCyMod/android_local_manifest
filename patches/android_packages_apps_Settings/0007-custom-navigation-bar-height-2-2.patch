@@ -1,4 +1,4 @@
-From 41158a077574e313a5f8301abedf531b934b0cd6 Mon Sep 17 00:00:00 2001
+From 176de5f25b079825f705618ac1d6c9b3b40fa89d Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:33:16 +0200
 Subject: [PATCH 7/7] custom navigation bar height (2/2)
@@ -44,10 +44,10 @@ index 529e809..23c0c79 100644
      <string-array name="wifi_countrycode_entries">
          <item>United States</item>
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index e3ff4ee..2338e05 100644
+index a192519..549f22e 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -907,6 +907,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -909,6 +909,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="navring_action_google_now">Google Now</string>
      <string name="navring_choose_action_title">Choose action</string>
  
@@ -65,10 +65,10 @@ index e3ff4ee..2338e05 100644
      <string name="power_menu_title">Power menu</string>
      <string name="power_menu_reboot_title">Reboot menu</string>
 diff --git a/res/xml/button_settings.xml b/res/xml/button_settings.xml
-index 33b4eb5..5afcab5 100644
+index ab95f20..63a26f7 100644
 --- a/res/xml/button_settings.xml
 +++ b/res/xml/button_settings.xml
-@@ -37,6 +37,15 @@
+@@ -43,6 +43,15 @@
              android:fragment="com.android.settings.cyanogenmod.NavRing"
              android:title="@string/navigation_ring_title" />
  
@@ -85,26 +85,26 @@ index 33b4eb5..5afcab5 100644
              android:key="navigation_bar_left"
              android:title="@string/navigation_bar_left_title"
 diff --git a/src/com/android/settings/cyanogenmod/ButtonSettings.java b/src/com/android/settings/cyanogenmod/ButtonSettings.java
-index bc69e48..109e0a6 100644
+index e2d172c..1de7222 100644
 --- a/src/com/android/settings/cyanogenmod/ButtonSettings.java
 +++ b/src/com/android/settings/cyanogenmod/ButtonSettings.java
-@@ -60,6 +60,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+@@ -66,6 +66,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
      private static final String KEY_SWAP_VOLUME_BUTTONS = "swap_volume_buttons";
      private static final String KEY_VOLUME_KEY_CURSOR_CONTROL = "volume_key_cursor_control";
      private static final String KEY_BLUETOOTH_INPUT_SETTINGS = "bluetooth_input_settings";
 +    private static final String KEY_NAVIGATION_HEIGHT = "nav_buttons_height";
      private static final String KEY_NAVIGATION_BAR_LEFT = "navigation_bar_left";
+     private static final String KEY_NAVIGATION_RECENTS_LONG_PRESS = "navigation_recents_long_press";
      private static final String DISABLE_NAV_KEYS = "disable_nav_keys";
-     private static final String KEY_POWER_END_CALL = "power_end_call";
-@@ -113,6 +114,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+@@ -120,6 +121,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
      private CheckBoxPreference mDisableNavigationKeys;
      private CheckBoxPreference mPowerEndCall;
      private CheckBoxPreference mHomeAnswerCall;
 +    private ListPreference mNavButtonsHeight;
      private CheckBoxPreference mNavigationBarLeftPref;
+     private ListPreference mNavigationRecentsLongPressAction;
  
-     private PreferenceCategory mNavigationPreferencesCat;
-@@ -166,6 +168,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+@@ -174,6 +176,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
          // Force Navigation bar related options
          mDisableNavigationKeys = (CheckBoxPreference) findPreference(DISABLE_NAV_KEYS);
  
@@ -114,7 +114,7 @@ index bc69e48..109e0a6 100644
          mNavigationPreferencesCat = (PreferenceCategory) findPreference(CATEGORY_NAVBAR);
  
          // Navigation bar left
-@@ -337,6 +342,13 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+@@ -347,6 +352,13 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                  mNavigationPreferencesCat.removePreference(mNavigationBarLeftPref);
              }
  
@@ -128,9 +128,9 @@ index bc69e48..109e0a6 100644
              if (!hasNavBar && (needsNavigationBar || !isKeyDisablerSupported())) {
                  // Hide navigation bar category
                  prefScreen.removePreference(mNavigationPreferencesCat);
-@@ -434,6 +446,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
-             handleActionListChange(mVolumeKeyCursorControl, newValue,
-                     Settings.System.VOLUME_KEY_CURSOR_CONTROL);
+@@ -520,6 +532,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+             }
+             Settings.Secure.putString(getContentResolver(), Settings.Secure.RECENTS_LONG_PRESS_ACTIVITY, putString);
              return true;
 +        } else if (preference == mNavButtonsHeight) {
 +            handleActionListChange(mNavButtonsHeight, newValue,

@@ -1,4 +1,4 @@
-From 91977aaccbd513b0181ec3eaf732e8a642482281 Mon Sep 17 00:00:00 2001
+From f302fa3f2115b033e01c477ceee569874a93e1dc Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Tue, 18 Dec 2012 15:27:40 +0200
 Subject: [PATCH 1/7] add partition info
@@ -15,7 +15,7 @@ Change-Id: I5a01f913f5d0eca04cbe54175e8fa72cb6418f77
  create mode 100644 src/com/android/settings/cyanogenmod/PartitionInfo.java
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 5cc2469..31238bb 100644
+index 217aada..67ebe9e 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
 @@ -15,6 +15,14 @@
@@ -31,7 +31,7 @@ index 5cc2469..31238bb 100644
 +    <string name="partition_info_sdext">EXT partition</string>
 +
      <!-- Wi-Fi region code -->
-     <string name="wifi_setting_countrycode_title">Wi-Fi region code</string>
+     <string name="wifi_setting_countrycode_title">Wi\u2011Fi region code</string>
      <!-- Wi-Fi settings screen, setting summary for setting the wifi frequency band [CHAR LIMIT=50]-->
 diff --git a/res/xml/partition_info.xml b/res/xml/partition_info.xml
 new file mode 100644

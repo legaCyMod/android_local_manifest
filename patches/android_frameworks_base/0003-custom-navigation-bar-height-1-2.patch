@@ -1,4 +1,4 @@
-From 43d001e6d5f6cef2b99e9eca817e431895add03c Mon Sep 17 00:00:00 2001
+From 088751c02cefc0d95fa8307e28043b50363deb8d Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:24:44 +0200
 Subject: [PATCH 3/3] custom navigation bar height (1/2)
@@ -10,7 +10,7 @@ Change-Id: Ib98773eda3d0b2b501594e4247113d0138f53b6a
  2 files changed, 28 insertions(+), 1 deletion(-)
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 3f8e649..f8e3120 100755
+index ed3d59d..84910bc 100755
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
 @@ -3551,6 +3551,12 @@ public final class Settings {
@@ -27,7 +27,7 @@ index 3f8e649..f8e3120 100755
           *
           * @hide
 diff --git a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-index ed1b4e9..ce6b079 100644
+index 260e292..362fe1c 100644
 --- a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
 +++ b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
 @@ -705,7 +705,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {

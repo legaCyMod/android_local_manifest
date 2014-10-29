@@ -1,4 +1,4 @@
-From 13097449aa586e2c1097fcb0c18fff9576e5d89f Mon Sep 17 00:00:00 2001
+From 32c8fe45853eb782ce2e6c54b1c66e490fc51405 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Thu, 26 Jun 2014 19:08:12 +0300
 Subject: [PATCH 5/7] move navigation bar options to the top of button
@@ -6,14 +6,14 @@ Subject: [PATCH 5/7] move navigation bar options to the top of button
 
 Change-Id: Ic7dcb9ca3a357643e996bb56c9fa876d898c1800
 ---
- res/xml/button_settings.xml |   67 ++++++++++++++++++++++---------------------
- 1 file changed, 34 insertions(+), 33 deletions(-)
+ res/xml/button_settings.xml |   79 ++++++++++++++++++++++---------------------
+ 1 file changed, 40 insertions(+), 39 deletions(-)
 
 diff --git a/res/xml/button_settings.xml b/res/xml/button_settings.xml
-index 18a07c2..48d799e 100644
+index 3a4c633..d357e4c 100644
 --- a/res/xml/button_settings.xml
 +++ b/res/xml/button_settings.xml
-@@ -17,18 +17,46 @@
+@@ -17,18 +17,52 @@
  <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
          xmlns:settings="http://schemas.android.com/apk/res/com.android.settings">
  
@@ -37,6 +37,12 @@ index 18a07c2..48d799e 100644
 +            android:key="navigation_bar"
 +            android:fragment="com.android.settings.cyanogenmod.NavBar"
 +            android:title="@string/navigation_bar_title" />
++
++        <ListPreference
++            android:key="navigation_recents_long_press"
++            android:dialogTitle="@string/navigation_bar_recents_title"
++            android:title="@string/navigation_bar_recents_title"
++            android:persistent="false" />
 +
 +        <PreferenceScreen
 +            android:key="navigation_ring"
@@ -66,7 +72,7 @@ index 18a07c2..48d799e 100644
      <!-- Device Specific Bluetooth Input settings -->
      <Preference
          android:key="bluetooth_input_settings">
-@@ -56,33 +84,6 @@
+@@ -56,39 +90,6 @@
      </PreferenceCategory>
  
      <PreferenceCategory
@@ -77,6 +83,12 @@ index 18a07c2..48d799e 100644
 -                android:key="navigation_bar"
 -                android:fragment="com.android.settings.cyanogenmod.NavBar"
 -                android:title="@string/navigation_bar_title" />
+-
+-        <ListPreference
+-            android:key="navigation_recents_long_press"
+-            android:dialogTitle="@string/navigation_bar_recents_title"
+-            android:title="@string/navigation_bar_recents_title"
+-            android:persistent="false" />
 -
 -        <PreferenceScreen
 -                android:key="navigation_ring"

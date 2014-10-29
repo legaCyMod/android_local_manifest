@@ -1,4 +1,4 @@
-From 56501b32101a69ed856a580356a535dbb2d50bb7 Mon Sep 17 00:00:00 2001
+From 14fe8945944c883356cc5f3ac950e53892ed5cbe Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:14:37 +0200
 Subject: [PATCH 6/7] add option to show navigation bar (2/2)
@@ -11,12 +11,12 @@ Change-Id: I60904182a4b8904e845ddfa7046aa612a0ec71aa
  3 files changed, 15 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index df79a42..e3ff4ee 100644
+index df50158..a192519 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -887,6 +887,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
-     <string name="navigation_bar_arrow_keys_title">Arrow keys while typing</string>
+@@ -889,6 +889,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="navigation_bar_arrow_keys_summary">Display left and right cursor buttons while typing</string>
+     <string name="navigation_bar_recents_title">Recents long press action</string>
  
 +    <!-- Navbar -->
 +    <string name="show_navbar_title">Show navigation bar</string>
@@ -26,10 +26,10 @@ index df79a42..e3ff4ee 100644
      <string name="navigation_ring_title">Quick launch shortcuts</string>
      <string name="navring_target_reset_message">Delete all user created navigation bar shortcuts and restore to default?</string>
 diff --git a/res/xml/button_settings.xml b/res/xml/button_settings.xml
-index 48d799e..33b4eb5 100644
+index d357e4c..ab95f20 100644
 --- a/res/xml/button_settings.xml
 +++ b/res/xml/button_settings.xml
-@@ -51,6 +51,12 @@
+@@ -57,6 +57,12 @@
  
      </PreferenceCategory>
  
@@ -43,12 +43,12 @@ index 48d799e..33b4eb5 100644
          android:key="disable_nav_keys"
          android:title="@string/disable_navkeys_title"
 diff --git a/src/com/android/settings/cyanogenmod/ButtonSettings.java b/src/com/android/settings/cyanogenmod/ButtonSettings.java
-index d60ba3a..bc69e48 100644
+index f689acd..e2d172c 100644
 --- a/src/com/android/settings/cyanogenmod/ButtonSettings.java
 +++ b/src/com/android/settings/cyanogenmod/ButtonSettings.java
-@@ -171,6 +171,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
-         // Navigation bar left
-         mNavigationBarLeftPref = (CheckBoxPreference) findPreference(KEY_NAVIGATION_BAR_LEFT);
+@@ -181,6 +181,11 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+         // Navigation bar recents long press activity needs custom setup
+         mNavigationRecentsLongPressAction = initRecentsLongPressAction(KEY_NAVIGATION_RECENTS_LONG_PRESS);
  
 +        // Hide option to show navbar on devices that have persistent navbar
 +        if (getResources().getBoolean(com.android.internal.R.bool.config_showNavigationBar)) {

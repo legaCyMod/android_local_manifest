@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
+    <!-- CM replacements -->
+    <remove-project name="CyanogenMod/android_frameworks_av" />
+    <remove-project name="CyanogenMod/android_frameworks_native" />
+    <project path="frameworks/av" name="legaCyMod/android_frameworks_av" revision="cm-11.0" />
+    <project path="frameworks/native" name="legaCyMod/android_frameworks_native" revision="cm-11.0" />
+
     <!-- ZTE Blade III -->
     <project path="device/zte/atlas40" name="KonstaT/android_device_zte_atlas40" revision="cm-11.0" />
     <project path="kernel/zte/msm7x27a" name="KonstaT/android_kernel_zte_msm7x27a" revision="cm-11.0" />

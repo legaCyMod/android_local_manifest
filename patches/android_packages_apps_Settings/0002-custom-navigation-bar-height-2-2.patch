@@ -1,4 +1,4 @@
-From a95a63787265002178b57d3c4e41d7c82088f420 Mon Sep 17 00:00:00 2001
+From c695872afaa6ce3bf669c6b5e01bda031fb719d6 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Fri, 2 Jan 2015 16:44:48 +0200
 Subject: [PATCH 2/2] custom navigation bar height (2/2)
@@ -44,10 +44,10 @@ index 8571c7b..d251faf 100644
      <string-array name="root_access_entries">
          <item>@string/root_access_none</item>
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 3dd5bee..d855ee6 100644
+index 8411a9d..20f4fc3 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -393,6 +393,16 @@
+@@ -396,6 +396,16 @@
      <string name="navigation_bar_left_title">Left-handed mode</string>
      <string name="navigation_bar_left_summary">Place the navigation bar on the left side of the screen in landscape mode</string>
  
@@ -65,7 +65,7 @@ index 3dd5bee..d855ee6 100644
  
      <!-- Status bar -->
 diff --git a/res/xml/button_settings.xml b/res/xml/button_settings.xml
-index ae56748..f51f39d 100644
+index 1584e98..47a07fe 100644
 --- a/res/xml/button_settings.xml
 +++ b/res/xml/button_settings.xml
 @@ -33,6 +33,15 @@
@@ -85,7 +85,7 @@ index ae56748..f51f39d 100644
              android:key="navigation_bar_left"
              android:title="@string/navigation_bar_left_title"
 diff --git a/src/com/android/settings/ButtonSettings.java b/src/com/android/settings/ButtonSettings.java
-index 6bbf71e..5a6aad4 100644
+index 76cd64c..b2bc966 100644
 --- a/src/com/android/settings/ButtonSettings.java
 +++ b/src/com/android/settings/ButtonSettings.java
 @@ -62,6 +62,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
@@ -104,7 +104,7 @@ index 6bbf71e..5a6aad4 100644
      private SwitchPreference mSwapVolumeButtons;
      private SwitchPreference mDisableNavigationKeys;
      private SwitchPreference mNavigationBarLeftPref;
-@@ -173,6 +175,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+@@ -175,6 +177,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
          // Force Navigation bar related options
          mDisableNavigationKeys = (SwitchPreference) findPreference(DISABLE_NAV_KEYS);
  
@@ -114,7 +114,7 @@ index 6bbf71e..5a6aad4 100644
          mNavigationPreferencesCat = (PreferenceCategory) findPreference(CATEGORY_NAVBAR);
  
          // Navigation bar left
-@@ -336,6 +341,13 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+@@ -347,6 +352,13 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                  mNavigationPreferencesCat.removePreference(mNavigationBarLeftPref);
              }
  
@@ -125,10 +125,10 @@ index 6bbf71e..5a6aad4 100644
 +                mNavButtonsHeight = initActionList(KEY_NAVIGATION_HEIGHT, statusNavButtonsHeight);
 +            }
 +
-             if (!hasNavBar && (needsNavigationBar || !isKeyDisablerSupported())) {
-                 // Hide navigation bar category
-                 prefScreen.removePreference(mNavigationPreferencesCat);
-@@ -430,6 +442,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+             if ((!hasNavBar && (needsNavigationBar || !isKeyDisablerSupported())) ||
+                 (mNavigationPreferencesCat.getPreferenceCount() == 0)
+             ) {
+@@ -443,6 +455,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
              handleActionListChange(mVolumeKeyCursorControl, newValue,
                      Settings.System.VOLUME_KEY_CURSOR_CONTROL);
              return true;

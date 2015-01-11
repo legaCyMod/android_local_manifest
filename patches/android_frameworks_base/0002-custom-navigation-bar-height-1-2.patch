@@ -1,4 +1,4 @@
-From 5b4dfb9fa11fa75367c222fb760cd39ec8d5477b Mon Sep 17 00:00:00 2001
+From 367a28ced28ecaf71f13fb80a424780cd4033979 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Fri, 2 Jan 2015 16:37:56 +0200
 Subject: [PATCH 2/2] custom navigation bar height (1/2)
@@ -10,10 +10,10 @@ Change-Id: I81ab3c1b6c321334293145edd8f437d43dfb17f3
  2 files changed, 29 insertions(+)
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index a62c7f0..ff9c579 100644
+index cef06ea..77523dd 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -3203,6 +3203,12 @@ public final class Settings {
+@@ -3228,6 +3228,12 @@ public final class Settings {
          public static final String NAVBAR_LEFT_IN_LANDSCAPE = "navigation_bar_left";
  
          /**
@@ -23,14 +23,14 @@ index a62c7f0..ff9c579 100644
 +        public static final String NAV_BUTTONS_HEIGHT = "nav_buttons_height";
 +
 +        /**
-          * Settings to backup. This is here so that it's in the same place as the settings
-          * keys and easy to update.
-          *
+          * Locale for secondary overlay on dialer for t9 search input
+          * @hide
+          */
 diff --git a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-index 9a9b216..bc783e9 100644
+index 6e78c59..8172323 100644
 --- a/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
 +++ b/policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
-@@ -775,6 +775,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -783,6 +783,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
              resolver.registerContentObserver(Settings.System.getUriFor(
                      Settings.System.NAVBAR_LEFT_IN_LANDSCAPE), false, this,
                      UserHandle.USER_ALL);
@@ -40,7 +40,7 @@ index 9a9b216..bc783e9 100644
              updateSettings();
          }
  
-@@ -1728,6 +1731,26 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -1748,6 +1751,26 @@ public class PhoneWindowManager implements WindowManagerPolicy {
              if (mImmersiveModeConfirmation != null) {
                  mImmersiveModeConfirmation.loadSetting(mCurrentUserId);
              }

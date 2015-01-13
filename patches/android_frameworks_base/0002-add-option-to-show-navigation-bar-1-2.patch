@@ -1,4 +1,4 @@
-From 8ff26a944666a150de5fbbc74e65cd2c92d9f0f0 Mon Sep 17 00:00:00 2001
+From 92b799333908b3933083865ef2f0c1a830f1693a Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:04:25 +0200
 Subject: [PATCH 2/3] add option to show navigation bar (1/2)
@@ -10,10 +10,10 @@ Change-Id: I7360587e5196fd529b50dbb8bd3202f94d0be6cd
  2 files changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 0d404ff..ed3d59d 100755
+index 3b8e982..0abd608 100755
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -3545,6 +3545,12 @@ public final class Settings {
+@@ -3557,6 +3557,12 @@ public final class Settings {
          public static final String NOTIFICATION_VIBRATE_DURING_ALERTS_DISABLED = "vibrate_while_no_alerts";
  
          /**

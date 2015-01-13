@@ -1,4 +1,4 @@
-From 088751c02cefc0d95fa8307e28043b50363deb8d Mon Sep 17 00:00:00 2001
+From 2e12e22ee4549deccdf8ce09d3758f3d4b898bbb Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:24:44 +0200
 Subject: [PATCH 3/3] custom navigation bar height (1/2)
@@ -10,10 +10,10 @@ Change-Id: Ib98773eda3d0b2b501594e4247113d0138f53b6a
  2 files changed, 28 insertions(+), 1 deletion(-)
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index ed3d59d..84910bc 100755
+index 0abd608..1c36844 100755
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -3551,6 +3551,12 @@ public final class Settings {
+@@ -3563,6 +3563,12 @@ public final class Settings {
          public static final String SHOW_NAVBAR = "show_navbar";
  
          /**

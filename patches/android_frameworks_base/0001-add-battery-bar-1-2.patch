@@ -1,4 +1,4 @@
-From 3a08ebc60a9351a685e44a72dbdab110c002150e Mon Sep 17 00:00:00 2001
+From 3bd880c8c34e2fa458893d5e0a91d98fde7a0e48 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Fri, 19 Dec 2014 18:14:43 +0200
 Subject: [PATCH 1/2] add battery bar (1/2)
@@ -18,10 +18,10 @@ Change-Id: I4fa3e128d30b95af917153f5cd1120023c167dcf
  create mode 100644 packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 10bc124..cef06ea 100644
+index ed0dded..52bf107 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -3171,6 +3171,7 @@ public final class Settings {
+@@ -3340,6 +3340,7 @@ public final class Settings {
           * 4: Hide the battery status information
           * 5: Display the battery an icon in landscape mode
           * 6: Display the battery as plain text
@@ -65,10 +65,10 @@ index 0000000..38a03cd
 +
 +</layer-list>
 diff --git a/packages/SystemUI/res/layout/msim_status_bar.xml b/packages/SystemUI/res/layout/msim_status_bar.xml
-index 8867b97..dbc7b98 100644
+index 149482e..7c9f535 100644
 --- a/packages/SystemUI/res/layout/msim_status_bar.xml
 +++ b/packages/SystemUI/res/layout/msim_status_bar.xml
-@@ -115,4 +115,9 @@
+@@ -146,4 +146,9 @@
          android:layout_height="match_parent"
          />
  
@@ -79,10 +79,10 @@ index 8867b97..dbc7b98 100644
 +
  </com.android.systemui.statusbar.phone.PhoneStatusBarView>
 diff --git a/packages/SystemUI/res/layout/status_bar.xml b/packages/SystemUI/res/layout/status_bar.xml
-index e2e1f4c..53ffb9c 100644
+index 3333533..fc070a2 100644
 --- a/packages/SystemUI/res/layout/status_bar.xml
 +++ b/packages/SystemUI/res/layout/status_bar.xml
-@@ -113,4 +113,9 @@
+@@ -144,4 +144,9 @@
          android:layout_height="match_parent"
          />
  

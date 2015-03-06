@@ -7,8 +7,5 @@
 
     <!-- CyanogenMod dependencies -->
     <project path="device/qcom/common" name="CyanogenMod/android_device_qcom_common" revision="cm-12.0" />
-    <project path="hardware/qcom/audio-caf/msm8610" name="CyanogenMod/android_hardware_qcom_audio" revision="cm-12.0-caf-8226" />
-    <project path="hardware/qcom/display-caf/msm8610" name="CyanogenMod/android_hardware_qcom_display" revision="cm-12.0-caf-8226" />
     <project path="hardware/qcom/fm" name="CyanogenMod/android_hardware_qcom_fm" revision="cm-12.0" />
-    <project path="hardware/qcom/media-caf/msm8610" name="CyanogenMod/android_hardware_qcom_media" revision="cm-12.0-caf-8226" />
 </manifest>

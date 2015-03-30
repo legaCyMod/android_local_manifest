@@ -1,4 +1,4 @@
-From d672d9e6ac283159adff61e0dab2c6367de2eeb1 Mon Sep 17 00:00:00 2001
+From 3fcef58f83a98161b6a0c1b23b75f980d8b5731f Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 19 Aug 2013 13:01:10 +0300
 Subject: [PATCH] cmhw: USB charging (1/2)

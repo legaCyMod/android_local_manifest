@@ -1,7 +1,7 @@
-From e1014ff8b5e9eecb4ea247b68f88bd795ebcd9cb Mon Sep 17 00:00:00 2001
+From e4be88c03d9c3917851cfb3b2d366e859d78ab31 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:14:37 +0200
-Subject: [PATCH 6/7] add option to show navigation bar (2/2)
+Subject: [PATCH 6/8] add option to show navigation bar (2/2)
 
 Change-Id: I60904182a4b8904e845ddfa7046aa612a0ec71aa
 ---
@@ -11,10 +11,10 @@ Change-Id: I60904182a4b8904e845ddfa7046aa612a0ec71aa
  3 files changed, 16 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 510e153..b14fa70 100644
+index 4efdfc2..67fbb1b 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -893,6 +893,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -899,6 +899,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="navigation_bar_arrow_keys_summary">Display left and right cursor buttons while typing</string>
      <string name="navigation_bar_recents_title">Recents long press action</string>
  
@@ -43,7 +43,7 @@ index d357e4c..ab95f20 100644
          android:key="disable_nav_keys"
          android:title="@string/disable_navkeys_title"
 diff --git a/src/com/android/settings/cyanogenmod/ButtonSettings.java b/src/com/android/settings/cyanogenmod/ButtonSettings.java
-index f689acd..0b9bf26 100644
+index f0bc3dd..eb4d2db 100644
 --- a/src/com/android/settings/cyanogenmod/ButtonSettings.java
 +++ b/src/com/android/settings/cyanogenmod/ButtonSettings.java
 @@ -181,6 +181,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements

@@ -1,4 +1,4 @@
-From 92b799333908b3933083865ef2f0c1a830f1693a Mon Sep 17 00:00:00 2001
+From 828dd4cbca1b70413d97ba1a65c435c632bf002a Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:04:25 +0200
 Subject: [PATCH 2/3] add option to show navigation bar (1/2)

@@ -1,4 +1,4 @@
-From 66dd50616f5208db94681ce7d13d23483454e9e3 Mon Sep 17 00:00:00 2001
+From 6dcd74f6bb4c8a1788746f36e3989a9b5c31f5da Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Fri, 2 Jan 2015 16:44:48 +0200
 Subject: [PATCH 2/2] custom navigation bar height (2/2)
@@ -12,7 +12,7 @@ Change-Id: Ie5156ff97a71aba29245ab2df3a7bd4988e4a223
  4 files changed, 57 insertions(+)
 
 diff --git a/res/values/cm_arrays.xml b/res/values/cm_arrays.xml
-index 913e10d..a6db2a1 100644
+index a384406..e4ae5eb 100644
 --- a/res/values/cm_arrays.xml
 +++ b/res/values/cm_arrays.xml
 @@ -15,6 +15,27 @@
@@ -44,10 +44,10 @@ index 913e10d..a6db2a1 100644
      <string-array name="root_access_entries" translatable="false">
          <item>@string/root_access_none</item>
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 0c5f916..188406c 100644
+index ef427a5..041db11 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -381,6 +381,16 @@
+@@ -391,6 +391,16 @@
      <string name="navigation_bar_arrow_keys_summary">Display left and right cursor buttons while typing. Overrides IME switcher.</string>
      <string name="navigation_bar_recents_title">Recents long press action</string>
  

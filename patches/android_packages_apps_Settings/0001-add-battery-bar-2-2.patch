@@ -1,4 +1,4 @@
-From 3d594c27a8bad39b0189d94a413a219907001c91 Mon Sep 17 00:00:00 2001
+From e15c66cfcac368917a741b789346d722dade66a3 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Fri, 19 Dec 2014 18:03:51 +0200
 Subject: [PATCH 1/2] add battery bar (2/2)
@@ -11,10 +11,10 @@ Change-Id: If0563db78b57e948c921a6a9be3e23c0a49fe332
  3 files changed, 5 insertions(+)
 
 diff --git a/res/values/cm_arrays.xml b/res/values/cm_arrays.xml
-index ed22d63..913e10d 100644
+index 37b91ad..a384406 100644
 --- a/res/values/cm_arrays.xml
 +++ b/res/values/cm_arrays.xml
-@@ -408,6 +408,7 @@
+@@ -415,6 +415,7 @@
          <item>@string/status_bar_battery_style_icon_landscape</item>
          <item>@string/status_bar_battery_style_circle</item>
          <item>@string/status_bar_battery_style_text</item>
@@ -22,7 +22,7 @@ index ed22d63..913e10d 100644
          <item>@string/status_bar_battery_style_hidden</item>
      </string-array>
  
-@@ -416,6 +417,7 @@
+@@ -423,6 +424,7 @@
          <item>5</item>
          <item>2</item>
          <item>6</item>
@@ -31,10 +31,10 @@ index ed22d63..913e10d 100644
      </string-array>
  
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 4afee77..0c5f916 100644
+index 92b552d..ef427a5 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -409,6 +409,7 @@
+@@ -419,6 +419,7 @@
      <string name="status_bar_battery_style_icon_landscape">Icon landscape</string>
      <string name="status_bar_battery_style_circle">Circle</string>
      <string name="status_bar_battery_style_text">Text</string>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
+    <remote name="gitlab" fetch="ssh://git@gitlab.com/" />
+
     <!-- Moto G -->
-    <project path="device/motorola/falcon" name="KonstaT/android_device_motorola_falcon" revision="cm-12.0" />
+    <project path="device/motorola/falcon" name="Konsta/android_device_motorola_falcon" remote="gitlab" revision="cm-12.0" />
     <project path="kernel/motorola/msm8226" name="KonstaT/android_kernel_motorola_msm8226"  revision="cm-12.0" />
     <project path="vendor/motorola" name="KonstaT/proprietary_vendor_motorola" revision="cm-12.0" />
 

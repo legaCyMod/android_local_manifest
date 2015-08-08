@@ -1,0 +1,28 @@
+From 7f9ec82610be5bdee85a2de3b66615e9fe4597db Mon Sep 17 00:00:00 2001
+From: NBruderman <nbruderman@gmail.com>
+Date: Thu, 4 Jun 2015 16:03:10 +0300
+Subject: [PATCH 3/4] Dialer: Enable Call Recording for France
+
+Change-Id: I3c1c85dcad21f15556316e1dc1ddf608617c0a8a
+---
+ res/values-mcc208/config.xml | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/res/values-mcc208/config.xml b/res/values-mcc208/config.xml
+index def954f..2474f5d 100644
+--- a/res/values-mcc208/config.xml
++++ b/res/values-mcc208/config.xml
+@@ -14,6 +14,9 @@
+      See the License for the specific language governing permissions and
+      limitations under the License.
+ -->
++
++<!--Allow recording for country: France-->
++<!--Legal precedent source: http://levesquelavoie.com/2011/11/la-legalite-de-lenregistrement-dune-conversation/-->
+ <resources>
+-    <bool name="call_recording_enabled">false</bool>
++
+ </resources>
+-- 
+2.5.0
+

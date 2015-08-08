@@ -1,21 +1,21 @@
-From 964364b4dadcb53a4ce0b0792a1800f2d1af9d27 Mon Sep 17 00:00:00 2001
+From 665abc1957590a382b32c0ce2c79a75fe3fada93 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Sun, 29 Jun 2014 16:21:31 +0300
-Subject: [PATCH 3/8] cmhw: USB charging (2/2)
+Subject: [PATCH 1/6] cmhw: USB charging (2/2)
 
 Change-Id: I06eb61da830ee57e7e8b3f75ea83f4ea1851e5b7
 ---
- res/values/cm_strings.xml                          |    5 +++
- res/xml/development_prefs.xml                      |   10 +++++
- src/com/android/settings/DevelopmentSettings.java  |   45 ++++++++++++++++++++
- .../android/settings/cyanogenmod/BootReceiver.java |    2 +
+ res/values/cm_strings.xml                          |  5 +++
+ res/xml/development_prefs.xml                      | 10 +++++
+ src/com/android/settings/DevelopmentSettings.java  | 45 ++++++++++++++++++++++
+ .../android/settings/cyanogenmod/BootReceiver.java |  2 +
  4 files changed, 62 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index d256634..43f1265 100644
+index 79efbf8..a94afc0 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -739,6 +739,11 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -731,6 +731,11 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <!-- Used if no name provided by overlay -->
      <string name="gamma_tuning_control_set_header">Group <xliff:g id="index">%d</xliff:g></string>
  
@@ -174,5 +174,5 @@ index 01e9bee..e94e37c 100644
  
      private void initFreqCapFiles(Context ctx)
 -- 
-1.7.9.5
+2.5.0
 

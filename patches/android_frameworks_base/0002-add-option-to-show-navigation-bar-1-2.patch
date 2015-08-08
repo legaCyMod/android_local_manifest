@@ -1,12 +1,12 @@
-From 828dd4cbca1b70413d97ba1a65c435c632bf002a Mon Sep 17 00:00:00 2001
+From 465f283eb6ea792dddb529a577cd88a4abdbe45c Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:04:25 +0200
 Subject: [PATCH 2/3] add option to show navigation bar (1/2)
 
 Change-Id: I7360587e5196fd529b50dbb8bd3202f94d0be6cd
 ---
- core/java/android/provider/Settings.java           |    6 ++++++
- .../internal/policy/impl/PhoneWindowManager.java   |    7 ++++++-
+ core/java/android/provider/Settings.java                           | 6 ++++++
+ .../src/com/android/internal/policy/impl/PhoneWindowManager.java   | 7 ++++++-
  2 files changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
@@ -45,5 +45,5 @@ index 4b0e720..260e292 100644
          // See also hasNavigationBar().
          String navBarOverride = SystemProperties.get("qemu.hw.mainkeys");
 -- 
-1.7.9.5
+2.5.0
 

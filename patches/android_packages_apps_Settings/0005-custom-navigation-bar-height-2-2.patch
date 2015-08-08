@@ -1,14 +1,14 @@
-From 7d14c4e1df2c99d85343b159d6ac066b9d63acd7 Mon Sep 17 00:00:00 2001
+From de94c10cea4306c7c99e83c43b430e0d4944e086 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:33:16 +0200
-Subject: [PATCH 7/8] custom navigation bar height (2/2)
+Subject: [PATCH 5/6] custom navigation bar height (2/2)
 
 Change-Id: I30b0061eb8c50ea882c47d7e750d960d365b44d1
 ---
- res/values/cm_arrays.xml                           |   21 ++++++++++++++++++++
- res/values/cm_strings.xml                          |   10 ++++++++++
- res/xml/button_settings.xml                        |    9 +++++++++
- .../settings/cyanogenmod/ButtonSettings.java       |   16 +++++++++++++++
+ res/values/cm_arrays.xml                            | 21 +++++++++++++++++++++
+ res/values/cm_strings.xml                           | 10 ++++++++++
+ res/xml/button_settings.xml                         |  9 +++++++++
+ .../settings/cyanogenmod/ButtonSettings.java        | 16 ++++++++++++++++
  4 files changed, 56 insertions(+)
 
 diff --git a/res/values/cm_arrays.xml b/res/values/cm_arrays.xml
@@ -44,10 +44,10 @@ index 2643655..20785d9 100644
      <string-array name="wifi_countrycode_entries">
          <item>United States</item>
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 67fbb1b..59ed296 100644
+index 1d9b067..d859a14 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -919,6 +919,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -911,6 +911,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="navring_action_google_now">Google Now</string>
      <string name="navring_choose_action_title">Choose action</string>
  
@@ -85,7 +85,7 @@ index ab95f20..63a26f7 100644
              android:key="navigation_bar_left"
              android:title="@string/navigation_bar_left_title"
 diff --git a/src/com/android/settings/cyanogenmod/ButtonSettings.java b/src/com/android/settings/cyanogenmod/ButtonSettings.java
-index eb4d2db..bd38037 100644
+index 883febc..cbfe5cf 100644
 --- a/src/com/android/settings/cyanogenmod/ButtonSettings.java
 +++ b/src/com/android/settings/cyanogenmod/ButtonSettings.java
 @@ -66,6 +66,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
@@ -140,5 +140,5 @@ index eb4d2db..bd38037 100644
  
          return false;
 -- 
-1.7.9.5
+2.5.0
 

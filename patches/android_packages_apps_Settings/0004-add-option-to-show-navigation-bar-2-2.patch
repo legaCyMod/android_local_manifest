@@ -1,20 +1,20 @@
-From e4be88c03d9c3917851cfb3b2d366e859d78ab31 Mon Sep 17 00:00:00 2001
+From 9c661c8b6be1e5f4b0179c42c198960baa73704b Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:14:37 +0200
-Subject: [PATCH 6/8] add option to show navigation bar (2/2)
+Subject: [PATCH 4/6] add option to show navigation bar (2/2)
 
 Change-Id: I60904182a4b8904e845ddfa7046aa612a0ec71aa
 ---
- res/values/cm_strings.xml                          |    4 ++++
- res/xml/button_settings.xml                        |    6 ++++++
- .../settings/cyanogenmod/ButtonSettings.java       |    6 ++++++
+ res/values/cm_strings.xml                                | 4 ++++
+ res/xml/button_settings.xml                              | 6 ++++++
+ src/com/android/settings/cyanogenmod/ButtonSettings.java | 6 ++++++
  3 files changed, 16 insertions(+)
 
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index 4efdfc2..67fbb1b 100644
+index a102ce0..1d9b067 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -899,6 +899,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
+@@ -891,6 +891,10 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
      <string name="navigation_bar_arrow_keys_summary">Display left and right cursor buttons while typing</string>
      <string name="navigation_bar_recents_title">Recents long press action</string>
  
@@ -43,7 +43,7 @@ index d357e4c..ab95f20 100644
          android:key="disable_nav_keys"
          android:title="@string/disable_navkeys_title"
 diff --git a/src/com/android/settings/cyanogenmod/ButtonSettings.java b/src/com/android/settings/cyanogenmod/ButtonSettings.java
-index f0bc3dd..eb4d2db 100644
+index 684483c..883febc 100644
 --- a/src/com/android/settings/cyanogenmod/ButtonSettings.java
 +++ b/src/com/android/settings/cyanogenmod/ButtonSettings.java
 @@ -181,6 +181,12 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
@@ -60,5 +60,5 @@ index f0bc3dd..eb4d2db 100644
          // and don't even try unless the existing keys can be disabled
          boolean needsNavigationBar = false;
 -- 
-1.7.9.5
+2.5.0
 

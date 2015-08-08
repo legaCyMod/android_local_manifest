@@ -1,0 +1,32 @@
+From dd494362b72d413f6fd098c294cf8b145bfc0303 Mon Sep 17 00:00:00 2001
+From: Konsta <konsta09@gmail.com>
+Date: Mon, 11 May 2015 20:41:26 +0300
+Subject: [PATCH] Contacs: check internal sdcard is non-removable
+
+getExternalStorageState() returns status of primary sdcard
+whether it's internal or external. This causes problem on
+devices that have primary external sdcard. Internal sdcard
+is always non-removable so also check that.
+
+Change-Id: Iaeacf914e535ac35cfc6c58f8e5293729aebced2
+---
+ src/com/android/contacts/common/vcard/ImportVCardActivity.java | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/com/android/contacts/common/vcard/ImportVCardActivity.java b/src/com/android/contacts/common/vcard/ImportVCardActivity.java
+index c15d5df..2e4eb24 100644
+--- a/src/com/android/contacts/common/vcard/ImportVCardActivity.java
++++ b/src/com/android/contacts/common/vcard/ImportVCardActivity.java
+@@ -927,7 +927,8 @@ public class ImportVCardActivity extends Activity implements SelectAccountDialog
+ 
+     private void checkStorage() {
+         boolean sdExist = MoreContactUtils.sdCardExist(this);
+-        boolean inExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
++        boolean inExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)
++                && !Environment.isExternalStorageRemovable();
+         if (sdExist && inExist) {
+             CharSequence[] storageNames = new CharSequence[2];
+             storageNames[VCardService.INTERNAL_PATH] = getString(R.string.phone_storage);
+-- 
+2.5.0
+

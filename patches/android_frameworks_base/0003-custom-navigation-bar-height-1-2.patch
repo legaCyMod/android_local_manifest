@@ -1,12 +1,12 @@
-From 27a73432174e9f179579a982f0d3e510c4a3d82e Mon Sep 17 00:00:00 2001
+From 837298cc574f37d8f03c94339c79a4609ab73375 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Mon, 13 Jan 2014 22:24:44 +0200
 Subject: [PATCH 3/3] custom navigation bar height (1/2)
 
 Change-Id: Ib98773eda3d0b2b501594e4247113d0138f53b6a
 ---
- core/java/android/provider/Settings.java           |    6 +++++
- .../internal/policy/impl/PhoneWindowManager.java   |   23 +++++++++++++++++++-
+ core/java/android/provider/Settings.java           |  6 ++++++
+ .../internal/policy/impl/PhoneWindowManager.java   | 23 +++++++++++++++++++++-
  2 files changed, 28 insertions(+), 1 deletion(-)
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
@@ -68,5 +68,5 @@ index 260e292..362fe1c 100644
  
          if (updateRotation) {
 -- 
-1.7.9.5
+2.5.0
 

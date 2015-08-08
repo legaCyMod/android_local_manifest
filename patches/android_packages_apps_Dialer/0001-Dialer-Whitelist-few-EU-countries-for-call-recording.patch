@@ -1,0 +1,243 @@
+From 3eb1652631c144a904fabdbed578955a1d22f53c Mon Sep 17 00:00:00 2001
+From: NBruderman <nbruderman@gmail.com>
+Date: Mon, 2 Mar 2015 20:27:11 +0200
+Subject: [PATCH 1/4] Dialer: Whitelist few EU countries for call recording
+
+All entries to this list patch should state the country being modified
+and
+provide a URL reference (either government law, precedent or similar).
+
+A disclaimer item will also be added to the InCallUI view for the user
+to
+acknowledge that it is their responsibility to conduct/maintain and use
+recordings in conjunction with their respective country/region's laws.
+
+Change-Id: Id6aa02447e9e8b6520cbe7c6eada7df333ee42a0
+---
+ res/values-mcc204/config.xml |  7 +++++--
+ res/values-mcc214/config.xml |  7 +++++--
+ res/values-mcc222/config.xml |  7 +++++--
+ res/values-mcc230/config.xml |  7 +++++--
+ res/values-mcc238/config.xml |  7 +++++--
+ res/values-mcc240/config.xml |  7 +++++--
+ res/values-mcc242/config.xml | 22 ++++++++++++++++++++++
+ res/values-mcc244/config.xml |  7 +++++--
+ res/values-mcc260/config.xml |  7 +++++--
+ 9 files changed, 62 insertions(+), 16 deletions(-)
+ create mode 100644 res/values-mcc242/config.xml
+
+diff --git a/res/values-mcc204/config.xml b/res/values-mcc204/config.xml
+index def954f..9fbbd54 100644
+--- a/res/values-mcc204/config.xml
++++ b/res/values-mcc204/config.xml
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!--
+-     Copyright (C) 2014 The CyanogenMod Project
++     Copyright (C) 2015 The CyanogenMod Project
+ 
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+@@ -14,6 +14,9 @@
+      See the License for the specific language governing permissions and
+      limitations under the License.
+ -->
++
++<!--Allow recording for country: Netherlands-->
++<!--Legal precedent source: http://blog.wetrecht.nl/telefoongesprekken-opnemen-als-bewijs-kan-dat/ -->
+ <resources>
+-    <bool name="call_recording_enabled">false</bool>
++
+ </resources>
+diff --git a/res/values-mcc214/config.xml b/res/values-mcc214/config.xml
+index def954f..efc7c14 100644
+--- a/res/values-mcc214/config.xml
++++ b/res/values-mcc214/config.xml
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!--
+-     Copyright (C) 2014 The CyanogenMod Project
++     Copyright (C) 2015 The CyanogenMod Project
+ 
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+@@ -14,6 +14,9 @@
+      See the License for the specific language governing permissions and
+      limitations under the License.
+ -->
++
++<!--Allow recording for country: Spain-->
++<!--Legal precedent source: http://www.legalisconsultores.es/2014/04/es-legal-realizar-grabacionesse-pueden-aportar-como-prueba-en-juicios/ -->
+ <resources>
+-    <bool name="call_recording_enabled">false</bool>
++
+ </resources>
+diff --git a/res/values-mcc222/config.xml b/res/values-mcc222/config.xml
+index def954f..6087b8b 100644
+--- a/res/values-mcc222/config.xml
++++ b/res/values-mcc222/config.xml
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!--
+-     Copyright (C) 2014 The CyanogenMod Project
++     Copyright (C) 2015 The CyanogenMod Project
+ 
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+@@ -14,6 +14,9 @@
+      See the License for the specific language governing permissions and
+      limitations under the License.
+ -->
++
++<!--Allow recording for country: Italy-->
++<!--Legal precedent source: http://www.altalex.com/index.php?idnot=53369 -->
+ <resources>
+-    <bool name="call_recording_enabled">false</bool>
++
+ </resources>
+diff --git a/res/values-mcc230/config.xml b/res/values-mcc230/config.xml
+index def954f..d6169db 100644
+--- a/res/values-mcc230/config.xml
++++ b/res/values-mcc230/config.xml
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!--
+-     Copyright (C) 2014 The CyanogenMod Project
++     Copyright (C) 2015 The CyanogenMod Project
+ 
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+@@ -14,6 +14,9 @@
+      See the License for the specific language governing permissions and
+      limitations under the License.
+ -->
++
++<!--Allow recording for country: Czech Republic-->
++<!--Legal precedent source: http://nalus.usoud.cz/Search/GetText.aspx?sz=1-191-05_2 -->
+ <resources>
+-    <bool name="call_recording_enabled">false</bool>
++
+ </resources>
+diff --git a/res/values-mcc238/config.xml b/res/values-mcc238/config.xml
+index def954f..e745c17 100644
+--- a/res/values-mcc238/config.xml
++++ b/res/values-mcc238/config.xml
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!--
+-     Copyright (C) 2014 The CyanogenMod Project
++     Copyright (C) 2015 The CyanogenMod Project
+ 
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+@@ -14,6 +14,9 @@
+      See the License for the specific language governing permissions and
+      limitations under the License.
+ -->
++
++<!--Allow recording for country: Denmark-->
++<!--Legal precedent source: https://www.retsinformation.dk/Forms/r0710.aspx?id=164192#Kap27 -->
+ <resources>
+-    <bool name="call_recording_enabled">false</bool>
++
+ </resources>
+diff --git a/res/values-mcc240/config.xml b/res/values-mcc240/config.xml
+index def954f..8f75521 100644
+--- a/res/values-mcc240/config.xml
++++ b/res/values-mcc240/config.xml
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!--
+-     Copyright (C) 2014 The CyanogenMod Project
++     Copyright (C) 2015 The CyanogenMod Project
+ 
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+@@ -14,6 +14,9 @@
+      See the License for the specific language governing permissions and
+      limitations under the License.
+ -->
++
++<!--Allow recording for country: Sweden-->
++<!--Legal precedent source: https://lagen.nu/begrepp/Olovlig_avlyssning -->
+ <resources>
+-    <bool name="call_recording_enabled">false</bool>
++
+ </resources>
+diff --git a/res/values-mcc242/config.xml b/res/values-mcc242/config.xml
+new file mode 100644
+index 0000000..4cd0818
+--- /dev/null
++++ b/res/values-mcc242/config.xml
+@@ -0,0 +1,22 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!--
++     Copyright (C) 2015 The CyanogenMod Project
++
++     Licensed under the Apache License, Version 2.0 (the "License");
++     you may not use this file except in compliance with the License.
++     You may obtain a copy of the License at
++
++          http://www.apache.org/licenses/LICENSE-2.0
++
++     Unless required by applicable law or agreed to in writing, software
++     distributed under the License is distributed on an "AS IS" BASIS,
++     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++     See the License for the specific language governing permissions and
++     limitations under the License.
++-->
++
++<!--Allow recording for country: Norway-->
++<!--Legal precedent source: https://www.datatilsynet.no/verktoy-skjema/Veiledere/Lydopptak-/ -->
++<resources>
++
++</resources>
+diff --git a/res/values-mcc244/config.xml b/res/values-mcc244/config.xml
+index def954f..4eba15b 100644
+--- a/res/values-mcc244/config.xml
++++ b/res/values-mcc244/config.xml
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!--
+-     Copyright (C) 2014 The CyanogenMod Project
++     Copyright (C) 2015 The CyanogenMod Project
+ 
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+@@ -14,6 +14,9 @@
+      See the License for the specific language governing permissions and
+      limitations under the License.
+ -->
++
++<!--Allow recording for country: Finland-->
++<!--Legal precedent source: http://www.tietosuoja.fi/fi/index/ratkaisut/puheluidennauhoittaminen.html -->
+ <resources>
+-    <bool name="call_recording_enabled">false</bool>
++
+ </resources>
+diff --git a/res/values-mcc260/config.xml b/res/values-mcc260/config.xml
+index def954f..c2876e0 100644
+--- a/res/values-mcc260/config.xml
++++ b/res/values-mcc260/config.xml
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!--
+-     Copyright (C) 2014 The CyanogenMod Project
++     Copyright (C) 2015 The CyanogenMod Project
+ 
+      Licensed under the Apache License, Version 2.0 (the "License");
+      you may not use this file except in compliance with the License.
+@@ -14,6 +14,9 @@
+      See the License for the specific language governing permissions and
+      limitations under the License.
+ -->
++
++<!--Allow recording for country: Poland-->
++<!--Legal precedent source: http://www.giodo.gov.pl/data/filemanager_pl/467.doc -->
+ <resources>
+-    <bool name="call_recording_enabled">false</bool>
++
+ </resources>
+-- 
+2.5.0
+

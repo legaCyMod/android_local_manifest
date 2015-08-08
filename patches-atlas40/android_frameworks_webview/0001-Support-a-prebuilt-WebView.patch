@@ -1,15 +1,20 @@
-From 78d3df9a89a21309369d4a101bd68e06ea07c33e Mon Sep 17 00:00:00 2001
-From: Konsta <konsta09@gmail.com>
-Date: Sun, 24 Nov 2013 00:14:55 +0200
-Subject: [PATCH] Revert "Revert "Support a prebuilt WebView.""
+From 9875c9c891322dca0764d446b2f49adcb7920c78 Mon Sep 17 00:00:00 2001
+From: "Torne (Richard Coles)" <torne@google.com>
+Date: Wed, 16 Oct 2013 11:58:08 +0100
+Subject: [PATCH] Support a prebuilt WebView.
 
-This reverts commit a52bf0f6b156d329231509364d303c4102057239.
+If the product sets PRODUCT_PREBUILT_WEBVIEWCHROMIUM, do not attempt to
+build most of the WebView from source; build only
+libwebviewchromium_plat_support.
+
+Bug: 10824652
+Change-Id: I236fd98916f2a20006c946c0a0c8b317e77dafd1
 ---
- chromium/Android.mk |    8 ++++++--
+ chromium/Android.mk | 8 ++++++--
  1 file changed, 6 insertions(+), 2 deletions(-)
 
 diff --git a/chromium/Android.mk b/chromium/Android.mk
-index 168be05..96e2905 100644
+index d715221..bdc5b28 100644
 --- a/chromium/Android.mk
 +++ b/chromium/Android.mk
 @@ -19,6 +19,9 @@
@@ -37,5 +42,5 @@ index 168be05..96e2905 100644
  
  LOCAL_MODULE:= libwebviewchromium_plat_support
 -- 
-1.7.9.5
+2.5.0
 

@@ -5,7 +5,7 @@ Subject: [PATCH] cmhw: USB charging (1/2)
 
 Change-Id: I2426f9369cf4c53006d3eef0fb8fcd703ce83fb0
 ---
- src/org/cyanogenmod/hardware/UsbCharging.java |   47 +++++++++++++++++++++++++
+ src/org/cyanogenmod/hardware/UsbCharging.java | 47 +++++++++++++++++++++++++++
  1 file changed, 47 insertions(+)
  create mode 100644 src/org/cyanogenmod/hardware/UsbCharging.java
 
@@ -63,5 +63,5 @@ index 0000000..7eb7d66
 +
 +}
 -- 
-1.7.9.5
+2.5.0
 

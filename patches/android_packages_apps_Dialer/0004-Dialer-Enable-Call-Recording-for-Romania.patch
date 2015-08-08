@@ -1,0 +1,30 @@
+From 44e050548d5fc8b550c4a8e8a633a6274d0da736 Mon Sep 17 00:00:00 2001
+From: NBruderman <nbruderman@gmail.com>
+Date: Sun, 28 Jun 2015 01:15:37 +0300
+Subject: [PATCH 4/4] Dialer: Enable Call Recording for Romania
+
+Change-Id: Iaf45e88002e88b7642778a82bcdc3197b2ba1ed6
+---
+ res/values-mcc226/config.xml | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/res/values-mcc226/config.xml b/res/values-mcc226/config.xml
+index def954f..216906d 100644
+--- a/res/values-mcc226/config.xml
++++ b/res/values-mcc226/config.xml
+@@ -14,6 +14,11 @@
+      See the License for the specific language governing permissions and
+      limitations under the License.
+ -->
++
++<!--Allow recording for country: Romania-->
++<!--Legal precedent source: http://www.dsclex.ro/coduri/cciv2.htm
++    http://www.dreptonline.ro/legislatie/codul_procedura_civila_consolidat.php
++    http://www.dreptonline.ro/legislatie/codul_procedura_penala_2007.php -->
+ <resources>
+-    <bool name="call_recording_enabled">false</bool>
++
+ </resources>
+-- 
+2.5.0
+

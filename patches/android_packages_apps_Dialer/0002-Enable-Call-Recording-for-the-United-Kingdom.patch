@@ -1,0 +1,60 @@
+From d8fa1cb3823754f3732e4bd40c5cef9d9125deea Mon Sep 17 00:00:00 2001
+From: Kryten2k35 <Kryten2k35@gmail.com>
+Date: Mon, 25 May 2015 17:06:16 +0100
+Subject: [PATCH 2/4] Enable Call Recording for the United Kingdom
+
+Recording calls in the UK is not illegal and perfectly fine for personal use.
+
+http://www.ofcom.org.uk/static/archive/oftel/consumer/advice/faqs/prvfaq3.htm
+
+Change-Id: I2612e4cdd7160fadd583c6d54a89b89d1ca60cf6
+---
+ res/values-mcc234/config.xml |  5 ++++-
+ res/values-mcc235/config.xml | 19 +++++++++++++++++++
+ 2 files changed, 23 insertions(+), 1 deletion(-)
+ create mode 100755 res/values-mcc235/config.xml
+
+diff --git a/res/values-mcc234/config.xml b/res/values-mcc234/config.xml
+index def954f..84ea1e4 100644
+--- a/res/values-mcc234/config.xml
++++ b/res/values-mcc234/config.xml
+@@ -14,6 +14,9 @@
+      See the License for the specific language governing permissions and
+      limitations under the License.
+ -->
++
++<!--Allow recording for country: United Kingdom-->
++<!--Legal precedent source: http://www.ofcom.org.uk/static/archive/oftel/consumer/advice/faqs/prvfaq3.htm -->
+ <resources>
+-    <bool name="call_recording_enabled">false</bool>
++
+ </resources>
+diff --git a/res/values-mcc235/config.xml b/res/values-mcc235/config.xml
+new file mode 100755
+index 0000000..705c717
+--- /dev/null
++++ b/res/values-mcc235/config.xml
+@@ -0,0 +1,19 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!--
++     Copyright (C) 2014 The CyanogenMod Project
++     Licensed under the Apache License, Version 2.0 (the "License");
++     you may not use this file except in compliance with the License.
++     You may obtain a copy of the License at
++          http://www.apache.org/licenses/LICENSE-2.0
++     Unless required by applicable law or agreed to in writing, software
++     distributed under the License is distributed on an "AS IS" BASIS,
++     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++     See the License for the specific language governing permissions and
++     limitations under the License.
++-->
++
++<!--Allow recording for country: United Kingdom-->
++<!--Legal precedent source: http://www.ofcom.org.uk/static/archive/oftel/consumer/advice/faqs/prvfaq3.htm -->
++<resources>
++
++</resources>
+\ No newline at end of file
+-- 
+2.5.0
+

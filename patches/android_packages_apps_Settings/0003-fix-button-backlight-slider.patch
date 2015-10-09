@@ -1,0 +1,38 @@
+From 8ceefb8cb76e8f4801feaea815a5aa2ca0ff10a4 Mon Sep 17 00:00:00 2001
+From: Konsta <konsta09@gmail.com>
+Date: Sat, 18 Apr 2015 21:31:51 +0300
+Subject: [PATCH 3/3] fix button backlight slider
+
+Change-Id: I14be66722f9e9953c440f0ead0934aaeeb239a1c
+---
+ .../android/settings/cyanogenmod/ButtonBacklightBrightness.java    | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/src/com/android/settings/cyanogenmod/ButtonBacklightBrightness.java b/src/com/android/settings/cyanogenmod/ButtonBacklightBrightness.java
+index e288a10..925dcba 100644
+--- a/src/com/android/settings/cyanogenmod/ButtonBacklightBrightness.java
++++ b/src/com/android/settings/cyanogenmod/ButtonBacklightBrightness.java
+@@ -391,7 +391,8 @@ public class ButtonBacklightBrightness extends DialogPreference implements
+                 mSeekBar = (SeekBar) container.findViewById(R.id.seekbar);
+                 mValue = (TextView) container.findViewById(R.id.value);
+ 
+-                mSeekBar.setMax(255);
++                mSeekBar.setMax(getContext().getResources().getInteger(
++                        com.android.internal.R.integer.config_buttonBrightnessSettingDefault));
+                 mSeekBar.setProgress(brightness);
+                 mSeekBar.setOnSeekBarChangeListener(this);
+             }
+@@ -451,7 +452,9 @@ public class ButtonBacklightBrightness extends DialogPreference implements
+         private void handleBrightnessUpdate(int brightness) {
+             updateBrightnessPreview();
+             if (mValue != null) {
+-                mValue.setText(String.format("%d%%", (int)((brightness * 100) / 255)));
++                mValue.setText(String.format("%d%%", (int)((brightness * 100) /
++                        getContext().getResources().getInteger(
++                        com.android.internal.R.integer.config_buttonBrightnessSettingDefault))));
+             }
+             updateTimeoutEnabledState();
+         }
+-- 
+2.6.1
+

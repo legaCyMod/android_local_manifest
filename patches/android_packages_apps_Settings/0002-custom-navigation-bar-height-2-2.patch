@@ -1,18 +1,18 @@
-From 6dcd74f6bb4c8a1788746f36e3989a9b5c31f5da Mon Sep 17 00:00:00 2001
+From 7a8d91d78fb1730c92f9c7baeb9b1ee6e2cd6522 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Fri, 2 Jan 2015 16:44:48 +0200
-Subject: [PATCH 2/2] custom navigation bar height (2/2)
+Subject: [PATCH 2/3] custom navigation bar height (2/2)
 
 Change-Id: Ie5156ff97a71aba29245ab2df3a7bd4988e4a223
 ---
- res/values/cm_arrays.xml                     |   21 +++++++++++++++++++++
- res/values/cm_strings.xml                    |   10 ++++++++++
- res/xml/button_settings.xml                  |    9 +++++++++
- src/com/android/settings/ButtonSettings.java |   17 +++++++++++++++++
+ res/values/cm_arrays.xml                     | 21 +++++++++++++++++++++
+ res/values/cm_strings.xml                    | 10 ++++++++++
+ res/xml/button_settings.xml                  |  9 +++++++++
+ src/com/android/settings/ButtonSettings.java | 17 +++++++++++++++++
  4 files changed, 57 insertions(+)
 
 diff --git a/res/values/cm_arrays.xml b/res/values/cm_arrays.xml
-index a384406..e4ae5eb 100644
+index cd029e7..2f628b6 100644
 --- a/res/values/cm_arrays.xml
 +++ b/res/values/cm_arrays.xml
 @@ -15,6 +15,27 @@
@@ -44,10 +44,10 @@ index a384406..e4ae5eb 100644
      <string-array name="root_access_entries" translatable="false">
          <item>@string/root_access_none</item>
 diff --git a/res/values/cm_strings.xml b/res/values/cm_strings.xml
-index ef427a5..041db11 100644
+index 3e2be39..16a3840 100644
 --- a/res/values/cm_strings.xml
 +++ b/res/values/cm_strings.xml
-@@ -391,6 +391,16 @@
+@@ -405,6 +405,16 @@
      <string name="navigation_bar_arrow_keys_summary">Display left and right cursor buttons while typing. Overrides IME switcher.</string>
      <string name="navigation_bar_recents_title">Recents long press action</string>
  
@@ -65,7 +65,7 @@ index ef427a5..041db11 100644
  
      <!-- Status bar -->
 diff --git a/res/xml/button_settings.xml b/res/xml/button_settings.xml
-index 2fdd002..462d24d 100644
+index e048b8f..06d9c08 100644
 --- a/res/xml/button_settings.xml
 +++ b/res/xml/button_settings.xml
 @@ -34,6 +34,15 @@
@@ -85,10 +85,10 @@ index 2fdd002..462d24d 100644
              android:key="navigation_bar_left"
              android:title="@string/navigation_bar_left_title"
 diff --git a/src/com/android/settings/ButtonSettings.java b/src/com/android/settings/ButtonSettings.java
-index 2b1eda9..a73e52f 100644
+index cef5758..3d8152e 100644
 --- a/src/com/android/settings/ButtonSettings.java
 +++ b/src/com/android/settings/ButtonSettings.java
-@@ -74,6 +74,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+@@ -75,6 +75,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
      private static final String DISABLE_NAV_KEYS = "disable_nav_keys";
      private static final String KEY_NAVIGATION_BAR_LEFT = "navigation_bar_left";
      private static final String KEY_NAVIGATION_RECENTS_LONG_PRESS = "navigation_recents_long_press";
@@ -96,15 +96,15 @@ index 2b1eda9..a73e52f 100644
      private static final String KEY_POWER_END_CALL = "power_end_call";
      private static final String KEY_HOME_ANSWER_CALL = "home_answer_call";
      private static final String KEY_VOLUME_MUSIC_CONTROLS = "volbtn_music_controls";
-@@ -121,6 +122,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
-     private ListPreference mAppSwitchPressAction;
-     private ListPreference mAppSwitchLongPressAction;
+@@ -126,6 +127,7 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+     private SwitchPreference mCameraSleepOnRelease;
+     private SwitchPreference mCameraLaunch;
      private ListPreference mVolumeKeyCursorControl;
 +    private ListPreference mNavButtonsHeight;
      private SwitchPreference mVolumeWakeScreen;
      private SwitchPreference mVolumeMusicControls;
-     private SwitchPreference mSwapVolumeButtons;
-@@ -155,6 +157,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+     private SwitchPreference mVolumeControlRingStream;
+@@ -161,6 +163,9 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
  
          mNavigationPreferencesCat = (PreferenceCategory) findPreference(CATEGORY_NAVBAR);
  
@@ -114,11 +114,11 @@ index 2b1eda9..a73e52f 100644
          // Navigation bar left
          mNavigationBarLeftPref = (SwitchPreference) findPreference(KEY_NAVIGATION_BAR_LEFT);
  
-@@ -412,6 +417,14 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+@@ -451,6 +456,14 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
                  result.put(KEY_NAVIGATION_BAR_LEFT, CATEGORY_NAVBAR);
              }
  
-+            if (hasNavBar || cmHardwareManager.isSupported(CmHardwareManager.FEATURE_KEY_DISABLE)) {
++            if (hasNavBar || hardware.isSupported(CMHardwareManager.FEATURE_KEY_DISABLE)) {
 +                // Navigation bar height
 +                int statusNavButtonsHeight = Settings.System.getInt(resolver,
 +                        Settings.System.NAV_BUTTONS_HEIGHT, 48);
@@ -127,9 +127,9 @@ index 2b1eda9..a73e52f 100644
 +            }
 +
              if (!hasNavBar && (needsNavigationBar ||
-                     !cmHardwareManager.isSupported(CmHardwareManager.FEATURE_KEY_DISABLE))) {
+                     !hardware.isSupported(CMHardwareManager.FEATURE_KEY_DISABLE))) {
                  result.put(CATEGORY_NAVBAR, null);
-@@ -587,6 +600,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
+@@ -626,6 +639,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements
              Settings.Secure.putString(getContentResolver(),
                      Settings.Secure.RECENTS_LONG_PRESS_ACTIVITY, putString);
              return true;
@@ -141,5 +141,5 @@ index 2b1eda9..a73e52f 100644
          return false;
      }
 -- 
-1.7.9.5
+2.6.1
 

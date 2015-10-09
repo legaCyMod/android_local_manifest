@@ -1,28 +1,28 @@
-From c12c9762a892417099a95926cac52c6973db5d6f Mon Sep 17 00:00:00 2001
+From 593d6c8c64ccbaa56384817ec9c88b0b4230006d Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Fri, 19 Dec 2014 18:14:43 +0200
 Subject: [PATCH 1/2] add battery bar (1/2)
 
 Change-Id: I4fa3e128d30b95af917153f5cd1120023c167dcf
 ---
- core/java/android/provider/Settings.java           |    1 +
- packages/SystemUI/res/drawable/battery_bar.xml     |   29 ++++
- packages/SystemUI/res/layout/msim_status_bar.xml   |    5 +
- packages/SystemUI/res/layout/status_bar.xml        |    5 +
- packages/SystemUI/res/values/styles.xml            |    7 +
- .../com/android/systemui/BatteryLevelTextView.java |    3 +-
- .../src/com/android/systemui/BatteryMeterView.java |    4 +
- .../systemui/statusbar/phone/BatteryBar.java       |  173 ++++++++++++++++++++
- .../statusbar/policy/BatteryController.java        |    1 +
- 9 files changed, 227 insertions(+), 1 deletion(-)
+ core/java/android/provider/Settings.java           |   1 +
+ packages/SystemUI/res/drawable/battery_bar.xml     |  29 ++++
+ .../SystemUI/res/layout/keyguard_status_bar.xml    |   6 +
+ packages/SystemUI/res/layout/status_bar.xml        |   6 +
+ packages/SystemUI/res/values/styles.xml            |   7 +
+ .../com/android/systemui/BatteryLevelTextView.java |   3 +-
+ .../src/com/android/systemui/BatteryMeterView.java |   9 +-
+ .../systemui/statusbar/phone/BatteryBar.java       | 179 +++++++++++++++++++++
+ .../statusbar/policy/BatteryController.java        |   1 +
+ 9 files changed, 239 insertions(+), 2 deletions(-)
  create mode 100644 packages/SystemUI/res/drawable/battery_bar.xml
  create mode 100644 packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java
 
 diff --git a/core/java/android/provider/Settings.java b/core/java/android/provider/Settings.java
-index 2aa946f..ad8ee39 100644
+index d1cfc2e..ba9dd1f 100644
 --- a/core/java/android/provider/Settings.java
 +++ b/core/java/android/provider/Settings.java
-@@ -3375,6 +3375,7 @@ public final class Settings {
+@@ -3418,6 +3418,7 @@ public final class Settings {
           * 4: Hide the battery status information
           * 5: Display the battery an icon in landscape mode
           * 6: Display the battery as plain text
@@ -65,39 +65,41 @@ index 0000000..38a03cd
 +    </item>
 +
 +</layer-list>
-diff --git a/packages/SystemUI/res/layout/msim_status_bar.xml b/packages/SystemUI/res/layout/msim_status_bar.xml
-index 149482e..7c9f535 100644
---- a/packages/SystemUI/res/layout/msim_status_bar.xml
-+++ b/packages/SystemUI/res/layout/msim_status_bar.xml
-@@ -146,4 +146,9 @@
-         android:layout_height="match_parent"
-         />
+diff --git a/packages/SystemUI/res/layout/keyguard_status_bar.xml b/packages/SystemUI/res/layout/keyguard_status_bar.xml
+index e67a0ae..97e4615 100644
+--- a/packages/SystemUI/res/layout/keyguard_status_bar.xml
++++ b/packages/SystemUI/res/layout/keyguard_status_bar.xml
+@@ -86,4 +86,10 @@
+         android:textColor="#ffffff"
+         android:singleLine="true" />
  
 +    <com.android.systemui.statusbar.phone.BatteryBar
 +        style="@style/StatusBar.BatteryBar"
 +        android:layout_width="match_parent"
-+        android:layout_height="1.5dp" />
++        android:layout_height="1.5dp"
++        android:visibility="gone" />
 +
- </com.android.systemui.statusbar.phone.PhoneStatusBarView>
+ </com.android.systemui.statusbar.phone.KeyguardStatusBarView>
 diff --git a/packages/SystemUI/res/layout/status_bar.xml b/packages/SystemUI/res/layout/status_bar.xml
-index 3333533..fc070a2 100644
+index 361883f..bd2de26 100644
 --- a/packages/SystemUI/res/layout/status_bar.xml
 +++ b/packages/SystemUI/res/layout/status_bar.xml
-@@ -144,4 +144,9 @@
+@@ -153,4 +153,10 @@
          android:layout_height="match_parent"
          />
  
 +    <com.android.systemui.statusbar.phone.BatteryBar
 +        style="@style/StatusBar.BatteryBar"
 +        android:layout_width="match_parent"
-+        android:layout_height="1.5dp" />
++        android:layout_height="1.5dp"
++        android:visibility="gone" />
 +
  </com.android.systemui.statusbar.phone.PhoneStatusBarView>
 diff --git a/packages/SystemUI/res/values/styles.xml b/packages/SystemUI/res/values/styles.xml
-index 532513f..b235194 100644
+index 5cd6b9b..ad146b8 100644
 --- a/packages/SystemUI/res/values/styles.xml
 +++ b/packages/SystemUI/res/values/styles.xml
-@@ -272,4 +272,11 @@
+@@ -276,4 +276,11 @@
          <item name="android:backgroundDimEnabled">false</item>
          <item name="android:alertDialogTheme">@style/Theme.SystemUI.Dialog.Alert</item>
      </style>
@@ -110,13 +112,13 @@ index 532513f..b235194 100644
 +    </style>
  </resources>
 diff --git a/packages/SystemUI/src/com/android/systemui/BatteryLevelTextView.java b/packages/SystemUI/src/com/android/systemui/BatteryLevelTextView.java
-index 56efce8..9f40496 100644
+index d8156ef..25c73fe 100644
 --- a/packages/SystemUI/src/com/android/systemui/BatteryLevelTextView.java
 +++ b/packages/SystemUI/src/com/android/systemui/BatteryLevelTextView.java
-@@ -116,7 +116,8 @@ public class BatteryLevelTextView extends TextView implements
-     private void updateVisibility() {
-         boolean showNextPercent = mPercentMode == BatteryController.PERCENTAGE_MODE_OUTSIDE
-                 || (mBatteryCharging && mPercentMode == BatteryController.PERCENTAGE_MODE_INSIDE);
+@@ -121,7 +121,8 @@ public class BatteryLevelTextView extends TextView implements
+         boolean showNextPercent = mBatteryPresent && (
+                 mPercentMode == BatteryController.PERCENTAGE_MODE_OUTSIDE
+                 || (mBatteryCharging && mPercentMode == BatteryController.PERCENTAGE_MODE_INSIDE));
 -        if (mStyle == BatteryController.STYLE_GONE) {
 +        if (mStyle == BatteryController.STYLE_GONE
 +                || mStyle == BatteryController.STYLE_STATUSBAR) {
@@ -124,26 +126,52 @@ index 56efce8..9f40496 100644
          } else if (mStyle == BatteryController.STYLE_TEXT) {
              showNextPercent = true;
 diff --git a/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java b/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java
-index 129320d..2338326 100755
+index 776e895..fc66e68 100755
 --- a/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java
 +++ b/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java
-@@ -325,6 +325,10 @@ public class BatteryMeterView extends View implements DemoMode,
+@@ -58,7 +58,8 @@ public class BatteryMeterView extends View implements DemoMode,
+         BATTERY_METER_ICON_PORTRAIT,
+         BATTERY_METER_ICON_LANDSCAPE,
+         BATTERY_METER_CIRCLE,
+-        BATTERY_METER_TEXT
++        BATTERY_METER_TEXT,
++        BATTERY_METER_STATUSBAR
+     }
+ 
+     private int mHeight;
+@@ -254,6 +255,7 @@ public class BatteryMeterView extends View implements DemoMode,
+             case BATTERY_METER_ICON_LANDSCAPE:
+                 return new NormalBatteryMeterDrawable(res, true);
+             case BATTERY_METER_TEXT:
++            case BATTERY_METER_STATUSBAR:
+             case BATTERY_METER_GONE:
+                 return null;
+             default:
+@@ -327,6 +329,10 @@ public class BatteryMeterView extends View implements DemoMode,
                  meterMode = BatteryMeterMode.BATTERY_METER_TEXT;
                  showInsidePercent = false;
                  break;
 +            case BatteryController.STYLE_STATUSBAR:
-+                meterMode = BatteryMeterMode.BATTERY_METER_GONE;
++                meterMode = BatteryMeterMode.BATTERY_METER_STATUSBAR;
 +                showInsidePercent = false;
 +                break;
              default:
                  break;
          }
+@@ -354,6 +360,7 @@ public class BatteryMeterView extends View implements DemoMode,
+         mMeterMode = mode;
+         BatteryTracker tracker = mDemoMode ? mDemoTracker : mTracker;
+         if (mode == BatteryMeterMode.BATTERY_METER_GONE ||
++                mode == BatteryMeterMode.BATTERY_METER_STATUSBAR ||
+                 mode == BatteryMeterMode.BATTERY_METER_TEXT) {
+             setVisibility(View.GONE);
+             mBatteryMeterDrawable = null;
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java
 new file mode 100644
-index 0000000..3a885e9
+index 0000000..bac31fe
 --- /dev/null
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java
-@@ -0,0 +1,173 @@
+@@ -0,0 +1,179 @@
 +package com.android.systemui.statusbar.phone;
 +
 +import android.content.BroadcastReceiver;
@@ -257,8 +285,10 @@ index 0000000..3a885e9
 +                    stop();
 +                }
 +            } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
++                updateVisibility(false);
 +                stop();
 +            } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
++                updateVisibility(true);
 +                if (mBatteryCharging && mBatteryLevel < 100) {
 +                    start();
 +                }
@@ -267,19 +297,23 @@ index 0000000..3a885e9
 +    };
 +
 +    private void updateSettings() {
-+        ContentResolver resolver = mContext.getContentResolver();
-+        mShowBatteryBar = (Settings.System.getInt(resolver,
-+                Settings.System.STATUS_BAR_BATTERY_STYLE, 0) == 7);
-+        if (mShowBatteryBar) {
-+            setVisibility(VISIBLE);
-+        } else {
-+            setVisibility(GONE);
-+        }
++        updateVisibility(true);
 +
 +        if (mBatteryCharging && mBatteryLevel < 100) {
 +            start();
 +        } else {
 +            stop();
++        }
++    }
++
++    private void updateVisibility(boolean setVisible) {
++        ContentResolver resolver = mContext.getContentResolver();
++        mShowBatteryBar = (Settings.System.getInt(resolver,
++                Settings.System.STATUS_BAR_BATTERY_STYLE, 0) == 7);
++        if (mShowBatteryBar && setVisible) {
++            setVisibility(VISIBLE);
++        } else {
++            setVisibility(GONE);
 +        }
 +    }
 +
@@ -318,10 +352,10 @@ index 0000000..3a885e9
 +
 +}
 diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/policy/BatteryController.java b/packages/SystemUI/src/com/android/systemui/statusbar/policy/BatteryController.java
-index 47d97a2..9f25356 100644
+index 0978599..998160e 100644
 --- a/packages/SystemUI/src/com/android/systemui/statusbar/policy/BatteryController.java
 +++ b/packages/SystemUI/src/com/android/systemui/statusbar/policy/BatteryController.java
-@@ -42,6 +42,7 @@ public class BatteryController extends BroadcastReceiver {
+@@ -42,6 +42,7 @@ public class BatteryController extends BroadcastReceiver implements BatteryState
      public static final int STYLE_GONE = 4;
      public static final int STYLE_ICON_LANDSCAPE = 5;
      public static final int STYLE_TEXT = 6;
@@ -330,5 +364,5 @@ index 47d97a2..9f25356 100644
      public static final int PERCENTAGE_MODE_OFF = 0;
      public static final int PERCENTAGE_MODE_INSIDE = 1;
 -- 
-1.7.9.5
+2.6.1
 

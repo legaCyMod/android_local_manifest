@@ -1,0 +1,54 @@
+From e69ee41815e7ce42f5b1e1bf69dba30d8d2cd7a2 Mon Sep 17 00:00:00 2001
+From: Konsta <konsta09@gmail.com>
+Date: Fri, 2 Jan 2015 16:37:56 +0200
+Subject: [PATCH 2/2] custom navigation bar height (1/3)
+
+Change-Id: I81ab3c1b6c321334293145edd8f437d43dfb17f3
+---
+ .../android/server/policy/PhoneWindowManager.java  | 23 ++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+
+diff --git a/services/core/java/com/android/server/policy/PhoneWindowManager.java b/services/core/java/com/android/server/policy/PhoneWindowManager.java
+index 1cb337b..e43dfc0 100644
+--- a/services/core/java/com/android/server/policy/PhoneWindowManager.java
++++ b/services/core/java/com/android/server/policy/PhoneWindowManager.java
+@@ -925,6 +925,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+             resolver.registerContentObserver(CMSettings.System.getUriFor(
+                     CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE), false, this,
+                     UserHandle.USER_ALL);
++            resolver.registerContentObserver(CMSettings.System.getUriFor(
++                    CMSettings.System.NAV_BUTTONS_HEIGHT), false, this,
++                    UserHandle.USER_ALL);
+             updateSettings();
+         }
+ 
+@@ -2240,6 +2243,26 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+             if (mImmersiveModeConfirmation != null) {
+                 mImmersiveModeConfirmation.loadSetting(mCurrentUserId);
+             }
++
++            // Update navigation bar dimensions
++            int mNavButtonsHeight = CMSettings.System.getInt(resolver,
++                    CMSettings.System.NAV_BUTTONS_HEIGHT, 48);
++
++            // Height of the navigation bar when presented horizontally at bottom
++            mNavigationBarHeightForRotation[mPortraitRotation] =
++            mNavigationBarHeightForRotation[mUpsideDownRotation] =
++            mNavigationBarHeightForRotation[mLandscapeRotation] =
++            mNavigationBarHeightForRotation[mSeascapeRotation] =
++                    mNavButtonsHeight * DisplayMetrics.DENSITY_DEVICE/DisplayMetrics.DENSITY_DEFAULT;
++
++            // Width of the navigation bar when presented vertically along one side
++            mNavigationBarWidthForRotation[mPortraitRotation] =
++            mNavigationBarWidthForRotation[mUpsideDownRotation] =
++            mNavigationBarWidthForRotation[mLandscapeRotation] =
++            mNavigationBarWidthForRotation[mSeascapeRotation] =
++                    (mNavButtonsHeight - (mNavButtonsHeight / 8))
++                    * DisplayMetrics.DENSITY_DEVICE/DisplayMetrics.DENSITY_DEFAULT;
++
+         }
+         synchronized (mWindowManagerFuncs.getWindowManagerLock()) {
+             WindowManagerPolicyControl.reloadFromSetting(mContext);
+-- 
+2.6.3
+

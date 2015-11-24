@@ -1,0 +1,358 @@
+From 2db56a10124c2926f5a3dd8198aa51ac479dff36 Mon Sep 17 00:00:00 2001
+From: Konsta <konsta09@gmail.com>
+Date: Fri, 19 Dec 2014 18:14:43 +0200
+Subject: [PATCH 1/2] add battery bar (1/3)
+
+Change-Id: I4fa3e128d30b95af917153f5cd1120023c167dcf
+---
+ packages/SystemUI/res/drawable/battery_bar.xml     |  29 ++++
+ .../SystemUI/res/layout/keyguard_status_bar.xml    |   6 +
+ packages/SystemUI/res/layout/status_bar.xml        |   7 +
+ packages/SystemUI/res/values/styles.xml            |   7 +
+ .../com/android/systemui/BatteryLevelTextView.java |   3 +-
+ .../src/com/android/systemui/BatteryMeterView.java |   9 +-
+ .../systemui/statusbar/phone/BatteryBar.java       | 181 +++++++++++++++++++++
+ .../statusbar/policy/BatteryController.java        |   1 +
+ 8 files changed, 241 insertions(+), 2 deletions(-)
+ create mode 100644 packages/SystemUI/res/drawable/battery_bar.xml
+ create mode 100644 packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java
+
+diff --git a/packages/SystemUI/res/drawable/battery_bar.xml b/packages/SystemUI/res/drawable/battery_bar.xml
+new file mode 100644
+index 0000000..38a03cd
+--- /dev/null
++++ b/packages/SystemUI/res/drawable/battery_bar.xml
+@@ -0,0 +1,29 @@
++<?xml version="1.0" encoding="utf-8"?>
++<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
++
++    <item android:id="@android:id/background"
++        android:drawable="@android:color/transparent" />
++
++    <item android:id="@android:id/secondaryProgress"
++        android:drawable="@android:color/transparent" />
++
++    <item android:id="@android:id/progress">
++        <clip>
++            <level-list xmlns:android="http://schemas.android.com/apk/res/android">
++                <item android:maxLevel="1500">
++                    <shape>
++                        <corners android:radius="5dip" />
++                        <solid android:color="@android:color/holo_red_dark" />
++                    </shape>
++                </item>
++                <item android:maxLevel="10000">
++                    <shape>
++                        <corners android:radius="5dip" />
++                        <solid android:color="@color/status_bar_clock_color" />
++                    </shape>
++                </item>
++            </level-list>
++        </clip>
++    </item>
++
++</layer-list>
+diff --git a/packages/SystemUI/res/layout/keyguard_status_bar.xml b/packages/SystemUI/res/layout/keyguard_status_bar.xml
+index 8d33742..afe7652 100644
+--- a/packages/SystemUI/res/layout/keyguard_status_bar.xml
++++ b/packages/SystemUI/res/layout/keyguard_status_bar.xml
+@@ -76,4 +76,10 @@
+         android:textColor="#ffffff"
+         android:singleLine="true" />
+ 
++    <com.android.systemui.statusbar.phone.BatteryBar
++        style="@style/StatusBar.BatteryBar"
++        android:layout_width="match_parent"
++        android:layout_height="1.5dp"
++        android:visibility="gone" />
++
+ </com.android.systemui.statusbar.phone.KeyguardStatusBarView>
+diff --git a/packages/SystemUI/res/layout/status_bar.xml b/packages/SystemUI/res/layout/status_bar.xml
+index 291dc65..cf2a535 100644
+--- a/packages/SystemUI/res/layout/status_bar.xml
++++ b/packages/SystemUI/res/layout/status_bar.xml
+@@ -133,4 +133,11 @@
+             android:visibility="gone"
+             />
+     </com.android.keyguard.AlphaOptimizedLinearLayout>
++
++    <com.android.systemui.statusbar.phone.BatteryBar
++        style="@style/StatusBar.BatteryBar"
++        android:layout_width="match_parent"
++        android:layout_height="1.5dp"
++        android:visibility="gone" />
++
+ </com.android.systemui.statusbar.phone.PhoneStatusBarView>
+diff --git a/packages/SystemUI/res/values/styles.xml b/packages/SystemUI/res/values/styles.xml
+index 8241ddf..dae339a 100644
+--- a/packages/SystemUI/res/values/styles.xml
++++ b/packages/SystemUI/res/values/styles.xml
+@@ -300,4 +300,11 @@
+         <item name="android:background">@drawable/btn_borderless_rect</item>
+     </style>
+ 
++    <style name="StatusBar.BatteryBar"
++        parent="@android:style/Widget.ProgressBar.Horizontal">
++        <item name="android:progressDrawable">@drawable/battery_bar</item>
++        <item name="android:minHeight">1dip</item>
++        <item name="android:maxHeight">1dip</item>
++    </style>
++
+ </resources>
+diff --git a/packages/SystemUI/src/com/android/systemui/BatteryLevelTextView.java b/packages/SystemUI/src/com/android/systemui/BatteryLevelTextView.java
+index 4717a0b..206bb28 100644
+--- a/packages/SystemUI/src/com/android/systemui/BatteryLevelTextView.java
++++ b/packages/SystemUI/src/com/android/systemui/BatteryLevelTextView.java
+@@ -114,7 +114,8 @@ public class BatteryLevelTextView extends TextView implements
+     private void updateVisibility() {
+         boolean showNextPercent = mPercentMode == BatteryController.PERCENTAGE_MODE_OUTSIDE
+                 || (mBatteryCharging && mPercentMode == BatteryController.PERCENTAGE_MODE_INSIDE);
+-        if (mStyle == BatteryController.STYLE_GONE) {
++        if (mStyle == BatteryController.STYLE_GONE
++                || mStyle == BatteryController.STYLE_STATUSBAR) {
+             showNextPercent = false;
+         } else if (mStyle == BatteryController.STYLE_TEXT) {
+             showNextPercent = true;
+diff --git a/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java b/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java
+index 41d4aae..cfc189d 100755
+--- a/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java
++++ b/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java
+@@ -58,7 +58,8 @@ public class BatteryMeterView extends View implements DemoMode,
+         BATTERY_METER_ICON_PORTRAIT,
+         BATTERY_METER_ICON_LANDSCAPE,
+         BATTERY_METER_CIRCLE,
+-        BATTERY_METER_TEXT
++        BATTERY_METER_TEXT,
++        BATTERY_METER_STATUSBAR
+     }
+ 
+     private int mHeight;
+@@ -262,6 +263,7 @@ public class BatteryMeterView extends View implements DemoMode,
+             case BATTERY_METER_ICON_LANDSCAPE:
+                 return new NormalBatteryMeterDrawable(res, true);
+             case BATTERY_METER_TEXT:
++            case BATTERY_METER_STATUSBAR:
+             case BATTERY_METER_GONE:
+                 return null;
+             default:
+@@ -330,6 +332,10 @@ public class BatteryMeterView extends View implements DemoMode,
+                 meterMode = BatteryMeterMode.BATTERY_METER_TEXT;
+                 showInsidePercent = false;
+                 break;
++            case BatteryController.STYLE_STATUSBAR:
++                meterMode = BatteryMeterMode.BATTERY_METER_STATUSBAR;
++                showInsidePercent = false;
++                break;
+             default:
+                 break;
+         }
+@@ -357,6 +363,7 @@ public class BatteryMeterView extends View implements DemoMode,
+         mMeterMode = mode;
+         BatteryTracker tracker = mDemoMode ? mDemoTracker : mTracker;
+         if (mode == BatteryMeterMode.BATTERY_METER_GONE ||
++                mode == BatteryMeterMode.BATTERY_METER_STATUSBAR ||
+                 mode == BatteryMeterMode.BATTERY_METER_TEXT) {
+             setVisibility(View.GONE);
+             mBatteryMeterDrawable = null;
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java b/packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java
+new file mode 100644
+index 0000000..d2b0474
+--- /dev/null
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/phone/BatteryBar.java
+@@ -0,0 +1,181 @@
++package com.android.systemui.statusbar.phone;
++
++import android.content.BroadcastReceiver;
++import android.content.ContentResolver;
++import android.content.Context;
++import android.content.Intent;
++import android.content.IntentFilter;
++import android.database.ContentObserver;
++import android.graphics.drawable.Animatable;
++import android.os.BatteryManager;
++import android.os.Handler;
++import android.provider.Settings;
++import android.util.AttributeSet;
++import android.widget.ProgressBar;
++
++import cyanogenmod.providers.CMSettings;
++
++public class BatteryBar extends ProgressBar implements Animatable, Runnable {
++
++    private static final String TAG = BatteryBar.class.getSimpleName();
++
++    // Total animation duration
++    private static final int ANIM_DURATION = 10000; // 10 seconds
++
++    // Duration between frames of charging animation
++    private static final int FRAME_DURATION = ANIM_DURATION / 100;
++
++    // Are we listening for actions?
++    private boolean mAttached = false;
++
++    // Should we show this?
++    private boolean mShowBatteryBar = false;
++
++    // Current battery level
++    private int mBatteryLevel = 0;
++
++    // Current "step" of charging animation
++    private int mChargingLevel = -1;
++
++    // Are we charging?
++    private boolean mBatteryCharging = false;
++
++    private Handler mHandler = new Handler();
++
++    class SettingsObserver extends ContentObserver {
++
++        public SettingsObserver(Handler handler) {
++            super(handler);
++        }
++
++        void observer() {
++            ContentResolver resolver = mContext.getContentResolver();
++            resolver.registerContentObserver(
++                    CMSettings.System.getUriFor(CMSettings.System.STATUS_BAR_BATTERY_STYLE), false, this);
++        }
++
++        @Override
++        public void onChange(boolean selfChange) {
++            updateSettings();
++        }
++    }
++
++    public BatteryBar(Context context) {
++        this(context, null);
++    }
++
++    public BatteryBar(Context context, AttributeSet attrs) {
++        this(context, attrs, 0);
++    }
++
++    public BatteryBar(Context context, AttributeSet attrs, int defStyle) {
++        super(context, attrs, defStyle);
++
++        SettingsObserver observer = new SettingsObserver(mHandler);
++        observer.observer();
++        updateSettings();
++    }
++
++    @Override
++    protected void onAttachedToWindow() {
++        super.onAttachedToWindow();
++
++        if (!mAttached) {
++            mAttached = true;
++            IntentFilter filter = new IntentFilter();
++            filter.addAction(Intent.ACTION_BATTERY_CHANGED);
++            filter.addAction(Intent.ACTION_SCREEN_OFF);
++            filter.addAction(Intent.ACTION_SCREEN_ON);
++            getContext().registerReceiver(mIntentReceiver, filter, null, getHandler());
++        }
++    }
++
++    @Override
++    protected void onDetachedFromWindow() {
++        super.onDetachedFromWindow();
++
++        if (mAttached) {
++            mAttached = false;
++            getContext().unregisterReceiver(mIntentReceiver);
++        }
++    }
++
++    private final BroadcastReceiver mIntentReceiver = new BroadcastReceiver() {
++        @Override
++        public void onReceive(Context context, Intent intent) {
++            String action = intent.getAction();
++            if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
++                mBatteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0);
++                mBatteryCharging = intent.getIntExtra(BatteryManager.EXTRA_STATUS, 0) == BatteryManager.BATTERY_STATUS_CHARGING;
++                if (mBatteryCharging && mBatteryLevel < 100) {
++                    start();
++                } else {
++                    stop();
++                }
++            } else if (Intent.ACTION_SCREEN_OFF.equals(action)) {
++                updateVisibility(false);
++                stop();
++            } else if (Intent.ACTION_SCREEN_ON.equals(action)) {
++                updateVisibility(true);
++                if (mBatteryCharging && mBatteryLevel < 100) {
++                    start();
++                }
++            }
++        }
++    };
++
++    private void updateSettings() {
++        updateVisibility(true);
++
++        if (mBatteryCharging && mBatteryLevel < 100) {
++            start();
++        } else {
++            stop();
++        }
++    }
++
++    private void updateVisibility(boolean setVisible) {
++        ContentResolver resolver = mContext.getContentResolver();
++        mShowBatteryBar = (CMSettings.System.getInt(resolver,
++                CMSettings.System.STATUS_BAR_BATTERY_STYLE, 0) == 7);
++        if (mShowBatteryBar && setVisible) {
++            setVisibility(VISIBLE);
++        } else {
++            setVisibility(GONE);
++        }
++    }
++
++    @Override
++    public void run() {
++        mChargingLevel++;
++        if (mChargingLevel > 100) {
++            mChargingLevel = mBatteryLevel;
++        }
++        setProgress(mChargingLevel);
++        mHandler.postDelayed(this, FRAME_DURATION);
++    }
++
++    @Override
++    public void start() {
++        if (!isRunning()) {
++            mHandler.removeCallbacks(this);
++            mChargingLevel = mBatteryLevel;
++            mHandler.postDelayed(this, FRAME_DURATION);
++        }
++    }
++
++    @Override
++    public void stop() {
++        if (isRunning()) {
++            mHandler.removeCallbacks(this);
++            mChargingLevel = -1;
++        }
++        setProgress(mBatteryLevel);
++    }
++
++    @Override
++    public boolean isRunning() {
++        return mChargingLevel != -1;
++    }
++
++}
+diff --git a/packages/SystemUI/src/com/android/systemui/statusbar/policy/BatteryController.java b/packages/SystemUI/src/com/android/systemui/statusbar/policy/BatteryController.java
+index a154544..78de1c8 100644
+--- a/packages/SystemUI/src/com/android/systemui/statusbar/policy/BatteryController.java
++++ b/packages/SystemUI/src/com/android/systemui/statusbar/policy/BatteryController.java
+@@ -43,6 +43,7 @@ public class BatteryController extends BroadcastReceiver {
+     public static final int STYLE_GONE = 4;
+     public static final int STYLE_ICON_LANDSCAPE = 5;
+     public static final int STYLE_TEXT = 6;
++    public static final int STYLE_STATUSBAR = 7;
+ 
+     public static final int PERCENTAGE_MODE_OFF = 0;
+     public static final int PERCENTAGE_MODE_INSIDE = 1;
+-- 
+2.6.3
+

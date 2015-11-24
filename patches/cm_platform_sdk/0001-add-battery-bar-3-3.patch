@@ -1,0 +1,39 @@
+From 3d14509455932db70af4923e21f0657d1320b06d Mon Sep 17 00:00:00 2001
+From: Konsta <konsta09@gmail.com>
+Date: Sun, 22 Nov 2015 13:45:30 +0200
+Subject: [PATCH 1/2] add battery bar (3/3)
+
+Change-Id: I3de4afb58cacbb8457b98f8fe12059908d0d1368
+---
+ host/migration/src/CMSettings.java             | 1 +
+ src/java/cyanogenmod/providers/CMSettings.java | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/host/migration/src/CMSettings.java b/host/migration/src/CMSettings.java
+index 0d57b0d..dec2017 100644
+--- a/host/migration/src/CMSettings.java
++++ b/host/migration/src/CMSettings.java
+@@ -86,6 +86,7 @@ public final class CMSettings {
+          * 4: Hide the battery status information
+          * 5: Display the battery an icon in landscape mode
+          * 6: Display the battery as plain text
++         * 7: Display the battery as status bar battery bar
+          * default: 0
+          * @hide
+          */
+diff --git a/src/java/cyanogenmod/providers/CMSettings.java b/src/java/cyanogenmod/providers/CMSettings.java
+index ca93885..c791b48 100644
+--- a/src/java/cyanogenmod/providers/CMSettings.java
++++ b/src/java/cyanogenmod/providers/CMSettings.java
+@@ -850,7 +850,7 @@ public final class CMSettings {
+ 
+         /** @hide */
+         public static final Validator STATUS_BAR_BATTERY_STYLE_VALIDATOR =
+-                new DiscreteValueValidator(new String[] {"0", "2", "4", "5", "6"});
++                new DiscreteValueValidator(new String[] {"0", "2", "4", "5", "7", "6"});
+ 
+         /**
+          * Status bar battery %
+-- 
+2.6.3
+

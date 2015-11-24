@@ -1,0 +1,76 @@
+From e9747aae72402f26aef83b2af384c6647c836c34 Mon Sep 17 00:00:00 2001
+From: Konsta <konsta09@gmail.com>
+Date: Sun, 22 Nov 2015 14:03:54 +0200
+Subject: [PATCH 2/2] custom navigation bar height (3/3)
+
+Change-Id: Ica17f654c1f15b1a9eaef5153956d26d19312607
+---
+ host/migration/src/CMSettings.java             |  7 +++++++
+ src/java/cyanogenmod/providers/CMSettings.java | 12 ++++++++++++
+ 2 files changed, 19 insertions(+)
+
+diff --git a/host/migration/src/CMSettings.java b/host/migration/src/CMSettings.java
+index dec2017..3a2157e 100644
+--- a/host/migration/src/CMSettings.java
++++ b/host/migration/src/CMSettings.java
+@@ -458,6 +458,12 @@ public final class CMSettings {
+         public static final String NAVBAR_LEFT_IN_LANDSCAPE = "navigation_bar_left";
+ 
+         /**
++         * Navigation bar height
++         * @hide
++         */
++        public static final String NAV_BUTTONS_HEIGHT = "nav_buttons_height";
++
++        /**
+          * Locale for secondary overlay on dialer for t9 search input
+          * @hide
+          */
+@@ -683,6 +689,7 @@ public final class CMSettings {
+                 CMSettings.System.STATUS_BAR_SHOW_WEATHER,
+                 CMSettings.System.RECENTS_SHOW_SEARCH_BAR,
+                 CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE,
++                CMSettings.System.NAV_BUTTONS_HEIGHT,
+                 CMSettings.System.T9_SEARCH_INPUT_LOCALE,
+                 CMSettings.System.BLUETOOTH_ACCEPT_ALL_FILES,
+                 CMSettings.System.LOCKSCREEN_PIN_SCRAMBLE_LAYOUT,
+diff --git a/src/java/cyanogenmod/providers/CMSettings.java b/src/java/cyanogenmod/providers/CMSettings.java
+index c791b48..71ed509 100644
+--- a/src/java/cyanogenmod/providers/CMSettings.java
++++ b/src/java/cyanogenmod/providers/CMSettings.java
+@@ -1433,6 +1433,16 @@ public final class CMSettings {
+                 sBooleanValidator;
+ 
+         /**
++         * Navigation bar height
++         * @hide
++         */
++        public static final String NAV_BUTTONS_HEIGHT = "nav_buttons_height";
++
++        /** @hide */
++        public static final Validator NAV_BUTTONS_HEIGHT_VALIDATOR =
++                new DiscreteValueValidator(new String[] {"48", "44", "40", "36", "32", "28", "24"});
++
++        /**
+          * Locale for secondary overlay on dialer for t9 search input
+          * @hide
+          */
+@@ -1830,6 +1840,7 @@ public final class CMSettings {
+                 CMSettings.System.STATUS_BAR_SHOW_WEATHER,
+                 CMSettings.System.RECENTS_SHOW_SEARCH_BAR,
+                 CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE,
++                CMSettings.System.NAV_BUTTONS_HEIGHT,
+                 CMSettings.System.T9_SEARCH_INPUT_LOCALE,
+                 CMSettings.System.BLUETOOTH_ACCEPT_ALL_FILES,
+                 CMSettings.System.LOCKSCREEN_PIN_SCRAMBLE_LAYOUT,
+@@ -1960,6 +1971,7 @@ public final class CMSettings {
+             VALIDATORS.put(STATUS_BAR_SHOW_WEATHER, STATUS_BAR_SHOW_WEATHER_VALIDATOR);
+             VALIDATORS.put(RECENTS_SHOW_SEARCH_BAR, RECENTS_SHOW_SEARCH_BAR_VALIDATOR);
+             VALIDATORS.put(NAVBAR_LEFT_IN_LANDSCAPE, NAVBAR_LEFT_IN_LANDSCAPE_VALIDATOR);
++            VALIDATORS.put(NAV_BUTTONS_HEIGHT, NAV_BUTTONS_HEIGHT_VALIDATOR);
+             VALIDATORS.put(T9_SEARCH_INPUT_LOCALE, T9_SEARCH_INPUT_LOCALE_VALIDATOR);
+             VALIDATORS.put(BLUETOOTH_ACCEPT_ALL_FILES, BLUETOOTH_ACCEPT_ALL_FILES_VALIDATOR);
+             VALIDATORS.put(LOCKSCREEN_PIN_SCRAMBLE_LAYOUT,
+-- 
+2.6.3
+

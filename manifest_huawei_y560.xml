@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <!-- Huawei Y5 -->
+    <project path="device/huawei/y560" name="KonstaT/android_device_huawei_y560" revision="cm-12.1" />
+    <project path="kernel/huawei/msm8909" name="KonstaT/android_kernel_huawei_msm8909" revision="cm-12.1" />
+    <project path="vendor/huawei" name="KonstaT/proprietary_vendor_huawei" revision="cm-12.1" />
+
+    <!-- CyanogenMod dependencies -->
+    <project path="device/qcom/common" name="CyanogenMod/android_device_qcom_common" revision="cm-12.1" />
+    <project path="external/mm-dash" name="CyanogenMod/android_external_mm-dash" revision="cm-12.1" />
+    <project path="hardware/qcom/fm" name="CyanogenMod/android_hardware_qcom_fm" revision="cm-12.1" />
+</manifest>

@@ -1,4 +1,4 @@
-From 2db56a10124c2926f5a3dd8198aa51ac479dff36 Mon Sep 17 00:00:00 2001
+From 94ec277343774866ce1cc99c9f2e951a88d9a62f Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Fri, 19 Dec 2014 18:14:43 +0200
 Subject: [PATCH 1/2] add battery bar (1/3)
@@ -53,11 +53,11 @@ index 0000000..38a03cd
 +
 +</layer-list>
 diff --git a/packages/SystemUI/res/layout/keyguard_status_bar.xml b/packages/SystemUI/res/layout/keyguard_status_bar.xml
-index 8d33742..afe7652 100644
+index 6cca05f..af6f0c6 100644
 --- a/packages/SystemUI/res/layout/keyguard_status_bar.xml
 +++ b/packages/SystemUI/res/layout/keyguard_status_bar.xml
 @@ -76,4 +76,10 @@
-         android:textColor="#ffffff"
+         android:textColor="@color/keyguard_carrier_text_color"
          android:singleLine="true" />
  
 +    <com.android.systemui.statusbar.phone.BatteryBar
@@ -68,7 +68,7 @@ index 8d33742..afe7652 100644
 +
  </com.android.systemui.statusbar.phone.KeyguardStatusBarView>
 diff --git a/packages/SystemUI/res/layout/status_bar.xml b/packages/SystemUI/res/layout/status_bar.xml
-index 291dc65..cf2a535 100644
+index 3bedf3f..59ce287 100644
 --- a/packages/SystemUI/res/layout/status_bar.xml
 +++ b/packages/SystemUI/res/layout/status_bar.xml
 @@ -133,4 +133,11 @@
@@ -114,7 +114,7 @@ index 4717a0b..206bb28 100644
          } else if (mStyle == BatteryController.STYLE_TEXT) {
              showNextPercent = true;
 diff --git a/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java b/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java
-index 41d4aae..cfc189d 100755
+index 244b7f7..8f056b1 100755
 --- a/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java
 +++ b/packages/SystemUI/src/com/android/systemui/BatteryMeterView.java
 @@ -58,7 +58,8 @@ public class BatteryMeterView extends View implements DemoMode,
@@ -354,5 +354,5 @@ index a154544..78de1c8 100644
      public static final int PERCENTAGE_MODE_OFF = 0;
      public static final int PERCENTAGE_MODE_INSIDE = 1;
 -- 
-2.6.3
+2.7.0
 

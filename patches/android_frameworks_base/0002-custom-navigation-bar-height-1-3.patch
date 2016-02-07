@@ -1,4 +1,4 @@
-From e69ee41815e7ce42f5b1e1bf69dba30d8d2cd7a2 Mon Sep 17 00:00:00 2001
+From 13ed4027dff9ed241a532310f7699de097a90b45 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Fri, 2 Jan 2015 16:37:56 +0200
 Subject: [PATCH 2/2] custom navigation bar height (1/3)
@@ -9,10 +9,10 @@ Change-Id: I81ab3c1b6c321334293145edd8f437d43dfb17f3
  1 file changed, 23 insertions(+)
 
 diff --git a/services/core/java/com/android/server/policy/PhoneWindowManager.java b/services/core/java/com/android/server/policy/PhoneWindowManager.java
-index 1cb337b..e43dfc0 100644
+index 58f26fa..2ba5d19 100644
 --- a/services/core/java/com/android/server/policy/PhoneWindowManager.java
 +++ b/services/core/java/com/android/server/policy/PhoneWindowManager.java
-@@ -925,6 +925,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -934,6 +934,9 @@ public class PhoneWindowManager implements WindowManagerPolicy {
              resolver.registerContentObserver(CMSettings.System.getUriFor(
                      CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE), false, this,
                      UserHandle.USER_ALL);
@@ -22,7 +22,7 @@ index 1cb337b..e43dfc0 100644
              updateSettings();
          }
  
-@@ -2240,6 +2243,26 @@ public class PhoneWindowManager implements WindowManagerPolicy {
+@@ -2253,6 +2256,26 @@ public class PhoneWindowManager implements WindowManagerPolicy {
              if (mImmersiveModeConfirmation != null) {
                  mImmersiveModeConfirmation.loadSetting(mCurrentUserId);
              }
@@ -50,5 +50,5 @@ index 1cb337b..e43dfc0 100644
          synchronized (mWindowManagerFuncs.getWindowManagerLock()) {
              WindowManagerPolicyControl.reloadFromSetting(mContext);
 -- 
-2.6.3
+2.7.0
 

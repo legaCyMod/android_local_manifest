@@ -1,4 +1,4 @@
-From e9747aae72402f26aef83b2af384c6647c836c34 Mon Sep 17 00:00:00 2001
+From 885f64148c3832a170d68ca22f700af68d1a0e0d Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Sun, 22 Nov 2015 14:03:54 +0200
 Subject: [PATCH 2/2] custom navigation bar height (3/3)
@@ -35,10 +35,10 @@ index dec2017..3a2157e 100644
                  CMSettings.System.BLUETOOTH_ACCEPT_ALL_FILES,
                  CMSettings.System.LOCKSCREEN_PIN_SCRAMBLE_LAYOUT,
 diff --git a/src/java/cyanogenmod/providers/CMSettings.java b/src/java/cyanogenmod/providers/CMSettings.java
-index c791b48..71ed509 100644
+index 80638d6..32c13fa 100644
 --- a/src/java/cyanogenmod/providers/CMSettings.java
 +++ b/src/java/cyanogenmod/providers/CMSettings.java
-@@ -1433,6 +1433,16 @@ public final class CMSettings {
+@@ -1382,6 +1382,16 @@ public final class CMSettings {
                  sBooleanValidator;
  
          /**
@@ -53,9 +53,9 @@ index c791b48..71ed509 100644
 +
 +        /**
           * Locale for secondary overlay on dialer for t9 search input
-          * @hide
           */
-@@ -1830,6 +1840,7 @@ public final class CMSettings {
+         public static final String T9_SEARCH_INPUT_LOCALE = "t9_search_input_locale";
+@@ -1778,6 +1788,7 @@ public final class CMSettings {
                  CMSettings.System.STATUS_BAR_SHOW_WEATHER,
                  CMSettings.System.RECENTS_SHOW_SEARCH_BAR,
                  CMSettings.System.NAVBAR_LEFT_IN_LANDSCAPE,
@@ -63,7 +63,7 @@ index c791b48..71ed509 100644
                  CMSettings.System.T9_SEARCH_INPUT_LOCALE,
                  CMSettings.System.BLUETOOTH_ACCEPT_ALL_FILES,
                  CMSettings.System.LOCKSCREEN_PIN_SCRAMBLE_LAYOUT,
-@@ -1960,6 +1971,7 @@ public final class CMSettings {
+@@ -1914,6 +1925,7 @@ public final class CMSettings {
              VALIDATORS.put(STATUS_BAR_SHOW_WEATHER, STATUS_BAR_SHOW_WEATHER_VALIDATOR);
              VALIDATORS.put(RECENTS_SHOW_SEARCH_BAR, RECENTS_SHOW_SEARCH_BAR_VALIDATOR);
              VALIDATORS.put(NAVBAR_LEFT_IN_LANDSCAPE, NAVBAR_LEFT_IN_LANDSCAPE_VALIDATOR);
@@ -72,5 +72,5 @@ index c791b48..71ed509 100644
              VALIDATORS.put(BLUETOOTH_ACCEPT_ALL_FILES, BLUETOOTH_ACCEPT_ALL_FILES_VALIDATOR);
              VALIDATORS.put(LOCKSCREEN_PIN_SCRAMBLE_LAYOUT,
 -- 
-2.6.3
+2.7.0
 

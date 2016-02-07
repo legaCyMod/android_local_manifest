@@ -1,4 +1,4 @@
-From 3d14509455932db70af4923e21f0657d1320b06d Mon Sep 17 00:00:00 2001
+From 268f9cd3df0f9185b13aff480733dad02c667c84 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Sun, 22 Nov 2015 13:45:30 +0200
 Subject: [PATCH 1/2] add battery bar (3/3)
@@ -22,10 +22,10 @@ index 0d57b0d..dec2017 100644
           * @hide
           */
 diff --git a/src/java/cyanogenmod/providers/CMSettings.java b/src/java/cyanogenmod/providers/CMSettings.java
-index ca93885..c791b48 100644
+index 19a2140..80638d6 100644
 --- a/src/java/cyanogenmod/providers/CMSettings.java
 +++ b/src/java/cyanogenmod/providers/CMSettings.java
-@@ -850,7 +850,7 @@ public final class CMSettings {
+@@ -837,7 +837,7 @@ public final class CMSettings {
  
          /** @hide */
          public static final Validator STATUS_BAR_BATTERY_STYLE_VALIDATOR =
@@ -35,5 +35,5 @@ index ca93885..c791b48 100644
          /**
           * Status bar battery %
 -- 
-2.6.3
+2.7.0
 

@@ -1,4 +1,4 @@
-From b621ba9dddd0d18b35e41c7f70cb555344370be4 Mon Sep 17 00:00:00 2001
+From 07ba38c8411b92001826dce660f06f87673482f8 Mon Sep 17 00:00:00 2001
 From: Konsta <konsta09@gmail.com>
 Date: Sat, 18 Apr 2015 21:31:51 +0300
 Subject: [PATCH 3/3] fix button backlight slider
@@ -9,10 +9,10 @@ Change-Id: I14be66722f9e9953c440f0ead0934aaeeb239a1c
  1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/src/com/android/settings/cyanogenmod/ButtonBacklightBrightness.java b/src/com/android/settings/cyanogenmod/ButtonBacklightBrightness.java
-index 9a9b7b4..637bee5 100644
+index a15a55c..23bdf1e 100644
 --- a/src/com/android/settings/cyanogenmod/ButtonBacklightBrightness.java
 +++ b/src/com/android/settings/cyanogenmod/ButtonBacklightBrightness.java
-@@ -385,7 +385,8 @@ public class ButtonBacklightBrightness extends DialogPreference implements
+@@ -392,7 +392,8 @@ public class ButtonBacklightBrightness extends DialogPreference implements
                  mSeekBar = (SeekBar) container.findViewById(R.id.seekbar);
                  mValue = (TextView) container.findViewById(R.id.value);
  
@@ -22,7 +22,7 @@ index 9a9b7b4..637bee5 100644
                  mSeekBar.setProgress(brightness);
                  mSeekBar.setOnSeekBarChangeListener(this);
              }
-@@ -445,7 +446,9 @@ public class ButtonBacklightBrightness extends DialogPreference implements
+@@ -452,7 +453,9 @@ public class ButtonBacklightBrightness extends DialogPreference implements
          private void handleBrightnessUpdate(int brightness) {
              updateBrightnessPreview();
              if (mValue != null) {
@@ -34,5 +34,5 @@ index 9a9b7b4..637bee5 100644
              updateTimeoutEnabledState();
          }
 -- 
-2.6.3
+2.7.0
 

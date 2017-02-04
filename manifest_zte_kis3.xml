@@ -5,7 +5,7 @@
     <project path="kernel/zte/msm8610" name="KonstaT/android_kernel_zte_msm8610" revision="cm-13.0" />
     <project path="vendor/zte" name="KonstaT/proprietary_vendor_zte" revision="cm-13.0" />
 
-    <!-- CyanogenMod dependencies -->
-    <project path="device/qcom/common" name="CyanogenMod/android_device_qcom_common" revision="cm-13.0" />
-    <project path="external/sony/boringssl-compat" name="CyanogenMod/android_external_sony_boringssl-compat" revision="cm-13.0" />
+    <!-- LineageOS dependencies -->
+    <project path="device/qcom/common" name="LineageOS/android_device_qcom_common" revision="cm-13.0" />
+    <project path="external/sony/boringssl-compat" name="LineageOS/android_external_sony_boringssl-compat" revision="cm-13.0" />
 </manifest>

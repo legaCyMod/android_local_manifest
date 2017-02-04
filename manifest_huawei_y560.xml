@@ -5,7 +5,7 @@
     <project path="kernel/huawei/msm8909" name="KonstaT/android_kernel_huawei_msm8909" revision="cm-13.0" />
     <project path="vendor/huawei" name="KonstaT/proprietary_vendor_huawei" revision="cm-13.0" />
 
-    <!-- CyanogenMod dependencies -->
-    <project path="device/qcom/common" name="CyanogenMod/android_device_qcom_common" revision="cm-13.0" />
-    <project path="external/sony/boringssl-compat" name="CyanogenMod/android_external_sony_boringssl-compat" revision="cm-13.0" />
+    <!-- LineageOS dependencies -->
+    <project path="device/qcom/common" name="LineageOS/android_device_qcom_common" revision="cm-13.0" />
+    <project path="external/sony/boringssl-compat" name="LineageOS/android_external_sony_boringssl-compat" revision="cm-13.0" />
 </manifest>
